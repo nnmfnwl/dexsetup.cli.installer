@@ -14,7 +14,7 @@
 10. Inform user that in screen number NN NN NN are predefined commands which needs to be used to regenerate trading strategies with real addresses.
 11. etc TODO
 
-**Usage**
+**How to use dexsetup cli installer**
   * To download and run dexsetup `installer.sh` script by one command
 ```
 wget -q -O - "https://github.com/nnmfnwl/dexsetup.cli.installer/raw/refs/heads/main/installer.sh" | bash
@@ -24,7 +24,7 @@ wget -q -O - "https://github.com/nnmfnwl/dexsetup.cli.installer/raw/refs/heads/m
 bash ./installer.sh
 ```
 
-**Result**
+**How to use installed dexsetup environment**
   * All generated files are stored at `~/dexsetup`
   * Blockchains are using default chain data directories like `./litecoin`, `./blocknet`, `./bitcoin` etc...
   * There is main start screen script for management by console interface
