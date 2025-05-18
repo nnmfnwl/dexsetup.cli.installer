@@ -15,11 +15,11 @@
 11. etc TODO
 
 **Usage**
-  * To download and run dexsetup installer script by one command
+  * To download and run dexsetup `installer.sh` script by one command
 ```
 wget -q -O - "https://github.com/nnmfnwl/dexsetup.cli.installer/raw/refs/heads/main/installer.sh" | bash
 ```
-  * Or to download `installer.sh` amanually and run dexsetup installer script after
+  * Or to download `installer.sh` manually and run dexsetup installer script after
 ```
 bash ./installer.sh
 ```
