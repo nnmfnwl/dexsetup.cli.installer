@@ -3,7 +3,7 @@
 echo "This will be dexsetup cli installer script"
 
 echo "Would you like to continue with this very experimental script? :-))) yes?"
-read var_q
+read -p "$* [yes/else lol]: " var_q
 if [[ "${var_q}" == "yes" ]]; then
     echo "Ok, we continue"
     sleep 1
