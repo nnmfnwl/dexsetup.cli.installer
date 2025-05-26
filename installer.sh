@@ -51,9 +51,9 @@ git checkout merge.2025.02.06 \
 
 read -p "$* Would you like to install or update software dependencies? [yes/else to no]: " var_q
 if [[ "${var_q}" == "yes" ]]; then
-echo ""
-./setup.dependencies.sh clibuild clitools guibuild guitools
-(test $? != 0) && echo "Installing dependency packages failed" && exit 1
+   ./setup.dependencies.sh clibuild clitools guibuild guitools
+   (test $? != 0) && echo "Installing dependency packages failed" && exit 1
+fi
 
 echo "Proxychains configuration file update"
 ./setup.cfg.proxychains.sh install
