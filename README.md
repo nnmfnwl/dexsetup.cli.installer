@@ -16,13 +16,13 @@
 
 **How to use dexsetup cli installer**
   * Here are 3 user friendly options to download and run instaler
-  1. To download and run dexsetup `installer.sh` script `anonymously` by one command if user has proxychains4 installed
+  1. To download and run dexsetup `installer.sh` script `anonymously` by one command if user already have proxychains4 installed
 ```
-proxychains4 wget -q -O - "https://github.com/nnmfnwl/dexsetup.cli.installer/raw/refs/heads/main/installer.sh" | bash
+mkdir -p ~/dexsetup && cd ~/dexsetup && rm -f installer.sh && proxychains4 wget "https://github.com/nnmfnwl/dexsetup.cli.installer/raw/refs/heads/main/installer.sh" && bash installer.sh
 ```
   2. To download and run dexsetup `installer.sh` script by one command if user has proxychains4 installed
 ```
-wget -q -O - "https://github.com/nnmfnwl/dexsetup.cli.installer/raw/refs/heads/main/installer.sh" | bash
+mkdir -p ~/dexsetup && cd ~/dexsetup && rm -f installer.sh && wget "https://github.com/nnmfnwl/dexsetup.cli.installer/raw/refs/heads/main/installer.sh" && bash installer.sh
 ```
   3. Or to download [`installer.sh`](https://github.com/nnmfnwl/dexsetup.cli.installer/raw/refs/heads/main/installer.sh) manually and run dexsetup installer script after
 ```
