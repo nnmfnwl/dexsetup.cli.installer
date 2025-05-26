@@ -14,7 +14,7 @@
 10. Inform user that in screen number NN NN NN are predefined commands which needs to be used to regenerate trading strategies with real addresses.
 11. etc TODO
 
-**How to use dexsetup cli installer**
+**How setup dexsetup with cli installer**
   * Here are 3 user friendly options to download and run instaler
   1. To download and run dexsetup `installer.sh` script `anonymously` by one command if user already have proxychains4 installed
 ```
@@ -27,6 +27,10 @@ mkdir -p ~/dexsetup && cd ~/dexsetup && rm -f installer.sh && wget "https://gith
   3. Or to download [`installer.sh`](https://github.com/nnmfnwl/dexsetup.cli.installer/raw/refs/heads/main/installer.sh) manually and run dexsetup installer script after
 ```
 bash ./installer.sh
+```
+  * After succesfull installation, once dexsetup environment is started for the first time, below command could be used for dexbot strategies reconfiguration with real wallet addresses.
+```
+cd ~/dexsetup && ./installer_reconfigure_dexbot.sh
 ```
 
 **How to use installed dexsetup environment**
