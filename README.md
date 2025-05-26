@@ -11,8 +11,6 @@
 5. Setup wallets and wallets profiles by asking one by one which wallet user want and if exists asking if to try to update.
 7. Setup [DEXBOT](https://github.com/nnmfnwl/dexbot) and generate all default trading strategies from templates.
 8. Generate screen start script and inform user where main start screen script is and how to enter it, navigate it and detach from it.
-10. Inform user that in screen number NN NN NN are predefined commands which needs to be used to regenerate trading strategies with real addresses.
-11. etc TODO
 
 **How setup dexsetup with cli installer**
   * Here are 3 user friendly options to download and run instaler
