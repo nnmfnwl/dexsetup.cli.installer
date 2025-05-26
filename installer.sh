@@ -25,7 +25,7 @@ mkdir -p ~/dexsetup/dexsetup && cd ~/dexsetup/dexsetup
 (test $? != 0) && echo "failed to change directory to dexsetup root dir" && exit 1
 
 echo "downloading latest dexsetup version by git over anonymously over tor"
-&& proxychains4 git clone https://github.com/nnmfnwl/dexsetup.git ./
+proxychains4 git clone https://github.com/nnmfnwl/dexsetup.git ./
 if [[ ${?} != 0 ]]; then
    read -p "$* [DEXSETUP seems already installed, would you like to continue and try to update? yes/else to no]: " var_q
    if [[ "${var_q}" == "yes" ]]; then
