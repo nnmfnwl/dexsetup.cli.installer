@@ -3,7 +3,6 @@
 read -p "$* Would you like to continue with this experimental dexsetup setup script? [yes/else or enter for no]: " var_q
 if [[ "${var_q}" == "yes" ]]; then
     echo "Ok, we continue"
-    sleep 1
 else
     echo "The installer has been cancelled"
     exit 0
@@ -31,7 +30,6 @@ if [[ ${?} != 0 ]]; then
     
       echo "DEXSETUP reinstallation/update in progress"
       reinstall_yes="yes"
-      sleep 1
       git stash \
       && proxychains4 git pull
       (test $? != 0) && echo "update dexsetup by git failed. try again later" && exit 1
