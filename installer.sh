@@ -21,13 +21,31 @@ groups | grep debian-tor || su - -c "usermod -a -G debian-tor ${USER}; exit"
 (test $? != 0) && echo "updating permission for user ability to use tor failed" && exit 1
 
 echo "making directory(~/dexsetup) and downloading all dexsetup files"
-mkdir -p ~/dexsetup/dexsetup \
-&& cd ~/dexsetup/dexsetup \
-&& proxychains4 git clone https://github.com/nnmfnwl/dexsetup.git ./ \
-&& git checkout merge.2025.02.06 \
+mkdir -p ~/dexsetup/dexsetup && cd ~/dexsetup/dexsetup
+(test $? != 0) && echo "failed to change directory to dexsetup root dir" && exit 1
+
+echo "downloading latest dexsetup version by git over anonymously over tor"
+&& proxychains4 git clone https://github.com/nnmfnwl/dexsetup.git ./
+if [[ ${?} != 0 ]]; then
+   read -p "$* [DEXSETUP seems already installed, would you like to continue and try to update? yes/else to no]: " var_q
+   if [[ "${var_q}" == "yes" ]]; then
+    
+      echo "DEXSETUP reinstallation/update in progress"
+      reinstall_yes="yes"
+      sleep 1
+      git stash \
+      && proxychains4 git pull
+      (test $? != 0) && echo "update dexsetup by git failed. try again later" && exit 1
+   else
+      echo "DEXSETUP is already installed and installation cancelled."
+      exit 0
+   fi
+fi
+
+git checkout merge.2025.02.06 \
 && chmod 755 setup* \
 && chmod 755 ./src/setup*.sh
-(test $? != 0) && echo "downloading dexsetup failed. Already installed?" && exit 1
+(test $? != 0) && echo "switch to experimental dexsetup version failed" && exit 1
 
 echo "Software dependencies installation"
 ./setup.dependencies.sh clibuild clitools guibuild guitools
@@ -35,15 +53,25 @@ echo "Software dependencies installation"
 
 echo "Proxychains configuration file update"
 ./setup.cfg.proxychains.sh install
-(test $? != 0) && echo "proxychains config file update failed" && exit 1
+if [[ ${reinstall_yes} == "yes" ]]; then
+   ./setup.cfg.proxychains.sh update
+   (test $? != 0) && echo "proxychains config file update failed" && exit 1
+fi
 
-echo "SKIP Setting up VNC client password"
-# tigervncpasswd
-(test $? != 0) && echo "setup vnc password failed" && exit 1
 
-echo "SKIP configure tigervnc server to start automatically with computer"
-# grep "^:1=${USER}$" /etc/tigervnc/vncserver.users || su - -c "echo \":1=${USER}\" >> /etc/tigervnc/vncserver.users; systemctl start tigervncserver@:1.service; systemctl enable tigervncserver@:1.service"
-(test $? != 0) && echo "configure vng server to start automatically after restart failed" && exit 1
+echo "Setting up VNC client password"
+read -p "$* [Would you like to setup VNC password? yes/else to no]: " var_q
+if [[ "${var_q}" == "yes" ]]; then
+   tigervncpasswd
+   (test $? != 0) && echo "setup vnc password failed" && exit 1
+fi   
+
+echo "Tigervnc server to start automatically with computer"
+read -p "$* [Would you like to setup tigervnc server to start automatically after startup? yes/else to no]: " var_q
+if [[ "${var_q}" == "yes" ]]; then
+   grep "^:1=${USER}$" /etc/tigervnc/vncserver.users || su - -c "echo \":1=${USER}\" >> /etc/tigervnc/vncserver.users; systemctl start tigervncserver@:1.service; systemctl enable tigervncserver@:1.service"
+   (test $? != 0) && echo "configure vng server to start automatically after restart failed" && exit 1
+fi
 
 echo "Building wallets from official repositories"
 ./setup.cc.wallet.sh ./src/cfg.cc.blocknet.sh install
