@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "This will be dexsetup cli installer script"
-
 read -p "$* Would you like to continue with this experimental dexsetup setup script? [yes/else or enter for no]: " var_q
 if [[ "${var_q}" == "yes" ]]; then
     echo "Ok, we continue"
