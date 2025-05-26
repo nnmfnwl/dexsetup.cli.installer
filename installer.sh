@@ -201,7 +201,7 @@ echo "DEXBOT trading strategies setup"
 (test $? != 0) && echo "make PART LTC trading startegy1 failed" && exit 1
 
 echo "download BlockDX from official repositories:"
-./setup.cc.blockdx.sh download install
+./setup.cc.blockdx.sh download install || ./setup.cc.blockdx.sh download update
 (test $? != 0) && echo "setup BlockDX failed" && exit 1
 
 echo "create blockdx firejail sandbox profile start script "
@@ -209,5 +209,5 @@ echo "create blockdx firejail sandbox profile start script "
 (test $? != 0) && echo "setup BlockDX profile failed" && exit 1
 
 echo "Start/stop/update scripts with GNU Screen terminal multiplexer setup"
-./setup.screen.sh install
+./setup.screen.sh install || ./setup.screen.sh update
 (test $? != 0) && echo "Start/stop/update scripts with GNU Screen terminal multiplexer setup failed" && exit 1
