@@ -12,9 +12,11 @@ else
     exit 0
 fi
 
-echo "updating system and installing packages git proxychains tor torsocks"
-su - -c "apt update; apt full-upgrade; apt install git proxychains4 tor torsocks; exit"
-(test $? != 0) && echo "update system and installing packages failed" && exit 1
+read -p "$* Would you like to update system and install mandatory git proxychains tor and torsocks packages? [yes/else to no]: " var_q
+if [[ "${var_q}" == "yes" ]]; then
+   su - -c "apt update; apt full-upgrade; apt install git proxychains4 tor torsocks; exit"
+   (test $? != 0) && echo "update system and installing packages failed" && exit 1
+fi
 
 echo "updating user permissions for ability to use tor"
 groups | grep debian-tor || su - -c "usermod -a -G debian-tor ${USER}; exit"
@@ -47,7 +49,9 @@ git checkout merge.2025.02.06 \
 && chmod 755 ./src/setup*.sh
 (test $? != 0) && echo "switch to experimental dexsetup version failed" && exit 1
 
-echo "Software dependencies installation"
+read -p "$* Would you like to install or update software dependencies? [yes/else to no]: " var_q
+if [[ "${var_q}" == "yes" ]]; then
+echo ""
 ./setup.dependencies.sh clibuild clitools guibuild guitools
 (test $? != 0) && echo "Installing dependency packages failed" && exit 1
 
@@ -60,81 +64,81 @@ fi
 
 
 echo "Setting up VNC client password"
-read -p "$* [Would you like to setup VNC password? yes/else to no]: " var_q
+read -p "$* Would you like to setup VNC password? [yes/else to no]: " var_q
 if [[ "${var_q}" == "yes" ]]; then
    tigervncpasswd
    (test $? != 0) && echo "setup vnc password failed" && exit 1
 fi   
 
 echo "Tigervnc server to start automatically with computer"
-read -p "$* [Would you like to setup tigervnc server to start automatically after startup? yes/else to no]: " var_q
+read -p "$* Would you like to setup tigervnc server to start automatically after startup? [yes/else to no]: " var_q
 if [[ "${var_q}" == "yes" ]]; then
    grep "^:1=${USER}$" /etc/tigervnc/vncserver.users || su - -c "echo \":1=${USER}\" >> /etc/tigervnc/vncserver.users; systemctl start tigervncserver@:1.service; systemctl enable tigervncserver@:1.service"
    (test $? != 0) && echo "configure vng server to start automatically after restart failed" && exit 1
 fi
 
 echo "Building wallets from official repositories"
-read -p "$* [Would you like to install or update Blocknet(BLOCK) wallet? yes/else to no]: " var_q
+read -p "$* Would you like to install or update Blocknet(BLOCK) wallet? [yes/else to no]: " var_q
 if [[ "${var_q}" == "yes" ]]; then
    ./setup.cc.wallet.sh ./src/cfg.cc.blocknet.sh install || ./setup.cc.wallet.sh ./src/cfg.cc.blocknet.sh update
    (test $? != 0) && echo "build blocknet wallet failed " && exit 1
 fi
 
-read -p "$* [Would you like to install or update Litecoin(LTC) wallet? yes/else to no]: " var_q
+read -p "$* Would you like to install or update Litecoin(LTC) wallet? [yes/else to no]: " var_q
 if [[ "${var_q}" == "yes" ]]; then
    ./setup.cc.wallet.sh ./src/cfg.cc.litecoin.sh install || ./setup.cc.wallet.sh ./src/cfg.cc.litecoin.sh update
    (test $? != 0) && echo "build litecoin wallet failed" && exit 1
 fi
 
-read -p "$* [Would you like to install or update Bitcoin(BTC) wallet? yes/else to no]: " var_q
+read -p "$* Would you like to install or update Bitcoin(BTC) wallet? [yes/else to no]: " var_q
 if [[ "${var_q}" == "yes" ]]; then
    ./setup.cc.wallet.sh ./src/cfg.cc.bitcoin.sh install || ./setup.cc.wallet.sh ./src/cfg.cc.bitcoin.sh update
    (test $? != 0) && echo "build bitcoin wallet failed" && exit 1
 fi
 
-read -p "$* [Would you like to install or update Verge(XVG) wallet? yes/else to no]: " var_q
+read -p "$* Would you like to install or update Verge(XVG) wallet? [yes/else to no]: " var_q
 if [[ "${var_q}" == "yes" ]]; then
    ./setup.cc.wallet.sh ./src/cfg.cc.verge.sh install || ./setup.cc.wallet.sh ./src/cfg.cc.verge.sh update
    (test $? != 0) && echo "build verge wallet failed" && exit 1
 fi
 
-read -p "$* [Would you like to install or update Dogecoin(DOGE) wallet? yes/else to no]: " var_q
+read -p "$* Would you like to install or update Dogecoin(DOGE) wallet? [yes/else to no]: " var_q
 if [[ "${var_q}" == "yes" ]]; then
    ./setup.cc.wallet.sh ./src/cfg.cc.dogecoin.sh install || ./setup.cc.wallet.sh ./src/cfg.cc.dogecoin.sh update
    (test $? != 0) && echo "build dogecoin wallet failed" && exit 1
 fi
 
-read -p "$* [Would you like to install or update PIVX(PIVX) wallet? yes/else to no]: " var_q
+read -p "$* Would you like to install or update PIVX(PIVX) wallet? [yes/else to no]: " var_q
 if [[ "${var_q}" == "yes" ]]; then
    ./setup.cc.wallet.sh ./src/cfg.cc.pivx.sh download install || ./setup.cc.wallet.sh ./src/cfg.cc.pivx.sh download update
    (test $? != 0) && echo "download pivx wallet failed" && exit 1
 fi
 
-read -p "$* [Would you like to install or update Dash(DASH) wallet? yes/else to no]: " var_q
+read -p "$* Would you like to install or update Dash(DASH) wallet? [yes/else to no]: " var_q
 if [[ "${var_q}" == "yes" ]]; then
    ./setup.cc.wallet.sh ./src/cfg.cc.dash.sh install || ./setup.cc.wallet.sh ./src/cfg.cc.dash.sh update
    (test $? != 0) && echo "build dash wallet failed" && exit 1
 fi
 
-read -p "$* [Would you like to install or update Lbry Credits LevelDB(LBC) wallet? yes/else to no]: " var_q
+read -p "$* Would you like to install or update Lbry Credits LevelDB(LBC) wallet? [yes/else to no]: " var_q
 if [[ "${var_q}" == "yes" ]]; then
    ./setup.cc.wallet.sh ./src/cfg.cc.lbrycrd.leveldb.sh install || ./setup.cc.wallet.sh ./src/cfg.cc.lbrycrd.leveldb.sh update
    (test $? != 0) && echo "build lbry leveldb wallet failed" && exit 1
 fi
 
-read -p "$* [Would you like to install or update Lbry credits SQLITE(LBC) wallet? yes/else to no]: " var_q
+read -p "$* Would you like to install or update Lbry credits SQLITE(LBC) wallet? [yes/else to no]: " var_q
 if [[ "${var_q}" == "yes" ]]; then
    ./setup.cc.wallet.sh ./src/cfg.cc.lbrycrd.sqlite.sh install || ./setup.cc.wallet.sh ./src/cfg.cc.lbrycrd.sqlite.sh update
    (test $? != 0) && echo "build lbry sqlite wallet failed" && exit 1
 fi
 
-read -p "$* [Would you like to install or update Pocketcoin Bastyon.com(PKOIN) wallet? yes/else to no]: " var_q
+read -p "$* Would you like to install or update Pocketcoin Bastyon.com(PKOIN) wallet? [yes/else to no]: " var_q
 if [[ "${var_q}" == "yes" ]]; then
    ./setup.cc.wallet.sh ./src/cfg.cc.pocketcoin.sh install || ./setup.cc.wallet.sh ./src/cfg.cc.pocketcoin.sh update
    (test $? != 0) && echo "build pkoin wallet failed" && exit 1
 fi
 
-read -p "$* [Would you like to install or update Particl(PART) wallet? yes/else to no]: " var_q
+read -p "$* Would you like to install or update Particl(PART) wallet? [yes/else to no]: " var_q
 if [[ "${var_q}" == "yes" ]]; then
    ./setup.cc.wallet.sh ./src/cfg.cc.particl.sh install || ./setup.cc.wallet.sh ./src/cfg.cc.particl.sh update
    (test $? != 0) && echo "build particle wallet failed" && exit 1
