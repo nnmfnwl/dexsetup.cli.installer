@@ -74,38 +74,71 @@ if [[ "${var_q}" == "yes" ]]; then
 fi
 
 echo "Building wallets from official repositories"
-./setup.cc.wallet.sh ./src/cfg.cc.blocknet.sh install
-(test $? != 0) && echo "build blocknet wallet failed " && exit 1
+read -p "$* [Would you like to install or update Blocknet(BLOCK) wallet? yes/else to no]: " var_q
+if [[ "${var_q}" == "yes" ]]; then
+   ./setup.cc.wallet.sh ./src/cfg.cc.blocknet.sh install || ./setup.cc.wallet.sh ./src/cfg.cc.blocknet.sh update
+   (test $? != 0) && echo "build blocknet wallet failed " && exit 1
+fi
 
-./setup.cc.wallet.sh ./src/cfg.cc.litecoin.sh install
-(test $? != 0) && echo "build litecoin wallet failed" && exit 1
+read -p "$* [Would you like to install or update Litecoin(LTC) wallet? yes/else to no]: " var_q
+if [[ "${var_q}" == "yes" ]]; then
+   ./setup.cc.wallet.sh ./src/cfg.cc.litecoin.sh install || ./setup.cc.wallet.sh ./src/cfg.cc.litecoin.sh update
+   (test $? != 0) && echo "build litecoin wallet failed" && exit 1
+fi
 
-./setup.cc.wallet.sh ./src/cfg.cc.bitcoin.sh install
-(test $? != 0) && echo "build bitcoin wallet failed" && exit 1
+read -p "$* [Would you like to install or update Bitcoin(BTC) wallet? yes/else to no]: " var_q
+if [[ "${var_q}" == "yes" ]]; then
+   ./setup.cc.wallet.sh ./src/cfg.cc.bitcoin.sh install || ./setup.cc.wallet.sh ./src/cfg.cc.bitcoin.sh update
+   (test $? != 0) && echo "build bitcoin wallet failed" && exit 1
+fi
 
-#./setup.cc.wallet.sh ./src/cfg.cc.verge.sh install
-(test $? != 0) && echo "build verge wallet failed" && exit 1
+read -p "$* [Would you like to install or update Verge(XVG) wallet? yes/else to no]: " var_q
+if [[ "${var_q}" == "yes" ]]; then
+   ./setup.cc.wallet.sh ./src/cfg.cc.verge.sh install || ./setup.cc.wallet.sh ./src/cfg.cc.verge.sh update
+   (test $? != 0) && echo "build verge wallet failed" && exit 1
+fi
 
-./setup.cc.wallet.sh ./src/cfg.cc.dogecoin.sh install
-(test $? != 0) && echo "build dogecoin wallet failed" && exit 1
+read -p "$* [Would you like to install or update Dogecoin(DOGE) wallet? yes/else to no]: " var_q
+if [[ "${var_q}" == "yes" ]]; then
+   ./setup.cc.wallet.sh ./src/cfg.cc.dogecoin.sh install || ./setup.cc.wallet.sh ./src/cfg.cc.dogecoin.sh update
+   (test $? != 0) && echo "build dogecoin wallet failed" && exit 1
+fi
 
-./setup.cc.wallet.sh ./src/cfg.cc.pivx.sh download install
-(test $? != 0) && echo "download pivx wallet failed" && exit 1
+read -p "$* [Would you like to install or update PIVX(PIVX) wallet? yes/else to no]: " var_q
+if [[ "${var_q}" == "yes" ]]; then
+   ./setup.cc.wallet.sh ./src/cfg.cc.pivx.sh download install || ./setup.cc.wallet.sh ./src/cfg.cc.pivx.sh download update
+   (test $? != 0) && echo "download pivx wallet failed" && exit 1
+fi
 
-./setup.cc.wallet.sh ./src/cfg.cc.dash.sh install
-(test $? != 0) && echo "build dash wallet failed" && exit 1
+read -p "$* [Would you like to install or update Dash(DASH) wallet? yes/else to no]: " var_q
+if [[ "${var_q}" == "yes" ]]; then
+   ./setup.cc.wallet.sh ./src/cfg.cc.dash.sh install || ./setup.cc.wallet.sh ./src/cfg.cc.dash.sh update
+   (test $? != 0) && echo "build dash wallet failed" && exit 1
+fi
 
-#./setup.cc.wallet.sh ./src/cfg.cc.lbrycrd.leveldb.sh install
-(test $? != 0) && echo "build lbry leveldb wallet failed" && exit 1
+read -p "$* [Would you like to install or update Lbry Credits LevelDB(LBC) wallet? yes/else to no]: " var_q
+if [[ "${var_q}" == "yes" ]]; then
+   ./setup.cc.wallet.sh ./src/cfg.cc.lbrycrd.leveldb.sh install || ./setup.cc.wallet.sh ./src/cfg.cc.lbrycrd.leveldb.sh update
+   (test $? != 0) && echo "build lbry leveldb wallet failed" && exit 1
+fi
 
-#./setup.cc.wallet.sh ./src/cfg.cc.lbrycrd.sqlite.sh install
-(test $? != 0) && echo "build lbry sqlite wallet failed" && exit 1
+read -p "$* [Would you like to install or update Lbry credits SQLITE(LBC) wallet? yes/else to no]: " var_q
+if [[ "${var_q}" == "yes" ]]; then
+   ./setup.cc.wallet.sh ./src/cfg.cc.lbrycrd.sqlite.sh install || ./setup.cc.wallet.sh ./src/cfg.cc.lbrycrd.sqlite.sh update
+   (test $? != 0) && echo "build lbry sqlite wallet failed" && exit 1
+fi
 
-./setup.cc.wallet.sh ./src/cfg.cc.pocketcoin.sh install
-(test $? != 0) && echo "build pkoin wallet failed" && exit 1
+read -p "$* [Would you like to install or update Pocketcoin Bastyon.com(PKOIN) wallet? yes/else to no]: " var_q
+if [[ "${var_q}" == "yes" ]]; then
+   ./setup.cc.wallet.sh ./src/cfg.cc.pocketcoin.sh install || ./setup.cc.wallet.sh ./src/cfg.cc.pocketcoin.sh update
+   (test $? != 0) && echo "build pkoin wallet failed" && exit 1
+fi
 
-#./setup.cc.wallet.sh ./src/cfg.cc.particl.sh install
-(test $? != 0) && echo "build particle wallet failed" && exit 1
+read -p "$* [Would you like to install or update Particl(PART) wallet? yes/else to no]: " var_q
+if [[ "${var_q}" == "yes" ]]; then
+   ./setup.cc.wallet.sh ./src/cfg.cc.particl.sh install || ./setup.cc.wallet.sh ./src/cfg.cc.particl.sh update
+   (test $? != 0) && echo "build particle wallet failed" && exit 1
+fi
 
 echo "Wallets profiling setup"
 ./setup.cc.wallet.profile.sh ./src/cfg.cc.blocknet.sh ~/.blocknet_staking wallet_block_staking
