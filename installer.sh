@@ -212,7 +212,10 @@ echo "Start/stop/update scripts with GNU Screen terminal multiplexer setup"
 ./setup.screen.sh install || ./setup.screen.sh update
 (test $? != 0) && echo "Start/stop/update scripts with GNU Screen terminal multiplexer setup failed" && exit 1
 
+cd ~/dexsetup/
+
 echo '
+cd ~/dexsetup/dexsetup/
 echo "DEXBOT trading strategies reconfiguration"
 read -p "$* Enter BLOCK address: " block1
 read -p "$* Enter LTC address 1: " ltc1
@@ -259,5 +262,8 @@ read -p "$* Enter LTC address 9: " ltc9
 ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.particl.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.part.ltc.sh strategy1 $part1 $ltc9 update_strategy
 (test $? != 0) && echo "make PART LTC trading startegy1 failed" && exit 1
 
-' > reconfigure_dexbot_strategies.sh
-chmod 755 reconfigure_dexbot_strategies.sh
+' > installer_reconfigure_dexbot.sh
+chmod 755 installer_reconfigure_dexbot.sh
+
+echo "Dexsetup setup has successfully finished"
+echo "DEXBOT Strategies needs to be reconfigured with valid wallet addressses by using reconfiguration script later 'cd ~/dexsetup && ./installer_reconfigure_dexbot.sh'"
