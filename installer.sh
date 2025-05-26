@@ -154,7 +154,7 @@ echo "Wallets profiling setup"
 (test $? != 0) && echo "make litecoin wallet dex profile failed" && exit 1
 ./setup.cc.wallet.profile.sh ./src/cfg.cc.bitcoin.sh
 (test $? != 0) && echo "make bitcoin wallet dex profile failed" && exit 1
-#./setup.cc.wallet.profile.sh ./src/cfg.cc.verge.sh
+./setup.cc.wallet.profile.sh ./src/cfg.cc.verge.sh
 (test $? != 0) && echo "make verge wallet dex profile failed" && exit 1
 ./setup.cc.wallet.profile.sh ./src/cfg.cc.dogecoin.sh
 (test $? != 0) && echo "make dogecoin wallet dex profile failed" && exit 1
@@ -162,13 +162,13 @@ echo "Wallets profiling setup"
 (test $? != 0) && echo "make pivx wallet dex profile failed" && exit 1
 ./setup.cc.wallet.profile.sh ./src/cfg.cc.dash.sh
 (test $? != 0) && echo "make dash wallet dex profile failed" && exit 1
-#./setup.cc.wallet.profile.sh ./src/cfg.cc.lbrycrd.leveldb.sh
+./setup.cc.wallet.profile.sh ./src/cfg.cc.lbrycrd.leveldb.sh
 (test $? != 0) && echo "make lbry leveldb wallet dex profile failed" && exit 1
-#./setup.cc.wallet.profile.sh ./src/cfg.cc.lbrycrd.sqlite.sh
+./setup.cc.wallet.profile.sh ./src/cfg.cc.lbrycrd.sqlite.sh
 (test $? != 0) && echo "make lbry sqlite wallet dex profile failed" && exit 1
 ./setup.cc.wallet.profile.sh ./src/cfg.cc.pocketcoin.sh
 (test $? != 0) && echo "make pocketcoin wallet dex profile failed" && exit 1
-#./setup.cc.wallet.profile.sh ./src/cfg.cc.particl.sh
+./setup.cc.wallet.profile.sh ./src/cfg.cc.particl.sh
 (test $? != 0) && echo "make particl wallet dex profile failed" && exit 1
 
 echo "DEXBOT trading strategies setup"
@@ -176,7 +176,7 @@ echo "DEXBOT trading strategies setup"
 (test $? != 0) && echo "make BLOCK LTC trading startegy1 failed" && exit 1
 ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.bitcoin.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.btc.ltc.sh strategy1         bitcoin01    litecoin02
 (test $? != 0) && echo "make BTC LTC trading startegy1 failed" && exit 1
-#./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.verge.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.xvg.ltc.sh strategy1           verge01      litecoin03
+./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.verge.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.xvg.ltc.sh strategy1           verge01      litecoin03
 (test $? != 0) && echo "make XVG LTC trading startegy1 failed" && exit 1
 ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.dogecoin.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.doge.ltc.sh strategy1       dogecoin01   litecoin04
 (test $? != 0) && echo "make DOGE LTC trading startegy1 failed" && exit 1
@@ -184,11 +184,11 @@ echo "DEXBOT trading strategies setup"
 (test $? != 0) && echo "make PIVX LTC trading startegy1 failed" && exit 1
 ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.dash.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.dash.ltc.sh strategy1           dash01       litecoin06
 (test $? != 0) && echo "make DASH LTC trading startegy1 failed" && exit 1
-#./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.lbrycrd.leveldb.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.lbc.ltc.sh strategy1 lbrycrd01    litecoin07
+./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.lbrycrd.leveldb.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.lbc.ltc.sh strategy1 lbrycrd01    litecoin07
 (test $? != 0) && echo "make LBC LTC trading startegy1 failed" && exit 1
 ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.pocketcoin.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.pkoin.ltc.sh strategy1    pocketcoin01 litecoin08
 (test $? != 0) && echo "make PKOIN LTC trading startegy1 failed" && exit 1
-#./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.particl.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.part.ltc.sh strategy1    particl01 litecoin09
+./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.particl.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.part.ltc.sh strategy1    particl01 litecoin09
 (test $? != 0) && echo "make PART LTC trading startegy1 failed" && exit 1
 
 echo "download BlockDX from official repositories:"
