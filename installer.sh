@@ -1,5 +1,7 @@
 #!/bin/bash
 
+id | grep root && echo "ERROR >> IT IS NOT ALLOWED TO RUN THIS SCRIPT AS ROOT !!!" && exit 1
+
 read -p "$* Would you like to continue with this experimental dexsetup setup script? [yes/else or enter for no]: " var_q
 if [[ "${var_q}" == "yes" ]]; then
     echo "Ok, we continue"
@@ -262,4 +264,4 @@ read -p "$* Enter LTC address 9: " ltc9
 chmod 755 installer_reconfigure_dexbot.sh
 
 echo "Dexsetup setup has successfully finished"
-echo "DEXBOT Strategies needs to be reconfigured with valid wallet addressses by using reconfiguration script later 'cd ~/dexsetup && ./installer_reconfigure_dexbot.sh'"
+echo "DEXBOT Strategies needs to be reconfigured with valid wallet addressses by using reconfiguration script later after you setup your wallet addresses 'cd ~/dexsetup && ./installer_reconfigure_dexbot.sh'"
