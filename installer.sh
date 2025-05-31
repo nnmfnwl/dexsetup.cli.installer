@@ -4,25 +4,30 @@ id | grep root && echo "ERROR >> IT IS NOT ALLOWED TO RUN THIS SCRIPT AS ROOT !!
 
 cat /etc/*release | grep -i -e debian > /dev/null && su_cmd="su -c " || su_cmd="sudo sh -c "
 
-read -p "$* Would you like to continue with this experimental dexsetup installer script? [yes/else or enter for no]: " var_q
+read -p ">>>> Would you like to continue with this experimental dexsetup installer script? [yes/else or enter for no]: " var_q
 if [[ "${var_q}" == "yes" ]]; then
-   echo "Ok, we continue"
+   echo "DEXSETUP installer continue..."
 else
-   echo "The installer has been cancelled"
+   echo "DEXSETUP installer been cancelled."
    exit 0
 fi
 
-read -p "$* Would you like to update system and install mandatory git proxychains tor and torsocks packages? [yes/else or enter for no]: " var_q
+read -p ">>>> Would you like to update system and install mandatory git proxychains tor and torsocks packages? [yes/else or enter for no]: " var_q
 if [[ "${var_q}" == "yes" ]]; then
    apt_install_mandatory="apt update; apt full-upgrade; apt install git proxychains4 tor torsocks;"
    groups | grep debian-tor || usermod_a_g="usermod -a -G debian-tor ${USER};" || usermod_a_g=""
 else
    apt_install_mandatory=""
+   usermod_a_g=""
 fi
 
-echo "Performing system update: ${su_cmd} $apt_install_mandatory $usermod_a_g"
-${su_cmd} "$apt_install_mandatory $usermod_a_g"
-(test $? != 0) && echo "update system, installing packages and updating user permissions to use tor failed" && exit 1
+if [[ "${apt_install_mandatory}" != "" ]] || [[ "${usermod_a_g}" != "" ]]; then
+   echo "Operating system standard update: ${su_cmd} $apt_install_mandatory $usermod_a_g"
+   ${su_cmd} "$apt_install_mandatory $usermod_a_g"
+      (test $? != 0) && echo "update system, installing packages and updating user permissions to use tor failed" && exit 1
+else
+   echo "Operating system standard update not needed or cancelled"
+fi
 
 echo "making directory(~/dexsetup) and downloading all dexsetup files"
 mkdir -p ~/dexsetup/dexsetup && cd ~/dexsetup/dexsetup
@@ -31,7 +36,7 @@ mkdir -p ~/dexsetup/dexsetup && cd ~/dexsetup/dexsetup
 echo "downloading latest dexsetup version by git over anonymously over tor"
 proxychains4 git clone https://github.com/nnmfnwl/dexsetup.git ./
 if [[ ${?} != 0 ]]; then
-   read -p "$* DEXSETUP seems already installed, would you like to continue and try to update? [yes/else or enter for no]: " var_q
+   read -p ">>>> DEXSETUP seems already installed, would you like to continue and try to update? [yes/else or enter for no]: " var_q
    if [[ "${var_q}" == "yes" ]]; then
     
       echo "DEXSETUP reinstallation/update in progress"
