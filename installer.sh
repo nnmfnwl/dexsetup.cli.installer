@@ -2,23 +2,27 @@
 
 id | grep root && echo "ERROR >> IT IS NOT ALLOWED TO RUN THIS SCRIPT AS ROOT !!!" && exit 1
 
-read -p "$* Would you like to continue with this experimental dexsetup setup script? [yes/else or enter for no]: " var_q
+cat /etc/*release | grep -i -e debian > /dev/null && su_cmd="su -c " || su_cmd="sudo sh -c "
+
+read -p "$* Would you like to continue with this experimental dexsetup installer script? [yes/else or enter for no]: " var_q
 if [[ "${var_q}" == "yes" ]]; then
-    echo "Ok, we continue"
+   echo "Ok, we continue"
 else
-    echo "The installer has been cancelled"
-    exit 0
+   echo "The installer has been cancelled"
+   exit 0
 fi
 
 read -p "$* Would you like to update system and install mandatory git proxychains tor and torsocks packages? [yes/else or enter for no]: " var_q
 if [[ "${var_q}" == "yes" ]]; then
-   su - -c "apt update; apt full-upgrade; apt install git proxychains4 tor torsocks; exit"
-   (test $? != 0) && echo "update system and installing packages failed" && exit 1
+   apt_install_mandatory="apt update; apt full-upgrade; apt install git proxychains4 tor torsocks;"
+   groups | grep debian-tor || usermod_a_g="usermod -a -G debian-tor ${USER};" || usermod_a_g=""
+else
+   apt_install_mandatory=""
 fi
 
-echo "updating user permissions for ability to use tor"
-groups | grep debian-tor || su - -c "usermod -a -G debian-tor ${USER}; exit"
-(test $? != 0) && echo "updating permission for user ability to use tor failed" && exit 1
+echo "Performing system update: ${su_cmd} $apt_install_mandatory $usermod_a_g"
+${su_cmd} "$apt_install_mandatory $usermod_a_g"
+(test $? != 0) && echo "update system, installing packages and updating user permissions to use tor failed" && exit 1
 
 echo "making directory(~/dexsetup) and downloading all dexsetup files"
 mkdir -p ~/dexsetup/dexsetup && cd ~/dexsetup/dexsetup
@@ -48,7 +52,35 @@ git checkout merge.2025.02.06 \
 
 read -p "$* Would you like to install or update software dependencies? [yes/else to no]: " var_q
 if [[ "${var_q}" == "yes" ]]; then
-   ./setup.dependencies.sh clibuild clitools guibuild guitools
+    read -p "$* Would you like to install mandatory command line interface build packages? [yes/else to no]: " var_q
+    if [[ "${var_q}" == "yes" ]]; then
+        clibuild=clibuild
+    else
+        clibuild=""
+    fi
+    
+    read -p "$* Would you like to install mandatory command line interface packages? [yes/else to no]: " var_q
+    if [[ "${var_q}" == "yes" ]]; then
+        clitools=clitools
+    else
+        clitools=""
+    fi
+    
+    read -p "$* Would you like to install optional graphical user interface build packages? [yes/else to no]: " var_q
+    if [[ "${var_q}" == "yes" ]]; then
+        guibuild=guibuild
+    else
+        guibuild=""
+    fi
+    
+    read -p "$* Would you like to install optional graphical user interface packages? [yes/else to no]: " var_q
+    if [[ "${var_q}" == "yes" ]]; then
+        guitools=guitools
+    else
+        guitools=""
+    fi
+    
+   ./setup.dependencies.sh ${clibuild} ${clitools} ${guibuild} ${guitools}
    (test $? != 0) && echo "Installing dependency packages failed" && exit 1
 fi
 
@@ -67,7 +99,7 @@ fi
 
 read -p "$* Would you like to setup tigervnc server to start automatically after startup? [yes/else or enter for no]: " var_q
 if [[ "${var_q}" == "yes" ]]; then
-   grep "^:1=${USER}$" /etc/tigervnc/vncserver.users || su - -c "echo \":1=${USER}\" >> /etc/tigervnc/vncserver.users; systemctl start tigervncserver@:1.service; systemctl enable tigervncserver@:1.service"
+   grep "^:1=${USER}$" /etc/tigervnc/vncserver.users || ${su_cmd} "echo \":1=${USER}\" >> /etc/tigervnc/vncserver.users; systemctl start tigervncserver@:1.service; systemctl enable tigervncserver@:1.service"
    (test $? != 0) && echo "configure vng server to start automatically after restart failed" && exit 1
 fi
 
