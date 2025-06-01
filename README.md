@@ -5,12 +5,12 @@
 
 ### Summary
   1. Install `mandatory packages` and `reconfigure user for ability to use tor`.
-  2. Download or update `dexsetup` to lastest version.
-  3. Choose interactively which `optional dependency packages` to install.
-  4. Choose interactively which `wallets and wallets profiles` to install and configure.
+  2. Download or update `DEXSETUP` to lastest version.
+  3. Choose which `CLI` and `GUI` `dependency packages` to install.
+  4. Choose which `wallets and wallets profiles` to install and configure.
   5. Setup `DEXBOT` and generate all `default trading strategies` from templates.
-  6. setup `BlockDX` the Blocknet DEX graphical user interface app
-  7. Generate `screen start script` and inform user where main start screen script is and how to enter it, navigate it and detach from it.
+  6. setup `BlockDX` the Blocknet DEX graphical user interface app.
+  7. Generate `screen start script` and let user know how to start screen script is and how to connect it, navigate it and detach from it from terminal.
   8. Generate `dexbot reconfigurationm script` used to set wallet addresses used by DEXBOT trading strategies.
 
 ### How setup dexsetup with cli installer
@@ -21,11 +21,11 @@
 bash ./installer.sh
 ```
   2. Download and run dexsetup `installer.sh` script `anonymously` but install tor, proxychains4 and wget first
-  * Install packages and reconfigure user with `su` (by detauld used in Debian)
+  * Install packages and reconfigure user with `su` (by detauld used in `Debian`)
 ```
 su -c "apt update; apt full-upgrade; apt install wget proxychains4 tor; groups ${USER} | grep debian-tor || usermod -a -G debian-tor ${USER}; exit"
 ```
-  * Install packages and reconfigure user with `sudo` (by default used in Ubuntu)
+  * Install packages and reconfigure user with `sudo` (by default used in `Ubuntu`)
 ```
 sudo sh -c "apt update; apt full-upgrade; apt install wget proxychains4 tor; groups ${USER} | grep debian-tor || usermod -a -G debian-tor ${USER}; exit"
 ```
@@ -37,11 +37,12 @@ mkdir -p ~/dexsetup && cd ~/dexsetup && rm -f installer.sh && proxychains4 wget 
 ### How to use installed dexsetup environment
   * All generated files are stored at `~/dexsetup`
   * Blockchains are using default chain data directories like `./litecoin`, `./blocknet`, `./bitcoin` etc...
-  * There is main start script which opens management only by console interface:
+    
+  * There is `main CLI start script` which opens management only by console interface:
 ```
 cd ~/dexsetup/dexsetup/ && ./start.screen.instance_default.cli.sh
 ```
-  * There is main start script which opens management by console interface and graphical user interface wallets as well:
+  * There is `main start GUI script` which opens management by console interface and graphical user interface wallets as well:
 ```
 cd ~/dexsetup/dexsetup/ && ./start.screen.instance_default.gui.sh
 ```
