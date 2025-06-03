@@ -15,21 +15,27 @@
 
 ### How setup dexsetup with cli installer
   * Here are 2 user friendly options to download and run instaler:
-
-  1. Download [`installer.sh`](https://github.com/nnmfnwl/dexsetup.cli.installer/raw/refs/heads/main/installer.sh) manually and start setup by:
+  * **1. Download and start dexsetup [`installer.sh`](https://github.com/nnmfnwl/dexsetup.cli.installer/raw/refs/heads/main/installer.sh) script manually and `not anonymously`**:
 ```
 bash ./installer.sh
 ```
-  2. Download and run dexsetup `installer.sh` script `anonymously` but install tor, proxychains4 and wget first
-  * Install packages and reconfigure user with `su` (by detauld used in `Debian`)
+
+  * **2. Download and start dexsetup `installer.sh` script `anonymously`** but it needs to install tor, proxychains4 and wget first.
+  * Install packages and reconfigure user:
+  * For **`Debian`** based distributions by using `apt` and `su`:
 ```
-su -c "apt update; apt full-upgrade; apt install wget proxychains4 tor; groups ${USER} | grep debian-tor || usermod -a -G debian-tor ${USER}; exit"
+su -c "apt update; apt full-upgrade; apt install wget proxychains4 tor; groups ${USER} | grep debian-tor || usermod -a -G debian-tor ${USER}; exit
+"
 ```
-  * Install packages and reconfigure user with `sudo` (by default used in `Ubuntu`)
+
+  * For **`Ubuntu`** based distributions by using `apt` and `sudo`:
+
 ```
 sudo sh -c "apt update; apt full-upgrade; apt install wget proxychains4 tor; groups ${USER} | grep debian-tor || usermod -a -G debian-tor ${USER}; exit"
 ```
-  * Download and run installer anonymously
+
+  * Download and run installer anonymously:
+
 ```
 mkdir -p ~/dexsetup && cd ~/dexsetup && rm -f installer.sh && proxychains4 wget "https://github.com/nnmfnwl/dexsetup.cli.installer/raw/refs/heads/main/installer.sh" && bash installer.sh
 ```
