@@ -1,11 +1,9 @@
-## dexsetup.cli.installer
-
 ### About
-  * [dexsetup](https://github.com/nnmfnwl/dexsetup?tab=readme-ov-file#step-by-step-setup-tutorial) installer with simple command line interface
+  * **dexsetup.cli.installer** is simple interactive command line installer for [dexsetup](https://github.com/nnmfnwl/dexsetup?tab=readme-ov-file#step-by-step-setup-tutorial)
 
 ### Summary
   1. Install `mandatory packages` and `reconfigure user for ability to use tor`.
-  2. Download or update `DEXSETUP` to lastest version.
+  2. Download or update `DEXSETUP` to latest version.
   3. Choose which `CLI` and `GUI` `dependency packages` to install.
   4. Choose which `wallets and wallets profiles` to install and configure.
   5. Setup `DEXBOT` and generate all `default trading strategies` from templates.
@@ -20,22 +18,15 @@
 bash ./installer.sh
 ```
 
-  * **2. Download and start dexsetup `installer.sh` script `anonymously`** but it needs to install tor, proxychains4 and wget first.
-  * Install packages and reconfigure user:
-  * For **`Debian`** based distributions by using `apt` and `su`:
+  * **2. Download and start dexsetup `installer.sh` script `anonymously`** but for total privacy install `tor`, `proxychains4` and `wget` first.
+  * To install privacy packages on **`Debian`** or **`Ubuntu`** based distributions by using `apt` and `su` or `sudo`:
 ```
-su -c "apt update; apt full-upgrade; apt install wget proxychains4 tor; groups ${USER} | grep debian-tor || usermod -a -G debian-tor ${USER}; exit
-"
+pkgs="proxychains4 tor torsocks wget";
+groups | grep debian-tor > /dev/null && cfg_user_tor="echo 'Tor for ${USER} is already configured'" || cfg_user_tor="usermod -a -G debian-tor ${USER}";
+sudo -v; (test $? != 0) && su_cmd="echo 'Please enter ROOT password'; su -c" || su_cmd="echo 'Please enter ${USER} sudo password'; sudo -sh -c";
+eval "${su_cmd} \"apt update; apt full-upgrade; apt install ${pkgs}; ${cfg_user_tor}; exit\""
 ```
-
-  * For **`Ubuntu`** based distributions by using `apt` and `sudo`:
-
-```
-sudo sh -c "apt update; apt full-upgrade; apt install wget proxychains4 tor; groups ${USER} | grep debian-tor || usermod -a -G debian-tor ${USER}; exit"
-```
-
   * Download and run installer anonymously:
-
 ```
 mkdir -p ~/dexsetup && cd ~/dexsetup && rm -f installer.sh && proxychains4 wget "https://github.com/nnmfnwl/dexsetup.cli.installer/raw/refs/heads/main/installer.sh" && bash installer.sh
 ```
