@@ -127,7 +127,7 @@ mkdir -p ~/dexsetup/dexsetup && cd ~/dexsetup/dexsetup
 echo "downloading latest dexsetup version by git anonymously over tor"
 proxychains4 git clone https://github.com/nnmfnwl/dexsetup.git ./
 if [[ ${?} != 0 ]]; then
-   tool_interactivity "y" "n" "DEXSETUP seems already installed, would you like to continue to try to update?"
+   tool_interactivity "dexsetup-update-y" "dexsetup-update-n" "DEXSETUP seems already installed, would you like to continue to try to update?"
    if [[ "${var_q}" == "y" ]]; then
       echo "INFO >>> DEXSETUP re-installation/update in progress"
       reinstall_yes="y"
