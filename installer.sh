@@ -12,11 +12,17 @@ argvv=("$@")
 function tool_interactivity() { #toyes #tono #info
    for (( j=0; j<argcc; j++ )); do
       if [[ "${argvv[j]}" == "${1}" ]]; then
-         echo ">>> $3 [y to yes]: y (set by arg ${1})"
+         echo ""
+         echo ">>> ${3}"
+         echo ">>> (been skip by arg '${1}'/'${2}') [y to yes]: y"
+         #~ echo ">>> $3 [y to yes]: y (set by arg ${1})"
          var_q="y"
          return 0
       elif [[ "${argvv[j]}" == "${2}" ]]; then
-         echo ">>> $3 [y to yes]: n (set by arg ${2})"
+         echo ""
+         echo ">>> ${3}"
+         echo ">>> (been skip by arg '${1}'/'${2}') [y to yes]: n"
+         #~ echo ">>> $3 [y to yes]: n (set by arg ${2})"
          var_q="n"
          return 1
       fi
@@ -46,13 +52,29 @@ fi
 echo "INFO >>> Detecting Linux distribution 'sudo'/'su' compatibility"
 sudo -v; (test $? != 0) && su_cmd="echo 'Please enter ROOT password'; su -c" || su_cmd="echo 'Please enter ${USER} sudo password'; sudo -sh -c";
 
+echo ""
+echo "DEXSETUP INSTALLER - Blocknet's Decentralized Exchange Backend System Installer for Debian/Ubuntu based Linux distributions"
+echo "We build decentralized system which has NO central point of failure or control"
+echo "What it is and does:"
+echo "It is advanced multipurpose tool to build genuine decentralized systems"
+echo "It can prepare operating system to become node operator, tester, user or even developer and easy manage wallets and wallet profiles remotely by CLI and also GUI"
+echo "it can setup or update DEXSETUP framework"
+echo "It can build wallet from official source code or download wallets from official github repositories"
+echo "It can configure or merge wallet .conf files configurations"
+echo "It can create and manage wallet profiles and predefine wallet CLI commands per wallet profile"
+echo "It can configure Blocknet service node with other by desetup installed wallets"
+echo "It can setup DEXBOT automatic liquidity/trading bot"
+echo "It can use predefined trading strategy templates to create DEXBOT trading strategies configured to be run directly within installed wallets"
+echo "It can generate script used to easy manage all components by GNU Screen Terminal Multiplexer"
+echo "It can configures VNC server and start automatically after restart"
+
 tool_interactivity "c-y" "c-n" "Would you like to continue with this experimental dexsetup installer script?"
 if [[ "${var_q}" != "y" ]]; then
    echo "INFO >> DEXSETUP installer been canceled."
    exit 0
 fi
 
-tool_interactivity "upgrade-y" "upgrade-n" "Would you like to update system?"
+tool_interactivity "upgrade-y" "upgrade-n" "Would you like to set to update system before installation start?"
 if [[ "${var_q}" == "y" ]]; then
    pkg_update="apt update; apt full-upgrade"
 else
@@ -102,6 +124,7 @@ else
    tigervnc_yes=""
 fi
 
+echo ""
 eval_cmdd="${su_cmd} \"${pkg_update}; apt install ${pkg_privacy} ${pkg_cli_build} ${pkg_cli_tools} ${pkg_gui_build} ${pkg_gui_tools}; ${cfg_user_tor}; ${cfg_user_vnc}; exit\""
 echo "${eval_cmdd}"
 tool_interactivity "proceed-y" "proceed-n" "Proceed with above system installation?"
@@ -127,7 +150,7 @@ mkdir -p ~/dexsetup/dexsetup && cd ~/dexsetup/dexsetup
 echo "downloading latest dexsetup version by git anonymously over tor"
 proxychains4 git clone https://github.com/nnmfnwl/dexsetup.git ./
 if [[ ${?} != 0 ]]; then
-   tool_interactivity "dexsetup-update-y" "dexsetup-update-n" "DEXSETUP seems already installed, would you like to continue to try to update?"
+   tool_interactivity "dexsetup-update-y" "dexsetup-update-n" "DEXSETUP seems already installed, would you like to continue to try to update DEXSETUP and other components?"
    if [[ "${var_q}" == "y" ]]; then
       echo "INFO >>> DEXSETUP re-installation/update in progress"
       reinstall_yes="y"
@@ -187,64 +210,73 @@ tool_setup_wallet "Pocketcoin(Bastyon.com)" "PKOIN" "./src/cfg.cc.pocketcoin.sh"
 tool_setup_wallet "Particl" "PART" "./src/cfg.cc.particl.sh" "build"
 
 echo "Wallets profiling setup"
-./setup.cc.wallet.profile.sh ./src/cfg.cc.blocknet.sh ~/.blocknet_staking wallet_block_staking
-(test $? != 0) && echo "make blocknet wallet staking profile failed" && exit 1
-./setup.cc.wallet.profile.sh ./src/cfg.cc.pocketcoin.sh ~/.pocketcoin_staking wallet_pkoin_staking
-(test $? != 0) && echo "make pocketcoin (bastyon) wallet staking profile failed" && exit 1
-./setup.cc.wallet.profile.sh ./src/cfg.cc.pivx.sh ~/.pivx_staking/ wallet_pivx_staking
-(test $? != 0) && echo "make pivx wallet staking profile failed" && exit 1
 
-./setup.cc.wallet.profile.sh ./src/cfg.cc.blocknet.sh
-(test $? != 0) && echo "make blocknet wallet dex profile failed" && exit 1
-./setup.cc.wallet.profile.sh ./src/cfg.cc.litecoin.sh
-(test $? != 0) && echo "make litecoin wallet dex profile failed" && exit 1
-./setup.cc.wallet.profile.sh ./src/cfg.cc.bitcoin.sh
-(test $? != 0) && echo "make bitcoin wallet dex profile failed" && exit 1
-./setup.cc.wallet.profile.sh ./src/cfg.cc.verge.sh
-(test $? != 0) && echo "make verge wallet dex profile failed" && exit 1
-./setup.cc.wallet.profile.sh ./src/cfg.cc.dogecoin.sh
-(test $? != 0) && echo "make dogecoin wallet dex profile failed" && exit 1
-./setup.cc.wallet.profile.sh ./src/cfg.cc.pivx.sh
-(test $? != 0) && echo "make pivx wallet dex profile failed" && exit 1
-./setup.cc.wallet.profile.sh ./src/cfg.cc.dash.sh
-(test $? != 0) && echo "make dash wallet dex profile failed" && exit 1
-./setup.cc.wallet.profile.sh ./src/cfg.cc.lbrycrd.leveldb.sh
-(test $? != 0) && echo "make lbry leveldb wallet dex profile failed" && exit 1
-./setup.cc.wallet.profile.sh ./src/cfg.cc.lbrycrd.sqlite.sh
-(test $? != 0) && echo "make lbry sqlite wallet dex profile failed" && exit 1
-./setup.cc.wallet.profile.sh ./src/cfg.cc.pocketcoin.sh
-(test $? != 0) && echo "make pocketcoin wallet dex profile failed" && exit 1
-./setup.cc.wallet.profile.sh ./src/cfg.cc.particl.sh
-(test $? != 0) && echo "make particl wallet dex profile failed" && exit 1
+tool_interactivity "stake-profiles-y" "stake-profiles-n" "Would you like to setup also standalone staking profiles for blocknet, pocketcoin and pivx?"
+if [[ "${var_q}" != "y" ]]; then
+   ./setup.cc.wallet.profile.sh ./src/cfg.cc.blocknet.sh ~/.blocknet_staking wallet_block_staking
+   (test $? != 0) && echo "make blocknet wallet staking profile failed" && exit 1
+   ./setup.cc.wallet.profile.sh ./src/cfg.cc.pocketcoin.sh ~/.pocketcoin_staking wallet_pkoin_staking
+   (test $? != 0) && echo "make pocketcoin (bastyon) wallet staking profile failed" && exit 1
+   ./setup.cc.wallet.profile.sh ./src/cfg.cc.pivx.sh ~/.pivx_staking/ wallet_pivx_staking
+   (test $? != 0) && echo "make pivx wallet staking profile failed" && exit 1
+fi
 
-echo "DEXBOT trading strategies setup"
-./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.block.ltc.sh strategy1      blocknet01   litecoin01 \
-|| ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.block.ltc.sh strategy1      blocknet01   litecoin01 update_strategy
-(test $? != 0) && echo "make BLOCK LTC trading startegy1 failed" && exit 1
-./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.bitcoin.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.btc.ltc.sh strategy1         bitcoin01    litecoin02 \
-|| ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.bitcoin.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.btc.ltc.sh strategy1         bitcoin01    litecoin02 update_strategy
-(test $? != 0) && echo "make BTC LTC trading startegy1 failed" && exit 1
-./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.verge.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.xvg.ltc.sh strategy1           verge01      litecoin03 \
-|| ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.verge.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.xvg.ltc.sh strategy1           verge01      litecoin03 update_strategy
-(test $? != 0) && echo "make XVG LTC trading startegy1 failed" && exit 1
-./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.dogecoin.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.doge.ltc.sh strategy1       dogecoin01   litecoin04 \
-|| ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.dogecoin.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.doge.ltc.sh strategy1       dogecoin01   litecoin04 update_strategy
-(test $? != 0) && echo "make DOGE LTC trading startegy1 failed" && exit 1
-./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.pivx.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.pivx.ltc.sh strategy1           pivx01       litecoin05 \
-|| ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.pivx.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.pivx.ltc.sh strategy1           pivx01       litecoin05 update_strategy
-(test $? != 0) && echo "make PIVX LTC trading startegy1 failed" && exit 1
-./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.dash.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.dash.ltc.sh strategy1           dash01       litecoin06 \
-|| ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.dash.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.dash.ltc.sh strategy1           dash01       litecoin06 update_strategy
-(test $? != 0) && echo "make DASH LTC trading startegy1 failed" && exit 1
-./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.lbrycrd.leveldb.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.lbc.ltc.sh strategy1 lbrycrd01    litecoin07 \
-|| ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.lbrycrd.leveldb.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.lbc.ltc.sh strategy1 lbrycrd01    litecoin07 update_strategy
-(test $? != 0) && echo "make LBC LTC trading startegy1 failed" && exit 1
-./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.pocketcoin.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.pkoin.ltc.sh strategy1    pocketcoin01 litecoin08 \
-|| ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.pocketcoin.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.pkoin.ltc.sh strategy1    pocketcoin01 litecoin08 update_strategy
-(test $? != 0) && echo "make PKOIN LTC trading startegy1 failed" && exit 1
-./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.particl.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.part.ltc.sh strategy1    particl01 litecoin09 \
-|| ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.particl.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.part.ltc.sh strategy1    particl01 litecoin09 update_strategy
-(test $? != 0) && echo "make PART LTC trading startegy1 failed" && exit 1
+tool_interactivity "dex-profiles-y" "dex-profiles-n" "Would you like to setup wallet profiles which to be used in DEX trading?"
+if [[ "${var_q}" != "y" ]]; then
+   ./setup.cc.wallet.profile.sh ./src/cfg.cc.blocknet.sh
+   (test $? != 0) && echo "make blocknet wallet dex profile failed" && exit 1
+   ./setup.cc.wallet.profile.sh ./src/cfg.cc.litecoin.sh
+   (test $? != 0) && echo "make litecoin wallet dex profile failed" && exit 1
+   ./setup.cc.wallet.profile.sh ./src/cfg.cc.bitcoin.sh
+   (test $? != 0) && echo "make bitcoin wallet dex profile failed" && exit 1
+   ./setup.cc.wallet.profile.sh ./src/cfg.cc.verge.sh
+   (test $? != 0) && echo "make verge wallet dex profile failed" && exit 1
+   ./setup.cc.wallet.profile.sh ./src/cfg.cc.dogecoin.sh
+   (test $? != 0) && echo "make dogecoin wallet dex profile failed" && exit 1
+   ./setup.cc.wallet.profile.sh ./src/cfg.cc.pivx.sh
+   (test $? != 0) && echo "make pivx wallet dex profile failed" && exit 1
+   ./setup.cc.wallet.profile.sh ./src/cfg.cc.dash.sh
+   (test $? != 0) && echo "make dash wallet dex profile failed" && exit 1
+   ./setup.cc.wallet.profile.sh ./src/cfg.cc.lbrycrd.leveldb.sh
+   (test $? != 0) && echo "make lbry leveldb wallet dex profile failed" && exit 1
+   ./setup.cc.wallet.profile.sh ./src/cfg.cc.lbrycrd.sqlite.sh
+   (test $? != 0) && echo "make lbry sqlite wallet dex profile failed" && exit 1
+   ./setup.cc.wallet.profile.sh ./src/cfg.cc.pocketcoin.sh
+   (test $? != 0) && echo "make pocketcoin wallet dex profile failed" && exit 1
+   ./setup.cc.wallet.profile.sh ./src/cfg.cc.particl.sh
+   (test $? != 0) && echo "make particl wallet dex profile failed" && exit 1
+fi
+
+tool_interactivity "dex-profiles-y" "dex-profiles-n" "Would you like to setup DEXBOT and trading strategies with DEX trading wallet profiles?"
+if [[ "${var_q}" != "y" ]]; then
+   ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.block.ltc.sh strategy1      blocknet01   litecoin01 \
+   || ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.block.ltc.sh strategy1      blocknet01   litecoin01 update_strategy
+   (test $? != 0) && echo "make BLOCK LTC trading startegy1 failed" && exit 1
+   ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.bitcoin.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.btc.ltc.sh strategy1         bitcoin01    litecoin02 \
+   || ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.bitcoin.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.btc.ltc.sh strategy1         bitcoin01    litecoin02 update_strategy
+   (test $? != 0) && echo "make BTC LTC trading startegy1 failed" && exit 1
+   ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.verge.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.xvg.ltc.sh strategy1           verge01      litecoin03 \
+   || ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.verge.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.xvg.ltc.sh strategy1           verge01      litecoin03 update_strategy
+   (test $? != 0) && echo "make XVG LTC trading startegy1 failed" && exit 1
+   ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.dogecoin.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.doge.ltc.sh strategy1       dogecoin01   litecoin04 \
+   || ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.dogecoin.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.doge.ltc.sh strategy1       dogecoin01   litecoin04 update_strategy
+   (test $? != 0) && echo "make DOGE LTC trading startegy1 failed" && exit 1
+   ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.pivx.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.pivx.ltc.sh strategy1           pivx01       litecoin05 \
+   || ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.pivx.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.pivx.ltc.sh strategy1           pivx01       litecoin05 update_strategy
+   (test $? != 0) && echo "make PIVX LTC trading startegy1 failed" && exit 1
+   ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.dash.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.dash.ltc.sh strategy1           dash01       litecoin06 \
+   || ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.dash.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.dash.ltc.sh strategy1           dash01       litecoin06 update_strategy
+   (test $? != 0) && echo "make DASH LTC trading startegy1 failed" && exit 1
+   ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.lbrycrd.leveldb.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.lbc.ltc.sh strategy1 lbrycrd01    litecoin07 \
+   || ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.lbrycrd.leveldb.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.lbc.ltc.sh strategy1 lbrycrd01    litecoin07 update_strategy
+   (test $? != 0) && echo "make LBC LTC trading startegy1 failed" && exit 1
+   ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.pocketcoin.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.pkoin.ltc.sh strategy1    pocketcoin01 litecoin08 \
+   || ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.pocketcoin.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.pkoin.ltc.sh strategy1    pocketcoin01 litecoin08 update_strategy
+   (test $? != 0) && echo "make PKOIN LTC trading startegy1 failed" && exit 1
+   ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.particl.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.part.ltc.sh strategy1    particl01 litecoin09 \
+   || ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.particl.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.part.ltc.sh strategy1    particl01 litecoin09 update_strategy
+   (test $? != 0) && echo "make PART LTC trading startegy1 failed" && exit 1
+fi
 
 tool_interactivity "blockdx-install-y" "blockdx-install-n" "Would you like to install BlockDX(Blocknet DEX GUI app)?"
 if [[ "${var_q}" == "y" ]]; then
