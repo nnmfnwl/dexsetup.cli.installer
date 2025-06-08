@@ -257,7 +257,7 @@ if [[ "${var_q}" == "y" ]]; then
    (test $? != 0) && echo "make particl wallet dex profile failed" && exit 1
 fi
 
-tool_interactivity "dex-profiles-y" "dex-profiles-n" "Would you like to setup DEXBOT and trading strategies with DEX trading wallet profiles?"
+tool_interactivity "dexbot-strategies-y" "dexbot-strategies-n" "Would you like to setup DEXBOT and trading strategies with DEX trading wallet profiles?"
 if [[ "${var_q}" == "y" ]]; then
    ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.block.ltc.sh strategy1      blocknet01   litecoin01 \
    || ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.block.ltc.sh strategy1      blocknet01   litecoin01 update_strategy
