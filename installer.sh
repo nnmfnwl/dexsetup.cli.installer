@@ -78,7 +78,7 @@ tool_interactivity "upgrade-y" "upgrade-n" "Would you like to set to update syst
 if [[ "${var_q}" == "y" ]]; then
    pkg_update="apt update; apt full-upgrade"
 else
-   pkg_update=""
+   pkg_update="echo 'no apt update/upgrade performed'"
 fi
 
 tool_interactivity "pkg-privacy-y" "pkg-privacy-n" "Would you like to set to install mandatory to have tor proxychains4 and torsocks privacy packages?"
@@ -121,11 +121,12 @@ if [[ "${var_q}" == "y" ]]; then
    tigervnc_yes="y"
 else
    pkg_gui_tools=""
+   cfg_user_vnc="echo 'no TigerVNC for ${USER} is going to be configured'"
    tigervnc_yes=""
 fi
 
 echo ""
-eval_cmdd="${su_cmd} \"${pkg_update}; apt install ${pkg_privacy} ${pkg_cli_build} ${pkg_cli_tools} ${pkg_gui_build} ${pkg_gui_tools}; ${cfg_user_tor}; ${cfg_user_vnc}; exit\""
+eval_cmdd="${su_cmd} \"${pkg_update}; apt install apt ${pkg_privacy} ${pkg_cli_build} ${pkg_cli_tools} ${pkg_gui_build} ${pkg_gui_tools}; ${cfg_user_tor}; ${cfg_user_vnc}; exit\""
 echo "${eval_cmdd}"
 tool_interactivity "proceed-y" "proceed-n" "Proceed with above system installation?"
 if [[ "${var_q}" == "y" ]]; then
@@ -211,15 +212,9 @@ tool_setup_wallet "Particl" "PART" "./src/cfg.cc.particl.sh" "build"
 
 echo "Wallets profiling setup"
 
-tool_interactivity "dao-profiles-y" "dao-profiles-n" "Would you like to setup also standalone DAO profiles for blocknet?"
-if [[ "${var_q}" != "y" ]]; then
-   ./setup.cc.wallet.profile.sh ./src/cfg.cc.blocknet.dao.sh
-   (test $? != 0) && echo "make blocknet wallet staking profile failed" && exit 1
-fi
-
 tool_interactivity "stake-profiles-y" "stake-profiles-n" "Would you like to setup also standalone staking profiles for blocknet, pocketcoin and pivx?"
 if [[ "${var_q}" != "y" ]]; then
-   ./setup.cc.wallet.profile.sh ./src/cfg.cc.blocknet.staking.sh
+   ./setup.cc.wallet.profile.sh ./src/cfg.cc.blocknet.sh ~/.blocknet_staking wallet_block_staking
    (test $? != 0) && echo "make blocknet wallet staking profile failed" && exit 1
    ./setup.cc.wallet.profile.sh ./src/cfg.cc.pocketcoin.sh ~/.pocketcoin_staking wallet_pkoin_staking
    (test $? != 0) && echo "make pocketcoin (bastyon) wallet staking profile failed" && exit 1
