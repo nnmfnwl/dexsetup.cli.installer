@@ -212,9 +212,15 @@ tool_setup_wallet "Particl" "PART" "./src/cfg.cc.particl.sh" "build"
 
 echo "Wallets profiling setup"
 
+tool_interactivity "dao-profiles-y" "dao-profiles-n" "Would you like to setup also standalone DAO profiles for blocknet?"
+if [[ "${var_q}" != "y" ]]; then
+   ./setup.cc.wallet.profile.sh ./src/cfg.cc.blocknet.dao.sh
+   (test $? != 0) && echo "make blocknet wallet staking profile failed" && exit 1
+fi
+
 tool_interactivity "stake-profiles-y" "stake-profiles-n" "Would you like to setup also standalone staking profiles for blocknet, pocketcoin and pivx?"
 if [[ "${var_q}" != "y" ]]; then
-   ./setup.cc.wallet.profile.sh ./src/cfg.cc.blocknet.sh ~/.blocknet_staking wallet_block_staking
+   ./setup.cc.wallet.profile.sh ./src/cfg.cc.blocknet.staking.sh
    (test $? != 0) && echo "make blocknet wallet staking profile failed" && exit 1
    ./setup.cc.wallet.profile.sh ./src/cfg.cc.pocketcoin.sh ~/.pocketcoin_staking wallet_pkoin_staking
    (test $? != 0) && echo "make pocketcoin (bastyon) wallet staking profile failed" && exit 1
