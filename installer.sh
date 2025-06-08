@@ -216,13 +216,13 @@ tool_setup_wallet "Particl" "PART" "./src/cfg.cc.particl.sh" "build"
 echo "Wallets profiling setup"
 
 tool_interactivity "dao-profiles-y" "dao-profiles-n" "Would you like to setup also standalone DAO profiles for blocknet?"
-if [[ "${var_q}" != "y" ]]; then
+if [[ "${var_q}" == "y" ]]; then
    ./setup.cc.wallet.profile.sh ./src/cfg.cc.blocknet.dao.sh
    (test $? != 0) && echo "make blocknet wallet staking profile failed" && exit 1
 fi
 
 tool_interactivity "stake-profiles-y" "stake-profiles-n" "Would you like to setup also standalone staking profiles for blocknet, pocketcoin and pivx?"
-if [[ "${var_q}" != "y" ]]; then
+if [[ "${var_q}" == "y" ]]; then
    ./setup.cc.wallet.profile.sh ./src/cfg.cc.blocknet.staking.sh
    (test $? != 0) && echo "make blocknet wallet staking profile failed" && exit 1
    ./setup.cc.wallet.profile.sh ./src/cfg.cc.pocketcoin.sh ~/.pocketcoin_staking wallet_pkoin_staking
@@ -232,7 +232,7 @@ if [[ "${var_q}" != "y" ]]; then
 fi
 
 tool_interactivity "dex-profiles-y" "dex-profiles-n" "Would you like to setup wallet profiles which to be used in DEX trading?"
-if [[ "${var_q}" != "y" ]]; then
+if [[ "${var_q}" == "y" ]]; then
    ./setup.cc.wallet.profile.sh ./src/cfg.cc.blocknet.sh
    (test $? != 0) && echo "make blocknet wallet dex profile failed" && exit 1
    ./setup.cc.wallet.profile.sh ./src/cfg.cc.litecoin.sh
@@ -258,7 +258,7 @@ if [[ "${var_q}" != "y" ]]; then
 fi
 
 tool_interactivity "dex-profiles-y" "dex-profiles-n" "Would you like to setup DEXBOT and trading strategies with DEX trading wallet profiles?"
-if [[ "${var_q}" != "y" ]]; then
+if [[ "${var_q}" == "y" ]]; then
    ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.block.ltc.sh strategy1      blocknet01   litecoin01 \
    || ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.block.ltc.sh strategy1      blocknet01   litecoin01 update_strategy
    (test $? != 0) && echo "make BLOCK LTC trading startegy1 failed" && exit 1
