@@ -176,6 +176,7 @@ if [[ ${?} != 0 ]]; then
    if [[ "${var_q}" == "y" ]]; then
    ./setup.cfg.proxychains.sh update
    (test $? != 0) && echo "ERROR >>> proxychains config file update failed" && exit 1
+   fi
 fi
 
 echo "Building wallets from official repositories..."
