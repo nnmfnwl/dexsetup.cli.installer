@@ -144,7 +144,7 @@ if [[ "${tigervnc_yes}" == "y" ]]; then
 fi
 
 echo "making and changing directory to (~/dexsetup)"
-mkdir -p ~/dexsetup/dexsetup && cd ~/dexsetup/dexsetup
+mkdir -p ./dexsetup && cd ./dexsetup
 (test $? != 0) && echo "ERROR >>> Failed to make and change directory to (~/dexsetup)" && exit 1
 
 echo "downloading latest dexsetup version by git anonymously over tor"
@@ -290,8 +290,14 @@ fi
 
 tool_interactivity "blockdx-install-y" "blockdx-install-n" "Would you like to install BlockDX(Blocknet DEX GUI app)?"
 if [[ "${var_q}" == "y" ]]; then
-   ./setup.cc.blockdx.sh download install || ./setup.cc.blockdx.sh download update
-   (test $? != 0) && echo "setup BlockDX failed" && exit 1
+   ./setup.cc.blockdx.sh download install
+   if [[ ${?} != 0 ]]; then
+      tool_interactivity "blockdx-update-y" "blockdx-update-n" "BlockdDX seems already installed, would you like to try to update it first?"
+      if [[ "${var_q}" == "y" ]]; then
+         ./setup.cc.blockdx.sh download update
+         (test $? != 0) && echo "setup BlockDX failed" && exit 1
+      fi
+   fi
 fi
 
 tool_interactivity "blockdx-profile-y" "blockdx-profile-n" "Would you like to autoconfigure BlockDX default profile?"
@@ -302,14 +308,21 @@ fi
 
 tool_interactivity "screen-y" "screen-n" "Would you like to setup Start/stop/update scripts with GNU Screen terminal multiplexer?"
 if [[ "${var_q}" == "y" ]]; then
-   ./setup.screen.sh install || ./setup.screen.sh update
-   (test $? != 0) && echo "Start/stop/update scripts with GNU Screen terminal multiplexer setup failed" && exit 1
+   ./setup.screen.sh install
+   if [[ ${?} != 0 ]]; then
+      tool_interactivity "screen-update-y" "screen-update-n" "GNU Screen Terminal Multiplexer script seems already configured, would you like to try to update it first?"
+      if [[ "${var_q}" == "y" ]]; then
+         ./setup.screen.sh update
+         (test $? != 0) && echo "Start/stop/update scripts with GNU Screen terminal multiplexer setup failed" && exit 1
+      fi
+   fi
 fi
 
-cd ~/dexsetup/
+cd ..
 
 echo '
-cd ~/dexsetup/dexsetup/
+cd dexsetup || echo "dexsetup directory not found" && exit 1
+
 echo "DEXBOT trading strategies reconfiguration"
 read -p "$* Enter BLOCK address: " block1
 read -p "$* Enter LTC address 1: " ltc1
@@ -360,4 +373,4 @@ read -p "$* Enter LTC address 9: " ltc9
 chmod 755 installer_reconfigure_dexbot.sh
 
 echo "Dexsetup setup has successfully finished"
-echo "DEXBOT Strategies needs to be reconfigured with valid wallet addressses by using reconfiguration script later after you setup your wallet addresses 'cd ~/dexsetup && ./installer_reconfigure_dexbot.sh'"
+echo "DEXBOT Strategies needs to be reconfigured with valid wallet addresses by using reconfiguration script later after you setup your wallet addresses 'cd `pwd` && ./installer_reconfigure_dexbot.sh'"
