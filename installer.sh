@@ -128,12 +128,11 @@ fi
 echo ""
 eval_cmdd="${su_cmd} \"${pkg_update}; apt install apt ${pkg_privacy} ${pkg_cli_build} ${pkg_cli_tools} ${pkg_gui_build} ${pkg_gui_tools}; ${cfg_user_tor}; ${cfg_user_vnc}; exit\""
 echo "${eval_cmdd}"
-tool_interactivity "proceed-y" "proceed-n" "Proceed with above system installation?"
+tool_interactivity "proceed-y" "proceed-n" "Proceed with above system setup/update?"
 if [[ "${var_q}" == "y" ]]; then
    eval "$eval_cmdd"
 else
-   echo "INFO >> DEXSETUP installer been canceled."
-   exit 0
+   echo "INFO >> Operating system setup/update been skip."
 fi
 
 if [[ "${tigervnc_yes}" == "y" ]]; then
@@ -151,27 +150,30 @@ mkdir -p ~/dexsetup/dexsetup && cd ~/dexsetup/dexsetup
 echo "downloading latest dexsetup version by git anonymously over tor"
 proxychains4 git clone https://github.com/nnmfnwl/dexsetup.git ./
 if [[ ${?} != 0 ]]; then
-   tool_interactivity "dexsetup-update-y" "dexsetup-update-n" "DEXSETUP seems already installed, would you like to continue to try to update DEXSETUP and other components?"
+   tool_interactivity "dexsetup-update-y" "dexsetup-update-n" "DEXSETUP seems already installed, would you like to try to update DEXSETUP and other components first?"
    if [[ "${var_q}" == "y" ]]; then
       echo "INFO >>> DEXSETUP re-installation/update in progress"
-      reinstall_yes="y"
       git stash \
-      && proxychains4 git pull
+      && git checkout merge.2025.02.06 \
+      && proxychains4 git pull \
+      && chmod 755 setup* \
+      && chmod 755 ./src/setup*.sh
       (test $? != 0) && echo "update dexsetup by git failed. try again later" && exit 1
    else
-      echo "ERROR >>> DEXSETUP is already installed and installation canceled."
-      exit 0
+      echo "ERROR >>> DEXSETUP is already installed and update been skip"
    fi
+else
+   git checkout merge.2025.02.06 \
+   && chmod 755 setup* \
+   && chmod 755 ./src/setup*.sh
+   (test $? != 0) && echo "ERROR >>> switch to experimental DEXSETUP version failed" && exit 1
 fi
-
-git checkout merge.2025.02.06 \
-&& chmod 755 setup* \
-&& chmod 755 ./src/setup*.sh
-(test $? != 0) && echo "ERROR >>> switch to experimental DEXSETUP version failed" && exit 1
 
 echo "INFO >>> Proxychains configuration file update"
 ./setup.cfg.proxychains.sh install
-if [[ ${reinstall_yes} == "y" ]]; then
+if [[ ${?} != 0 ]]; then
+   tool_interactivity "proxychains-usr-reconfig-y" "proxychains-usr-reconfig-n" "Proxychains seems already configured, would you like to try to reconfigure first?"
+   if [[ "${var_q}" == "y" ]]; then
    ./setup.cfg.proxychains.sh update
    (test $? != 0) && echo "ERROR >>> proxychains config file update failed" && exit 1
 fi
