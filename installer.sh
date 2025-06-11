@@ -116,7 +116,20 @@ if [[ "${var_q}" == "y" ]]; then
    pkg_gui_tools="gitg keepassx geany xsensors tigervnc-standalone-server"
    tool_interactivity "vnc-autostart-y" "vnc-autostart-n" "Would you like to set to setup tigervnc server to start automatically after startup?"
    if [[ "${var_q}" == "y" ]]; then
-      grep "^:1=${USER}$" /etc/tigervnc/vncserver.users >> /dev/null && cfg_user_vnc="echo 'TigerVNC for ${USER} is already configured'" || cfg_user_vnc="echo ':1=${USER}' >> /etc/tigervnc/vncserver.users; systemctl start tigervncserver@:1.service; systemctl enable tigervncserver@:1.service";
+      #~ grep "^:1=${USER}$" /etc/tigervnc/vncserver.users >> /dev/null && cfg_user_vnc="echo 'TigerVNC for ${USER} is already configured'" || cfg_user_vnc="echo ':1=${USER}' >> /etc/tigervnc/vncserver.users; systemctl start tigervncserver@:1.service; systemctl enable tigervncserver@:1.service";
+      port=1
+      while : ; do
+         (grep "^:[0-9]=${USER}$" /etc/tigervnc/vncserver.users >> /dev/null && cfg_user_vnc="echo 'TigerVNC for ${USER} is already configured'") || (grep "^:${port}=" /etc/tigervnc/vncserver.users && cfg_user_vnc="") || cfg_user_vnc="echo ':${port}=${USER}' >> /etc/tigervnc/vncserver.users; systemctl start tigervncserver@:${port}.service; systemctl enable tigervncserver@:${port}.service";
+         if [[ "${cfg_user_vnc}" != "" ]]; then
+            break
+         fi
+         echo "TigerVNC is already configured at port ${port} for another user, please choose another port=${port} "
+         while : ; do
+            read -p ">>> Please enter alternative port number 1 to 9: " -n1 port ; echo ""
+            echo "${port}" | grep "[0-9]" && break
+            echo "Please select valid port number from 0 up to 9"
+         done
+      done
    fi
    tigervnc_yes="y"
 else
