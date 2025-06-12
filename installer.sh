@@ -2,7 +2,7 @@
 
 # do not allow run script as root check
 echo "INFO >>> Checking to not run this script as root"
-id | grep root && echo "ERROR >> IT IS NOT ALLOWED TO RUN THIS SCRIPT AS ROOT !!!" && exit 1
+id | grep root && echo "ERROR >>> IT IS NOT ALLOWED TO RUN THIS SCRIPT AS ROOT !!!" && exit 1
 
 # save global args
 argcc=$#
@@ -119,16 +119,22 @@ if [[ "${var_q}" == "y" ]]; then
       #~ grep "^:1=${USER}$" /etc/tigervnc/vncserver.users >> /dev/null && cfg_user_vnc="echo 'TigerVNC for ${USER} is already configured'" || cfg_user_vnc="echo ':1=${USER}' >> /etc/tigervnc/vncserver.users; systemctl start tigervncserver@:1.service; systemctl enable tigervncserver@:1.service";
       port=1
       while : ; do
-         (grep "^:[0-9]=${USER}$" /etc/tigervnc/vncserver.users >> /dev/null && cfg_user_vnc="echo 'TigerVNC for ${USER} is already configured'") || (grep "^:${port}=" /etc/tigervnc/vncserver.users && cfg_user_vnc="") || cfg_user_vnc="echo ':${port}=${USER}' >> /etc/tigervnc/vncserver.users; systemctl start tigervncserver@:${port}.service; systemctl enable tigervncserver@:${port}.service";
-         if [[ "${cfg_user_vnc}" != "" ]]; then
+         grep "^:[0-9]=${USER}$" /etc/tigervnc/vncserver.users
+         if [[ ${?} == 0 ]]; then
+            echo "WARNING >>> TigerVNC for ${USER} is already configured. This step is skip."
+            cfg_user_vnc="echo 'TigerVNC for ${USER} is already configured'"
             break
+         else
+            grep "^:${port}=" /etc/tigervnc/vncserver.users
+            if [[ ${?} == 0 ]]; then
+               echo "WARNING >>> TigerVNC is already configured at port ${port} for another user."
+               read -p ">>> Please enter alternative port number 1 to 9: " -n1 portt ; echo ""
+               echo "${portt}" | grep "[0-9]" && port=${portt} || echo "ERROR >>> Invalid port number ${portt} selected."
+            else
+               cfg_user_vnc="echo ':${port}=${USER}' >> /etc/tigervnc/vncserver.users; systemctl start tigervncserver@:${port}.service; systemctl enable tigervncserver@:${port}.service";
+               break
+            fi
          fi
-         echo "TigerVNC is already configured at port ${port} for another user, please choose another port=${port} "
-         while : ; do
-            read -p ">>> Please enter alternative port number 1 to 9: " -n1 port ; echo ""
-            echo "${port}" | grep "[0-9]" && break
-            echo "Please select valid port number from 0 up to 9"
-         done
       done
    fi
    tigervnc_yes="y"
