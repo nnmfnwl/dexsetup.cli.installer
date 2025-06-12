@@ -401,5 +401,5 @@ read -p "$* Enter LTC address 9: " ltc9
 ' > installer_reconfigure_dexbot.sh
 chmod 755 installer_reconfigure_dexbot.sh
 
-echo "Dexsetup setup has successfully finished"
-echo "DEXBOT Strategies needs to be reconfigured with valid wallet addresses by using reconfiguration script later after you setup your wallet addresses 'cd `pwd` && ./installer_reconfigure_dexbot.sh'"
+echo "All selected components been installed and configured and setup has successfully finished."
+echo "Please continue by tutorial: https://github.com/nnmfnwl/dexsetup.cli.installer?tab=readme-ov-file#how-setup-dexsetup-with-cli-installer"
