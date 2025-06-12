@@ -43,13 +43,20 @@ cd ~/dexsetup/dexsetup/ && ./start.screen.instance_default.cli.sh
 ```
 cd ~/dexsetup/dexsetup/ && ./start.screen.instance_default.gui.sh
 ```
-  * To connect to `GNU Screen terminal multiplexer` console interface
+  * To connect to dexsetup management by `GNU Screen terminal multiplexer` console interface
 ```
 screen -x
 ```
   * To list and navigate screen tabs/windows use shortcut `CTRL + a ^ "` (hold `CTRL` and push `a`, release `CTRL` and then push `"`)
   * To detach and keep running applications inside screen the console multiplexer use keyboard shortcut `CTRL + a ^ d`
   * All screen terminal multiplexer tabs are nicely named with predefined commands, and user just use enter to confirm commands depending on what is needed
+
+### Trading bot strategies reconfiguration
+  * After successfull installation/reinstallation/update, there is generated `installer_reconfigure_dexbot.sh` script wich should be used to reconfigure trading strategies once user setup and configures own wallets and generates trading addresses.
+  * DEXBOT Strategies needs to be reconfigured with valid wallet addresses by this reconfiguration script. It could be called multiple times to fix.
+```
+cd ~/dexsetup/dexsetup/ && ./installer_reconfigure_dexbot.sh
+```
 
 ### Used components
   * List of all used components by dexsetup here [`dexsetup readme page`](https://github.com/nnmfnwl/dexsetup/tree/merge.2025.02.06?tab=readme-ov-file#list-used-components-by-dexsetup)
