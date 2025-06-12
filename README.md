@@ -31,24 +31,24 @@ eval "${su_cmd} \"apt update; apt full-upgrade; apt install ${pkgs}; ${cfg_user_
 mkdir -p ~/dexsetup && cd ~/dexsetup && rm -f installer.sh && proxychains4 wget "https://github.com/nnmfnwl/dexsetup.cli.installer/raw/refs/heads/main/installer.sh" && bash installer.sh
 ```
 
-### How to use installed dexsetup environment
+### How to start and connect, navigate and detach from installed dexsetup environment
   * All generated files are stored at `~/dexsetup`
   * Blockchains are using default chain data directories like `./litecoin`, `./blocknet`, `./bitcoin` etc...
     
-  * There is `main CLI start script` which opens management only by console interface:
+  * To **start** `main CLI start script` which opens management only by console interface:
 ```
 cd ~/dexsetup/dexsetup/ && ./start.screen.instance_default.cli.sh
 ```
-  * There is `main start GUI script` which opens management by console interface and graphical user interface wallets as well:
+  * To **start** `main start GUI script` which opens management by console interface and graphical user interface wallets as well:
 ```
 cd ~/dexsetup/dexsetup/ && ./start.screen.instance_default.gui.sh
 ```
-  * To connect to dexsetup management by `GNU Screen terminal multiplexer` console interface
+  * To **connect** to dexsetup management by `GNU Screen terminal multiplexer` console interface
 ```
 screen -x
 ```
-  * To list and navigate screen tabs/windows use shortcut `CTRL + a ^ "` (hold `CTRL` and push `a`, release `CTRL` and then push `"`)
-  * To detach and keep running applications inside screen the console multiplexer use keyboard shortcut `CTRL + a ^ d`
+  * To **list and navigate** screen tabs/windows use shortcut `CTRL + a ^ "` (hold `CTRL` and push `a`, release `CTRL` and then push `"`, which is probably activated as `shift+"`)
+  * To **detach and keep running** applications inside screen the console multiplexer use keyboard shortcut `CTRL + a ^ d`
   * All screen terminal multiplexer tabs are nicely named with predefined commands, and user just use enter to confirm commands depending on what is needed
 
 ### Trading bot strategies reconfiguration
