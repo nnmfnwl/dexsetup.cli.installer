@@ -13,7 +13,7 @@
 
 ### How setup dexsetup with cli installer
   * Here are 2 user friendly options to download and run instaler:
-  * **1. Download and start dexsetup [`installer.sh`](https://github.com/nnmfnwl/dexsetup.cli.installer/raw/refs/heads/main/installer.sh) script manually and `not anonymously`**:
+  * **1. Download and start dexsetup [`installer.sh`](https://github.com/nnmfnwl/dexsetup.cli.installer/raw/refs/heads/main/installer.sh) script manually but `not anonymously`**:
 ```
 bash ./installer.sh
 ```
