@@ -244,9 +244,9 @@ tool_interactivity "stake-profiles-y" "stake-profiles-n" "Would you like to setu
 if [[ "${var_q}" == "y" ]]; then
    ./setup.cc.wallet.profile.sh ./src/cfg.cc.blocknet.staking.sh
    (test $? != 0) && echo "make blocknet wallet staking profile failed" && exit 1
-   ./setup.cc.wallet.profile.sh ./src/cfg.cc.pocketcoin.sh ~/.pocketcoin_staking wallet_pkoin_staking
+   ./setup.cc.wallet.profile.sh ./src/cfg.cc.pocketcoin.staking.sh
    (test $? != 0) && echo "make pocketcoin (bastyon) wallet staking profile failed" && exit 1
-   ./setup.cc.wallet.profile.sh ./src/cfg.cc.pivx.sh ~/.pivx_staking/ wallet_pivx_staking
+   ./setup.cc.wallet.profile.sh ./src/cfg.cc.pivx.staking.sh
    (test $? != 0) && echo "make pivx wallet staking profile failed" && exit 1
 fi
 
