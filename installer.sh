@@ -298,6 +298,7 @@ function tool_setup_wallet_profile() {
 
 tool_interactivity "dexbot-strategies-y" "dexbot-strategies-n" "Would you like to setup DEXBOT and trading strategies with DEX trading wallet profiles?"
 if [[ "${var_q}" == "y" ]]; then
+   strategies_enabled="1"
    tool_setup_wallet_profile "BLOCK" "LTC" ./src/cfg.cc.blocknet.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.block.ltc.sh strategy1 blocknet01 litecoin01
    
    tool_setup_wallet_profile "BTC" "LTC" ./src/cfg.cc.blocknet.sh ./src/cfg.cc.bitcoin.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.btc.ltc.sh strategy1 bitcoin01 litecoin02
@@ -347,9 +348,47 @@ if [[ "${var_q}" == "y" ]]; then
    fi
 fi
 
-cd ..
+tool_interactivity "session-y" "session-n" "Would you like to install SESSION ultimate privacy messenger app?"
+if [[ "${var_q}" == "y" ]]; then
+   ./setup.session.sh download install 
+   if [[ ${?} != 0 ]]; then
+      tool_interactivity "session-update-y" "session-update-n" "SESSION app seems already installed, would you like to try to update it to latest version first?"
+      if [[ "${var_q}" == "y" ]]; then
+         ./setup.session.sh update
+         (test $? != 0) && echo "Setup SESSION app failed" && exit 1
+      fi
+   fi
+fi
 
-echo '
+tool_interactivity "session-profile-y" "session-profile-n" "Would you like to auto-configure SESSION default profile?"
+if [[ "${var_q}" == "y" ]]; then
+   ./setup.cc.session.profile.sh default
+   (test $? != 0) && echo "setup SESSION profile failed" && exit 1
+fi
+
+tool_interactivity "tor-browser-y" "tor-browser-n" "Would you like to install tor-browser ultimate privacy web browser?"
+if [[ "${var_q}" == "y" ]]; then
+   ./setup.torbrowser.sh download install 
+   if [[ ${?} != 0 ]]; then
+      tool_interactivity "tor-browser-update-y" "tor-browser-update-n" "tor-browser seems already installed, would you like to try to update it to latest version first?"
+      if [[ "${var_q}" == "y" ]]; then
+         ./setup.torbrowser.sh update
+         (test $? != 0) && echo "Setup tor-browser app failed" && exit 1
+      fi
+   fi
+fi
+
+tool_interactivity "tor-browser-profile-y" "tor-browser-profile-n" "Would you like to auto-configure tor-browser default profile?"
+if [[ "${var_q}" == "y" ]]; then
+   ./setup.cc.torbrowser.profile.sh default
+   (test $? != 0) && echo "setup tor-browser profile failed" && exit 1
+fi
+
+if [[ "${strategies_enabled}" == "1" ]]; then
+
+   cd ..
+
+   echo '
 cd dexsetup || echo "dexsetup directory not found" && exit 1
 
 echo "DEXBOT trading strategies reconfiguration"
@@ -399,7 +438,8 @@ read -p "$* Enter LTC address 9: " ltc9
 (test $? != 0) && echo "make PART LTC trading startegy1 failed" && exit 1
 
 ' > installer_reconfigure_dexbot.sh
-chmod 755 installer_reconfigure_dexbot.sh
+   chmod 755 installer_reconfigure_dexbot.sh
+fi
 
 echo "All selected components been installed and configured and setup has successfully finished."
 echo "Please continue by tutorial: https://github.com/nnmfnwl/dexsetup.cli.installer?tab=readme-ov-file#how-setup-dexsetup-with-cli-installer"
