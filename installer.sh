@@ -150,6 +150,7 @@ echo "${eval_cmdd}"
 tool_interactivity "proceed-y" "proceed-n" "Proceed with above system setup/update?"
 if [[ "${var_q}" == "y" ]]; then
    eval "$eval_cmdd"
+   (test $? != 0) && echo "ERROR >>> System setup password/update/install/tor/vnc failed. Please check above." && exit 1
 else
    echo "INFO >> Operating system setup/update been skip."
 fi
