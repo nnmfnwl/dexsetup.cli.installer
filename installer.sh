@@ -363,7 +363,7 @@ fi
 
 tool_interactivity "session-profile-y" "session-profile-n" "Would you like to auto-configure SESSION default profile?"
 if [[ "${var_q}" == "y" ]]; then
-   ./setup.cc.session.profile.sh default
+   ./setup.session.profile.sh default
    (test $? != 0) && echo "setup SESSION profile failed" && exit 1
 fi
 
@@ -381,7 +381,7 @@ fi
 
 tool_interactivity "tor-browser-profile-y" "tor-browser-profile-n" "Would you like to auto-configure tor-browser default profile?"
 if [[ "${var_q}" == "y" ]]; then
-   ./setup.cc.torbrowser.profile.sh default
+   ./setup.torbrowser.profile.sh default
    (test $? != 0) && echo "setup tor-browser profile failed" && exit 1
 fi
 
