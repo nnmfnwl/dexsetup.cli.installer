@@ -189,6 +189,12 @@ else
    (test $? != 0) && echo "ERROR >>> switch to experimental DEXSETUP version failed" && exit 1
 fi
 
+tool_interactivity "mate-conf-y" "mate-conf-n" "Would you like to add optimized mate desktop configuration?"
+if [[ "${var_q}" == "y" ]]; then
+   dconf load /org/mate/ < ./src/dconf.dump.org.mate.txt
+   (test $? != 0) && echo "ERROR >>> Mate desktop add optimized configuration failed" && exit 1
+fi
+
 echo "INFO >>> Proxychains configuration file update"
 ./setup.cfg.proxychains.sh install
 if [[ ${?} != 0 ]]; then
