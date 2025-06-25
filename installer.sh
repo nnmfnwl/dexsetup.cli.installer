@@ -146,7 +146,7 @@ fi
 [[ "${cfg_user_vnc}" == "" ]] && cfg_user_vnc="echo 'no TigerVNC for ${USER} is going to be configured'"
 
 echo ""
-eval_cmdd="${su_cmd} \"${pkg_update}; apt install apt ${pkg_privacy} ${pkg_cli_build} ${pkg_cli_tools} ${pkg_gui_build} ${pkg_gui_tools}; ${cfg_user_tor}; ${cfg_user_vnc}; exit\""
+eval_cmdd="${su_cmd} \"${pkg_update}; apt -y install apt ${pkg_privacy} ${pkg_cli_build} ${pkg_cli_tools} ${pkg_gui_build} ${pkg_gui_tools}; ${cfg_user_tor}; ${cfg_user_vnc}; exit\""
 echo "${eval_cmdd}"
 tool_interactivity "proceed-y" "proceed-n" "Proceed with above system setup/update?"
 if [[ "${var_q}" == "y" ]]; then
