@@ -87,7 +87,6 @@ if [[ "${var_q}" == "y" ]]; then
    groups | grep debian-tor > /dev/null && cfg_user_tor="echo 'tor for ${USER} already configured'" || cfg_user_tor="usermod -a -G debian-tor ${USER}"
 else
    pkg_privacy=""
-   cfg_user_tor="echo 'no user tor configuration'"
 fi
 
 tool_interactivity "pkg-build-y" "pkg-build-n" "Would you like to set to install mandatory to have command line interface build packages?"
@@ -140,9 +139,11 @@ if [[ "${var_q}" == "y" ]]; then
    tigervnc_yes="y"
 else
    pkg_gui_tools=""
-   cfg_user_vnc="echo 'no TigerVNC for ${USER} is going to be configured'"
    tigervnc_yes=""
 fi
+
+[[ "${cfg_user_tor}" == "" ]] && cfg_user_tor="echo 'no Tor service for ${USER} is going to be configured'"
+[[ "${cfg_user_vnc}" == "" ]] && cfg_user_vnc="echo 'no TigerVNC for ${USER} is going to be configured'"
 
 echo ""
 eval_cmdd="${su_cmd} \"${pkg_update}; apt install apt ${pkg_privacy} ${pkg_cli_build} ${pkg_cli_tools} ${pkg_gui_build} ${pkg_gui_tools}; ${cfg_user_tor}; ${cfg_user_vnc}; exit\""
