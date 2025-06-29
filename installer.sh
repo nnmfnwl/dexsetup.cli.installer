@@ -53,12 +53,12 @@ echo "INFO >>> Detecting Linux distribution 'sudo'/'su' compatibility"
 sudo -v; (test $? != 0) && su_cmd="echo 'Please enter ROOT password'; su -c" || su_cmd="echo 'Please enter ${USER} sudo password'; sudo -sh -c";
 
 echo ""
-echo "DEXSETUP INSTALLER - Blocknet's Decentralized Exchange Backend System Installer for Debian/Ubuntu based Linux distributions"
+echo "DEXSETUP INSTALLER - Blocknet's Decentralized Exchange Backend System Installer for Debian/Ubuntu based Linux distributions, namely dexsetup framework"
 echo "We build decentralized system which has NO central point of failure or control"
 echo "What it is and does:"
 echo "It is advanced multipurpose tool to build genuine decentralized systems"
 echo "It can prepare operating system to become node operator, tester, user or even developer and easy manage wallets and wallet profiles remotely by CLI and also GUI"
-echo "it can setup or update DEXSETUP framework"
+echo "It can setup or update DEXSETUP framework"
 echo "It can build wallet from official source code or download wallets from official github repositories"
 echo "It can configure or merge wallet .conf files configurations"
 echo "It can create and manage wallet profiles and predefine wallet CLI commands per wallet profile"
@@ -68,7 +68,7 @@ echo "It can use predefined trading strategy templates to create DEXBOT trading 
 echo "It can generate script used to easy manage all components by GNU Screen Terminal Multiplexer"
 echo "It can configures VNC server and start automatically after restart"
 
-tool_interactivity "c-y" "c-n" "Would you like to continue with this experimental dexsetup installer script?"
+tool_interactivity "c-y" "c-n" "Would you like to accept standardized MIT license agreement and continue with this experimental dexsetup installer script?"
 if [[ "${var_q}" != "y" ]]; then
    echo "INFO >> DEXSETUP installer been canceled."
    exit 0
