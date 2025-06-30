@@ -76,7 +76,7 @@ fi
 
 tool_interactivity "upgrade-y" "upgrade-n" "Would you like to set to update system before installation start?"
 if [[ "${var_q}" == "y" ]]; then
-   pkg_update="apt update; apt full-upgrade"
+   pkg_update="apt -y update; apt -y full-upgrade"
 else
    pkg_update="echo 'no apt update/upgrade performed'"
 fi
