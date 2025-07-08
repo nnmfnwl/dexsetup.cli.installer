@@ -52,8 +52,7 @@ screen -x
   * All screen terminal multiplexer tabs are nicely named with predefined commands, and user just use enter to confirm commands depending on what is needed
 
 ### Trading bot strategies reconfiguration
-  * After successfull installation/reinstallation/update, there is generated `installer_reconfigure_dexbot.sh` script wich should be used to reconfigure trading strategies once user setup and configures own wallets and generates trading addresses.
-  * DEXBOT Strategies needs to be reconfigured with valid wallet addresses by this reconfiguration script. It could be called multiple times to fix.
+  * After successfull installation/reinstallation/update, there is generated `installer_reconfigure_dexbot.sh` script wich could be used to reconfigure generated DEXBOT trading strategies once user sets up wallets trading addresses.
 ```
 cd ~/dexsetup/dexsetup/ && ./installer_reconfigure_dexbot.sh
 ```
