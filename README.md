@@ -56,6 +56,12 @@ screen -x
 ```
 cd ~/dexsetup/dexsetup/ && ./installer_reconfigure_dexbot.sh
 ```
+  * Every generated strategy is readable well documented configuration based on [`DEXBOT template`](https://github.com/nnmfnwl/dexbot/blob/merge.2025.03.26/howto/examples/bot_v2_template.py) generated as mix with specific strategy trading pair configuration [`BLOCK/LTC`](https://github.com/nnmfnwl/dexsetup/blob/merge.2025.02.06/src/cfg.strategy.block.ltc.sh) , [`BTC/LTC`](https://github.com/nnmfnwl/dexsetup/blob/merge.2025.02.06/src/cfg.strategy.btc.ltc.sh) ...
+  * By default all generated strategy could be found at
+```
+cd ~/dexsetup/dexbot/git.src/ && ls -la | grep strategy | grep .py
+```
+  * Final strategy tunning is easy but most effective way would be to write own `strategy trading pair configuration` for dexsetup which could be easy shared used again and again.
 
 ### Used components
   * List of all used components by dexsetup here [`dexsetup readme page`](https://github.com/nnmfnwl/dexsetup/tree/merge.2025.02.06?tab=readme-ov-file#list-used-components-by-dexsetup)
