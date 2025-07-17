@@ -397,7 +397,9 @@ if [[ "${strategies_enabled}" == "1" ]]; then
    cd ..
 
    echo '
-cd dexsetup || echo "dexsetup directory not found" && exit 1
+#!/bin/bash
+
+cd dexsetup || (echo "dexsetup directory not found" && exit 1)
 
 echo "DEXBOT trading strategies reconfiguration"
 read -p "$* Enter BLOCK address: " block1
