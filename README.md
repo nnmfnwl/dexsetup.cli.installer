@@ -54,7 +54,7 @@ screen -x
 ### Trading bot strategies reconfiguration
   * After successfull installation/reinstallation/update, there is generated `installer_reconfigure_dexbot.sh` script wich could be used to reconfigure generated DEXBOT trading strategies once user sets up wallets trading addresses.
 ```
-cd ~/dexsetup/dexsetup/ && ./installer_reconfigure_dexbot.sh
+cd ~/dexsetup/ && ./installer_reconfigure_dexbot.sh
 ```
   * Every generated strategy is readable well documented configuration based on [`DEXBOT template`](https://github.com/nnmfnwl/dexbot/blob/merge.2025.03.26/howto/examples/bot_v2_template.py) generated as mix with specific strategy trading pair configuration [`BLOCK/LTC`](https://github.com/nnmfnwl/dexsetup/blob/merge.2025.02.06/src/cfg.strategy.block.ltc.sh) , [`BTC/LTC`](https://github.com/nnmfnwl/dexsetup/blob/merge.2025.02.06/src/cfg.strategy.btc.ltc.sh) ...
   * By default all generated strategy could be found at
