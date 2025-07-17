@@ -31,6 +31,16 @@ eval "${su_cmd} \"apt update; apt full-upgrade; apt install ${pkgs}; ${cfg_user_
 mkdir -p ~/dexsetup && cd ~/dexsetup && rm -f installer.sh && proxychains4 wget "https://github.com/nnmfnwl/dexsetup.cli.installer/raw/refs/heads/main/installer.sh" && bash installer.sh
 ```
 
+### Open secure SSH tunnel for VNC connection and use VNC client Remmina to connect to server
+  * Command to open SSH tunnel, but replace `10.10.10.10X` with real ip address
+```
+ssh -L 5923:127.0.0.1:5903 10.10.10.10X -N
+```
+  * Use VNC client remmina to connect to server
+```
+remmina -c vnc://127.0.0.1:5923
+```
+
 ### How to start and connect, navigate and detach from installed dexsetup environment
   * All generated files are stored at `~/dexsetup`
   * Blockchains are using default chain data directories like `./litecoin`, `./blocknet`, `./bitcoin` etc...
