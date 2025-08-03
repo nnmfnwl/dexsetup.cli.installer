@@ -15,14 +15,28 @@ function tool_interactivity() { #toyes #tono #info
          echo ""
          echo ">>> ${3}"
          echo ">>> (been skip by arg '${1}'/'${2}') [y to yes]: y"
-         #~ echo ">>> $3 [y to yes]: y (set by arg ${1})"
          var_q="y"
          return 0
       elif [[ "${argvv[j]}" == "${2}" ]]; then
          echo ""
          echo ">>> ${3}"
          echo ">>> (been skip by arg '${1}'/'${2}') [y to yes]: n"
-         #~ echo ">>> $3 [y to yes]: n (set by arg ${2})"
+         var_q="n"
+         return 1
+      fi
+   done
+   
+   for (( j=0; j<argcc; j++ )); do
+      if [[ "${argvv[j]}" == "DEFAULT-Y" ]]; then
+         echo ""
+         echo ">>> ${3}"
+         echo ">>> (been skip by arg '${1}'/'${2}/DEFAULT-Y') [y to yes]: y"
+         var_q="y"
+         return 0
+      elif [[ "${argvv[j]}" == "DEFAULT-N" ]]; then
+         echo ""
+         echo ">>> ${3}"
+         echo ">>> (been skip by arg '${1}'/'${2}/DEFAULT-N') [y to yes]: n"
          var_q="n"
          return 1
       fi
@@ -34,6 +48,29 @@ function tool_interactivity() { #toyes #tono #info
    if [[ "${var_q}" == "y" ]]; then
       return 0
    fi
+   
+   return 1
+}
+
+# find argument value
+function tool_arg_value() { #arg.name #"secret" #info #arg is loaded to var_v
+   var_v=""
+   for (( j=0; j<argcc; j++ )); do
+      if [[ "${argvv[j]}" == "${1}" ]]; then
+         ((j++))
+         var_v="${argvv[j]}"
+         echo ""
+         if [[ "secret" == "${2}" ]]; then
+            echo ">>> argument '${1}' ${3} value found '*******'"
+         else
+            echo ">>> argument '${1}' ${3} value found '${var_v}'"
+         fi
+         
+         return 0
+      fi
+   done
+   
+   echo ">>> ${1} ${3} could be skip by '${1} <value>' argument and value"
    
    return 1
 }
@@ -159,7 +196,14 @@ fi
 if [[ "${tigervnc_yes}" == "y" ]]; then
    tool_interactivity "vnc-setpassword-y" "vnc-setpassword-n" "Would you like to setup VNC user login password?"
    if [[ "${var_q}" == "y" ]]; then
-      tigervncpasswd
+      tool_arg_value "vncpasswd" "secret" ""
+      if [[ "$?" == "0" ]]; then
+         echo -e "${var_v}\n${var_v}\nn" | tigervncpasswd
+         var_v=""
+      else
+         echo "Please enter new VNC password for current user"
+         tigervncpasswd
+      fi
       (test $? != 0) && echo "ERROR >>> setup vnc password failed" && exit 1
    fi
 fi
