@@ -36,7 +36,7 @@ cp -r ~/.config/Session/* ~/dexsetup/session/latest/data/profile/johnsmith/
 ```
 
 #### Make link and put it on Desktop
-  * To make a link for specific session profile on Destop by right mouse button click and choose make a link and move file on your desktop or command:
+  * To make a link for specific session profile on Desktop, click with right mouse button and choose make a link and move file on your Desktop or use command:
 ```
 ln -s ~/dexsetup/session/latest/firejail.session.default.sh ~/Desktop/session.default.sh
 ln -s ~/dexsetup/session/latest/firejail.session.johnsmith.sh ~/Desktop/session.johnsmith.sh
