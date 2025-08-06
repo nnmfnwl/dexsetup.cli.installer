@@ -1,4 +1,5 @@
-#### Example of setting up Session-Privacy-Messenger app in very secure, isolated way, running behind tor and ability to run multiple session accounts at once.
+### Example of setting up Session-Privacy-Messenger app in very secure, isolated way, running behind tor and ability to run multiple session accounts at once with dexsetup:
+  * everything downloaded and configured by below example is very standard system packages installation/configuration or pure user-space-files thing in very isolated environment by firejail and tor by proxychains.
 
 #### Installation
   * detect if tor is already configured, detect if to use sudo or su and install base packages.
@@ -21,7 +22,7 @@ mkdir -p ~/dexsetup && cd ~/dexsetup && rm -f installer.sh && proxychains4 wget 
 ```
 
 #### Setting up multiple profiles
-  * with dexsetup you can setup any number of profiles just in second!
+  * with dexsetup.framework you can setup any number of profiles just in second!
   * example how to setup profile named `johnsmith`
 ```
 cd ~/dexsetup && ./setup.session.profile.sh johnsmith
@@ -34,20 +35,20 @@ cd ~/dexsetup && ./setup.session.profile.sh johnsmith
 cp -r ~/.config/Session/* ~/dexsetup/session/latest/data/profile/johnsmith/
 ```
 
-#### How to manage symlink and start Session by generated dexsetup profiles
-  * Generated session start scripts could be found at `~/dexsetup/session/latest`
-```
-ls -la ~/dexsetup/session/latest
-```
-  * you can create symlink to your startscript and put it on Desktop very easy by right mouse button click and choose make a link and move file on your desktop or command:
+#### Make link and put it on Desktop
+  * To make a link for specific session profile on Destop by right mouse button click and choose make a link and move file on your desktop or command:
 ```
 ln -s ~/dexsetup/session/latest/firejail.session.default.sh ~/Desktop/session.default.sh
 ln -s ~/dexsetup/session/latest/firejail.session.johnsmith.sh ~/Desktop/session.johnsmith.sh
 ```
 
-#### Directory struture
-  * everything downloaded and configured by above example is standard system packages installation/configuration or pure user-space thing.
-  * the main root directory is `~/dexsetup`
+#### How to start specific Session profile
+  * To start session profile just double click on profile at `~/dexsetup/session/latest` and choose run or run in terminal or use command like:
+```
+cd ~/dexsetup/session/latest/ && ./firejail.session.default.sh
+```
+
+#### Session directory struture
   * session profile files could be found at `~/dexsetup/session/latest/data/profile/<profilename>`
 ```
 cd ~/dexsetup && tree -d -L 4 session
