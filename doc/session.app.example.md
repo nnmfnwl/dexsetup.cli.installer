@@ -27,10 +27,28 @@ mkdir -p ~/dexsetup && cd ~/dexsetup && rm -f installer.sh && proxychains4 wget 
 cd ~/dexsetup && ./setup.session.profile.sh johnsmith
 ```
 
+#### Restore Session profile from old account
+  * If you been using Session app before the old profile files could be found at `~/.config/Session/`
+  * You can very easy restore your session profile to be used secudrely by dexsetup as:
+```
+cp -r ~/.config/Session/* ~/dexsetup/session/latest/data/profile/johnsmith/
+```
+
+#### How to manage symlink and start Session by generated dexsetup profiles
+  * Generated session start scripts could be found at `~/dexsetup/session/latest`
+```
+ls -la ~/dexsetup/session/latest
+```
+  * you can create symlink to your startscript and put it on Desktop very easy by right mouse button click and choose make a link and move file on your desktop or command:
+```
+ln -s ~/dexsetup/session/latest/firejail.session.default.sh ~/Desktop/session.default.sh
+ln -s ~/dexsetup/session/latest/firejail.session.johnsmith.sh ~/Desktop/session.johnsmith.sh
+```
+
 #### Directory struture
   * everything downloaded and configured by above example is standard system packages installation/configuration or pure user-space thing.
-  * the main directory of everything is `~/dexsetup`
-  * session profile files could be found `~/dexsetup/session/latest/data/profile/<profilename>`
+  * the main root directory is `~/dexsetup`
+  * session profile files could be found at `~/dexsetup/session/latest/data/profile/<profilename>`
 ```
 cd ~/dexsetup && tree -d -L 4 session
 ```
@@ -48,18 +66,4 @@ session
 
 ```
 
-#### Restore Session profile from old account
-  * If you been using Session app before the old profile files could be found at `~/.config/Session/`
-  * You can very easy restore your session profile to be used secudrely by dexsetup as:
-```
-cp -r ~/.config/Session/* ~/dexsetup/session/latest/data/profile/Default/
-```
-
-#### How to start Session by generated dexsetup profiles
-  * Start scripts could be found at `~/dexsetup/session/latest`
-```
-ls -la ~/dexsetup/session/latest
-```
-  * you can create symlink to your startscript and put it on Desktop
-```
-```
+#### Thanks for reading, feedback is welcome.
