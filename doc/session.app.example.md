@@ -1,4 +1,4 @@
-### Example of setting up Session-Privacy-Messenger app in very secure, isolated way, running behind tor and ability to run multiple session accounts at once with dexsetup:
+### Example of setting up Session-Privacy-Messenger app in very secure, isolated way, running behind tor and ability to run multiple session accounts at once on Linux with dexsetup:
   * everything downloaded and configured by below example is very standard system packages installation/configuration or pure user-space-files thing in very isolated environment by firejail and tor by proxychains.
 
 #### Installation
