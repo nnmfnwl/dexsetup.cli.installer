@@ -25,7 +25,7 @@ mkdir -p ~/dexsetup && cd ~/dexsetup && rm -f installer.sh && proxychains4 wget 
   * with dexsetup.framework you can setup any number of profiles just in second!
   * example how to setup profile named `johnsmith`
 ```
-cd ~/dexsetup && ./setup.session.profile.sh johnsmith
+cd ~/dexsetup/dexsetup && ./setup.session.profile.sh johnsmith
 ```
 
 #### Restore Session profile from old account
