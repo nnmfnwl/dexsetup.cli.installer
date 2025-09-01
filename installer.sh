@@ -343,13 +343,13 @@ function tool_setup_dexbot_profile() {
    if [[ "${var_q}" == "y" ]]; then
       
       tool_arg_value "${1}-${2}-strategy-cfg" "" "${7}" "" "strategy config"
-      strategy_cfg=var_v
+      strategy_cfg=${var_v}
       tool_arg_value "${1}-${2}-strategy-name" "" "${8}" "" "strategy name"
-      strategy_name=var_v
+      strategy_name=${var_v}
       tool_arg_value "${1}-${2}-strategy-addr1" "" "${9}" "" "address1"
-      strategy_addr1=var_v
+      strategy_addr1=${var_v}
       tool_arg_value "${1}-${2}-strategy-addr2" "" "${10}" "" "address2"
-      strategy_addr2=var_v
+      strategy_addr2=${var_v}
       
       ./setup.cc.dexbot.profile.sh ${3} ${4} ${5} ${6} ${strategy_cfg} ${strategy_name} ${strategy_addr1} ${strategy_addr2} 
       if [[ ${?} != 0 ]]; then
