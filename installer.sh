@@ -53,24 +53,28 @@ function tool_interactivity() { #toyes #tono #info
 }
 
 # find argument value
-function tool_arg_value() { #arg.name #"secret" #info #arg is loaded to var_v
+function tool_arg_value() { #1 arg.name #2 "if match" #3 "then set to" #4"secret"  #5 info  #arg is loaded to var_v
    var_v=""
    for (( j=0; j<argcc; j++ )); do
       if [[ "${argvv[j]}" == "${1}" ]]; then
          ((j++))
          var_v="${argvv[j]}"
          echo ""
-         if [[ "secret" == "${2}" ]]; then
-            echo ">>> argument '${1}' ${3} value found '*******'"
+         if [[ "secret" == "${4}" ]]; then
+            echo ">>> argument '${1}' ${5} value found '*******'"
          else
-            echo ">>> argument '${1}' ${3} value found '${var_v}'"
+            echo ">>> argument '${1}' ${5} value found '${var_v}'"
          fi
          
          return 0
       fi
    done
    
-   echo ">>> ${1} ${3} could be skip by '${1} <value>' argument and value"
+   if [[ "${2}" == "${var_v}" ]]; then
+      var_v="${3}"
+   fi
+   
+   echo ">>> ${1} - ${5} - could be specified by '${1} <value>' argument and value"
    
    return 1
 }
@@ -196,7 +200,7 @@ fi
 if [[ "${tigervnc_yes}" == "y" ]]; then
    tool_interactivity "vnc-setpassword-y" "vnc-setpassword-n" "Would you like to setup VNC user login password?"
    if [[ "${var_q}" == "y" ]]; then
-      tool_arg_value "vncpasswd" "secret" ""
+      tool_arg_value "vncpasswd" "" "" "secret" ""
       if [[ "$?" == "0" ]]; then
          echo -e "${var_v}\n${var_v}\nn" | tigervncpasswd
          var_v=""
@@ -332,15 +336,25 @@ fi
 function tool_setup_dexbot_profile() {  
    tool_interactivity "${1}-${2}-setup-y" "${1}-${2}-setup-n" "Would you like to setup DEXBOT ${1}/${2} trading strategy ${8} with DEX trading wallet profiles?"
    if [[ "${var_q}" == "y" ]]; then
-      ./setup.cc.dexbot.profile.sh ${3} ${4} ${5} ${6} ${7} ${8} ${9} ${10} 
+      
+      tool_arg_value "${1}-${2}-strategy-cfg" "" "${7}" "" "strategy config"
+      strategy_cfg=var_v
+      tool_arg_value "${1}-${2}-strategy-name" "" "${8}" "" "strategy name"
+      strategy_name=var_v
+      tool_arg_value "${1}-${2}-strategy-addr1" "" "${9}" "" "address1"
+      strategy_addr1=var_v
+      tool_arg_value "${1}-${2}-strategy-addr2" "" "${10}" "" "address2"
+      strategy_addr2=var_v
+      
+      ./setup.cc.dexbot.profile.sh ${3} ${4} ${5} ${6} ${strategy_cfg} ${strategy_name} ${strategy_addr1} ${strategy_addr2} 
       if [[ ${?} != 0 ]]; then
-         tool_interactivity "${1}-${2}-update-y" "${1}-${2}-update-n" "DEXBOT ${1}/${2} trading strategy ${8} failed or is already installed, would you like to try to update it?"
+         tool_interactivity "${1}-${2}-update-y" "${1}-${2}-update-n" "DEXBOT ${1}/${2} trading strategy ${strategy_name} failed or is already installed, would you like to try to update it?"
          if [[ "${var_q}" == "y" ]]; then
-            ./setup.cc.dexbot.profile.sh ${3} ${4} ${5} ${6} ${7} ${8} ${9} ${10} update_strategy update_source
+            ./setup.cc.dexbot.profile.sh ${3} ${4} ${5} ${6} ${strategy_cfg} ${strategy_name} ${strategy_addr1} ${strategy_addr2} update_strategy update_source
             if [[ ${?} != 0 ]]; then
-               tool_interactivity "${1}-${2}-skip-failed-y" "${1}-${2}-skip-failed-n" "DEXBOT ${1}/${2} trading strategy ${8} make failed, would you like to skip and continue?"
+               tool_interactivity "${1}-${2}-skip-failed-y" "${1}-${2}-skip-failed-n" "DEXBOT ${1}/${2} trading strategy ${strategy_name} make failed, would you like to skip and continue?"
                if [[ "${var_q}" != "y" ]]; then
-                  echo "ERROR >>> setup DEXBOT ${1}/(${2}) trading strategy {8} failed " && exit 1
+                  echo "ERROR >>> setup DEXBOT ${1}/(${2}) trading strategy {strategy_name} failed " && exit 1
                fi
             fi
          fi
