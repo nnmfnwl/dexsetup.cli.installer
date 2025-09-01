@@ -30,13 +30,13 @@ function tool_interactivity() { #toyes #tono #info
       if [[ "${argvv[j]}" == "DEFAULT-Y" ]]; then
          echo ""
          echo ">>> ${3}"
-         echo ">>> (been skip by arg '${1} / ${2}/DEFAULT-Y') [y to yes]: y"
+         echo ">>> (been skip by arg '${1} / ${2} / DEFAULT-Y') [y to yes]: y"
          var_q="y"
          return 0
       elif [[ "${argvv[j]}" == "DEFAULT-N" ]]; then
          echo ""
          echo ">>> ${3}"
-         echo ">>> (been skip by arg '${1} / ${2}/DEFAULT-N') [y to yes]: n"
+         echo ">>> (been skip by arg '${1} / ${2} / DEFAULT-N') [y to yes]: n"
          var_q="n"
          return 1
       fi
