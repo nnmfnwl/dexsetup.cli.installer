@@ -74,6 +74,11 @@ function tool_arg_value() { #1 arg.name #2 "if match" #3 "then set to" #4"secret
       var_v="${3}"
    fi
    
+   if [[ "secret" == "${4}" ]]; then
+      echo ">>> argument '${1}' ${5} value not found and set to default '*******'"
+   else
+      echo ">>> argument '${1}' ${5} value not found and set to default '${var_v}'"
+   fi
    echo ">>> ${1} - ${5} - could be specified by '${1} <value>' argument and value"
    
    return 1
