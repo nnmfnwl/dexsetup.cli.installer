@@ -62,16 +62,25 @@ screen -x
   * All screen terminal multiplexer tabs are nicely named with predefined commands, and user just use enter to confirm commands depending on what is needed
 
 ### Trading bot strategies reconfiguration
-  * After successfull installation/reinstallation/update, there is generated `installer_reconfigure_dexbot.sh` script wich could be used to reconfigure generated DEXBOT trading strategies once user sets up wallets trading addresses.
-```
-cd ~/dexsetup/ && ./installer_reconfigure_dexbot.sh
-```
-  * Every generated strategy is readable well documented configuration based on [`DEXBOT template`](https://github.com/nnmfnwl/dexbot/blob/merge.2025.03.26/howto/examples/bot_v2_template.py) generated as mix with specific strategy trading pair configuration [`BLOCK/LTC`](https://github.com/nnmfnwl/dexsetup/blob/merge.2025.02.06/src/cfg.strategy.block.ltc.sh) , [`BTC/LTC`](https://github.com/nnmfnwl/dexsetup/blob/merge.2025.02.06/src/cfg.strategy.btc.ltc.sh) ...
-  * By default all generated strategy could be found at
+  * After successful **strategy** installation, reinstallation or update, it **must be finalized manually by text editor to be able to be used**.
+  * By default all generated strategy could be found at `~/dexsetup/dexbot/git.src/` with prefix `strategy`
 ```
 cd ~/dexsetup/dexbot/git.src/ && ls -la | grep strategy | grep .py
 ```
-  * Final strategy tunning is easy but most effective way would be to write own `strategy trading pair configuration` for dexsetup which could be easy shared used again and again.
+  * It can be used any CLI or GUI text editor like joe, nano, vi, vim, geany...
+  * To finalize for example by installer generated `BLOCK/LTC` default trading `strategy1`, it must edit two files: `~/dexsetup/dexbot/git.src/strategy_BLOCK_LTC_strategy1.py` and `~/dexsetup/dexbot/git.src/strategy_LTC_BLOCK_strategy1.py`
+```
+editor=geany && ${editor} ~/dexsetup/dexbot/git.src/strategy_BLOCK_LTC_strategy1.py && ${editor} ~/dexsetup/dexbot/git.src/strategy_LTC_BLOCK_strategy1.py
+```
+  * There are at least two lines which must be manually finalized to make strategy usable, those are coins addresses itself specified by **makeraddress** and **takeraddress** :
+```
+# --makeraddress  | trading address of asset being sold (default=None)
+# --takeraddress  | trading address of asset being bought (default=None)
+    "--makeraddress blocknet01"
+    "--takeraddress litecoin01"
+```
+  * Every generated strategy is readable well documented configuration based on [`DEXBOT template`](https://github.com/nnmfnwl/dexbot/blob/merge.2025.03.26/howto/examples/bot_v2_template.py) generated as mix with specific strategy trading pair configuration [`BLOCK/LTC`](https://github.com/nnmfnwl/dexsetup/blob/merge.2025.02.06/src/cfg.strategy.block.ltc.sh) , [`BTC/LTC`](https://github.com/nnmfnwl/dexsetup/blob/merge.2025.02.06/src/cfg.strategy.btc.ltc.sh) ...
+  * Final strategy tuning is easy but most effective way would be to write own `strategy trading pair configuration` for dexsetup which could be easy shared used again and again.
 
 ### Used components
   * List of all used components by dexsetup here [`dexsetup readme page`](https://github.com/nnmfnwl/dexsetup/tree/merge.2025.02.06?tab=readme-ov-file#list-used-components-by-dexsetup)
