@@ -136,7 +136,7 @@ cd ~/dexsetup/dexbot/git.src/ && ls -la | grep strategy | grep .py
   * Final strategy tuning is easy but most effective way would be to write own `strategy trading pair configuration` for dexsetup which could be easy shared used again and again.
 
 #### 5.3.1. Strategy Start, Strategy Stop and Orders Cleaning
-  * Start `DEXBOT pricing proxy` component first
+  * **Start** `DEXBOT pricing proxy` component first
 ```
 ./run.firejail.proxy.sh
 ```
@@ -165,9 +165,16 @@ cd ~/dexsetup/dexbot/git.src/ && ls -la | grep strategy | grep .py
 ./run.firejail.LTC.BLOCK.strategy1.sh  --reset
 ```
 
+#### 5.3.2. Strategy Start, Strategy Stop and Orders Cleaning - Additional resources
+  * Start BlockDX - Decentralized Exchange Graphical User Interface by `blockdx` component:
+```
+./firejail.blockdx.default.sh
+```
+
 ### 6. Used components
   * List of all used components by dexsetup here [`dexsetup readme page`](https://github.com/nnmfnwl/dexsetup/tree/merge.2025.02.06?tab=readme-ov-file#list-used-components-by-dexsetup)
   
-### 7. Additional resources
-  * Session Privacy Messenger setup/add/update - [Session App Setup](https://github.com/nnmfnwl/dexsetup.cli.installer/blob/main/doc/session.app.example.md)
-  * Blocknet(BLOCK) faucet takerbot setup/add/update - [BLOCK Faucet Takerbot Setup](https://github.com/nnmfnwl/dexsetup.cli.installer/blob/main/doc/blocknet.faucet.takerbot.md)
+### 7. Additional resources - automatic deployment scripts examples
+  * Session Privacy Messenger setup/add/update - [>>>](https://github.com/nnmfnwl/dexsetup.cli.installer/blob/main/doc/session.app.example.md)
+  * Blocknet(BLOCK) faucet takerbot setup/add/update - [>>>](https://github.com/nnmfnwl/dexsetup.cli.installer/blob/main/doc/blocknet.faucet.takerbot.md)
+  * Specific wallet setup/update/reinstall - [>>>](https://github.com/nnmfnwl/dexsetup.cli.installer/blob/main/doc/wallet.setup.md)
