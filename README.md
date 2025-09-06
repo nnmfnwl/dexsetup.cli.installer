@@ -172,7 +172,7 @@ cd ~/dexsetup/dexbot/git.src/ && ls -la | grep strategy | grep .py
 ```
 
 ### 6. Used components
-  * List of all used components by dexsetup here [`dexsetup readme page`](https://github.com/nnmfnwl/dexsetup/tree/merge.2025.02.06?tab=readme-ov-file#list-used-components-by-dexsetup)
+  * List of all used components by dexsetup here [`dexsetup readme page`](https://github.com/nnmfnwl/dexsetup/tree/merge.2025.02.06?tab=readme-ov-file#list-of-used-components-by-dexsetup)
   
 ### 7. Additional resources - automatic deployment scripts examples
   * Session Privacy Messenger setup/add/update - [>>>](https://github.com/nnmfnwl/dexsetup.cli.installer/blob/main/doc/session.app.example.md)
