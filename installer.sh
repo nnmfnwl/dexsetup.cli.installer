@@ -260,7 +260,7 @@ fi
 
 echo "Building wallets from official repositories..."
 
-# 
+# setup wallet
 function tool_setup_wallet() {  #crypto_name  #crypto_ticker  #cfg_script_path  #download_build_action
    tool_interactivity "${2}-install-y" "${2}-install-n" "Would you like to install or update ${1}(${2}) wallet?"
    if [[ "${var_q}" == "y" ]]; then
@@ -294,46 +294,42 @@ tool_setup_wallet "Particl" "PART" "./src/cfg.cc.particl.sh" "build"
 
 echo "Wallets profiling setup"
 
+# setup wallet profile
+function tool_setup_wallet_profile() {  #crypto_name  #cfg_script_path
+   tool_interactivity "${1}-profile-y" "${1}-profile-n" "Would you like to setup ${1}(${2}) wallet profile?"
+   if [[ "${var_q}" == "y" ]]; then
+      ./setup.cc.wallet.profile.sh ${2}
+      if [[ ${?} != 0 ]]; then
+         echo "make ${1}(${2}) wallet profile failed" && exit 1
+      fi
+   fi
+}
+
 tool_interactivity "dao-profiles-y" "dao-profiles-n" "Would you like to setup also standalone DAO profiles for blocknet?"
 if [[ "${var_q}" == "y" ]]; then
-   ./setup.cc.wallet.profile.sh ./src/cfg.cc.blocknet.dao.sh
-   (test $? != 0) && echo "make blocknet wallet staking profile failed" && exit 1
+   tool_setup_wallet_profile "BLOCK-dao" ./src/cfg.cc.blocknet.dao.sh
 fi
 
 tool_interactivity "stake-profiles-y" "stake-profiles-n" "Would you like to setup also standalone staking profiles for blocknet, pocketcoin and pivx?"
 if [[ "${var_q}" == "y" ]]; then
-   ./setup.cc.wallet.profile.sh ./src/cfg.cc.blocknet.staking.sh
-   (test $? != 0) && echo "make blocknet wallet staking profile failed" && exit 1
-   ./setup.cc.wallet.profile.sh ./src/cfg.cc.pocketcoin.staking.sh
-   (test $? != 0) && echo "make pocketcoin (bastyon) wallet staking profile failed" && exit 1
-   ./setup.cc.wallet.profile.sh ./src/cfg.cc.pivx.staking.sh
-   (test $? != 0) && echo "make pivx wallet staking profile failed" && exit 1
+   tool_setup_wallet_profile "BLOCK-stake" ./src/cfg.cc.blocknet.staking.sh
+   tool_setup_wallet_profile "PKOIN-stake" ./src/cfg.cc.pocketcoin.staking.sh
+   tool_setup_wallet_profile "PIVX-stake" ./src/cfg.cc.pivx.staking.sh
 fi
 
 tool_interactivity "dex-profiles-y" "dex-profiles-n" "Would you like to setup wallet profiles which to be used in DEX trading?"
 if [[ "${var_q}" == "y" ]]; then
-   ./setup.cc.wallet.profile.sh ./src/cfg.cc.blocknet.sh
-   (test $? != 0) && echo "make blocknet wallet dex profile failed" && exit 1
-   ./setup.cc.wallet.profile.sh ./src/cfg.cc.litecoin.sh
-   (test $? != 0) && echo "make litecoin wallet dex profile failed" && exit 1
-   ./setup.cc.wallet.profile.sh ./src/cfg.cc.bitcoin.sh
-   (test $? != 0) && echo "make bitcoin wallet dex profile failed" && exit 1
-   ./setup.cc.wallet.profile.sh ./src/cfg.cc.verge.sh
-   (test $? != 0) && echo "make verge wallet dex profile failed" && exit 1
-   ./setup.cc.wallet.profile.sh ./src/cfg.cc.dogecoin.sh
-   (test $? != 0) && echo "make dogecoin wallet dex profile failed" && exit 1
-   ./setup.cc.wallet.profile.sh ./src/cfg.cc.pivx.sh
-   (test $? != 0) && echo "make pivx wallet dex profile failed" && exit 1
-   ./setup.cc.wallet.profile.sh ./src/cfg.cc.dash.sh
-   (test $? != 0) && echo "make dash wallet dex profile failed" && exit 1
-   ./setup.cc.wallet.profile.sh ./src/cfg.cc.lbrycrd.leveldb.sh
-   (test $? != 0) && echo "make lbry leveldb wallet dex profile failed" && exit 1
-   ./setup.cc.wallet.profile.sh ./src/cfg.cc.lbrycrd.sqlite.sh
-   (test $? != 0) && echo "make lbry sqlite wallet dex profile failed" && exit 1
-   ./setup.cc.wallet.profile.sh ./src/cfg.cc.pocketcoin.sh
-   (test $? != 0) && echo "make pocketcoin wallet dex profile failed" && exit 1
-   ./setup.cc.wallet.profile.sh ./src/cfg.cc.particl.sh
-   (test $? != 0) && echo "make particl wallet dex profile failed" && exit 1
+   tool_setup_wallet_profile "BLOCK-dex" ./src/cfg.cc.blocknet.sh
+   tool_setup_wallet_profile "LTC-dex" ./src/cfg.cc.litecoin.sh
+   tool_setup_wallet_profile "BTC-dex" ./src/cfg.cc.bitcoin.sh
+   tool_setup_wallet_profile "XVG-dex" ./src/cfg.cc.verge.sh
+   tool_setup_wallet_profile "DOGE-dex" ./src/cfg.cc.dogecoin.sh
+   tool_setup_wallet_profile "PIVX-dex" ./src/cfg.cc.pivx.sh
+   tool_setup_wallet_profile "DASH-dex" ./src/cfg.cc.dash.sh
+   tool_setup_wallet_profile "LBC-dex" ./src/cfg.cc.lbrycrd.leveldb.sh
+   tool_setup_wallet_profile "LBC-dex" ./src/cfg.cc.lbrycrd.sqlite.sh
+   tool_setup_wallet_profile "PKOIN-dex" ./src/cfg.cc.pocketcoin.sh
+   tool_setup_wallet_profile "PART-dex" ./src/cfg.cc.particl.sh
 fi
 
 #1 ticker1   #2 ticker2   #3 block script   #4 ticker 1 script   #5 ticker 2 script   #6 dexbot script  #7 dexbot strategy template  #8 strategy name #9 addr1   #10 addr2
