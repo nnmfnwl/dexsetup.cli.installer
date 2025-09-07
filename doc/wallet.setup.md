@@ -3,9 +3,9 @@
   * supported are BTC BCH LTC BLOCK DOGE XVG DASH LBC PART PKOIN 
 
 #### Content
-  1. Setup Wallet and environment as GUI+CLI from scratch, no update of existing components [>>>](#1)
-  2. Setup wallet to existing environment, no update of existing components [>>>](#2)
-  3. Automatically choose to setup or update wallet and envoronment [>>>](#3)
+  1. Setup Wallet and environment as GUI+CLI from scratch, no update of existing components [>>>](https://github.com/nnmfnwl/dexsetup.cli.installer/blob/main/doc/wallet.setup.md#1-setup-wallet-and-environment-as-guicli-from-scratch-no-update-of-existing-components-found)
+  2. Setup wallet to existing environment, no update of existing components [>>>](https://github.com/nnmfnwl/dexsetup.cli.installer/blob/main/doc/wallet.setup.md#2-setup-wallet-to-existing-environment-no-update-of-existing-components)
+  3. Automatically choose to setup or update wallet and environment [>>>](https://github.com/nnmfnwl/dexsetup.cli.installer/blob/main/doc/wallet.setup.md#3-automatically-choose-to-setup-or-update-wallet-and-environment)
      
 #### 1. Setup Wallet and environment as GUI+CLI from scratch, no update of existing components found
   * detect if tor is already configured
@@ -16,7 +16,7 @@
   * download dexsetup.framework
   * configure proxychains
   * download and build blocknet wallet from source
-  * setup blocknet wallet profiles
+  * setup blocknet wallet DAO, DEX and Stake profiles
 ```
 # set which wallet
 WALLET=BLOCK
@@ -50,7 +50,7 @@ WALLET=BLOCK
 cd ~/dexsetup && bash installer.sh DEFAULT-N c-y ${WALLET}-install-y dao-profiles-y ${WALLET}-dao-profile-y dex-profiles-y ${WALLET}-dex-profile-y stake-profiles-y ${WALLET}-stake-profile-y
 ```
 
-#### 3. Automatically choose to setup or update wallet and envoronment
+#### 3. Automatically choose to setup or update wallet and environment
   * force install or update related wallet components
 ```
 # set which wallet
