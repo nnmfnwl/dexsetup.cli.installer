@@ -19,7 +19,7 @@
   * setup blocknet wallet profiles
 ```
 # set which wallet
-$WALLET=BLOCK
+WALLET=BLOCK
 
 # set base packages for anonymity from very beginning because we do not want even to gitbub to spy on us.
 pkgs="proxychains4 tor torsocks wget";
@@ -44,7 +44,7 @@ mkdir -p ~/dexsetup && cd ~/dexsetup && rm -f installer.sh && proxychains4 wget 
   * setup blocknet wallet profiles
 ```
 # set which wallet
-$WALLET=BLOCK
+WALLET=BLOCK
 
 # run installer
 cd ~/dexsetup && bash installer.sh DEFAULT-N c-y ${WALLET}-install-y dao-profiles-y ${WALLET}-dao-profile-y dex-profiles-y ${WALLET}-dex-profile-y stake-profiles-y ${WALLET}-stake-profile-y
@@ -54,7 +54,7 @@ cd ~/dexsetup && bash installer.sh DEFAULT-N c-y ${WALLET}-install-y dao-profile
   * force install or update related wallet components
 ```
 # set which wallet
-$WALLET=BLOCK
+WALLET=BLOCK
 
 # set base packages for anonymity from very beginning because we do not want even to gitbub to spy on us.
 pkgs="proxychains4 tor torsocks wget";
