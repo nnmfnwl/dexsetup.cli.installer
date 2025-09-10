@@ -18,13 +18,21 @@
 
 ### 1. Running CLI installer
   * There are 2 user friendly options to download and run installer:
-  * **1. Download and start dexsetup [`installer.sh`](https://github.com/nnmfnwl/dexsetup.cli.installer/raw/refs/heads/main/installer.sh) script manually but `not anonymously`**:
+  
+#### 1.1. Download and start dexsetup installer not anonymously
+  * `not anonymously` - Your IP address will be exposed by internet service provider to github.
+  * Click do download [`installer.sh`](https://github.com/nnmfnwl/dexsetup.cli.installer/raw/refs/heads/main/installer.sh) script or use command.:
 ```
-bash ./installer.sh
+cd ~/Downloads/ && wget "https://github.com/nnmfnwl/dexsetup.cli.installer/raw/refs/heads/main/installer.sh"
+```
+  * Start dexsetup installer
+```
+mkdir -p ~/dexsetup && rm -f ~/dexsetup/installer.sh && mv ~/Downloads/installer.sh ~/dexsetup/installer.sh && cd ~/dexsetup && bash ./installer.sh
 ```
 
-  * **2. Download and start dexsetup `installer.sh` script `anonymously`** but for total privacy install `tor`, `proxychains4` and `wget` first.
-  * To install privacy packages on **`Debian`** or **`Ubuntu`** based distributions by using `apt` and `su` or `sudo`:
+#### 1.2. Download and start dexsetup installer anonymously
+  * `anonymously` - Your IP address will NOT be exposed by internet service provider to github.
+  * Install `tor`, `proxychains4` and `wget` privacy packages on **`Debian`** or **`Ubuntu`** based distributions by using `apt` and `su` or `sudo`:
 ```
 pkgs="proxychains4 tor torsocks wget";
 groups | grep debian-tor > /dev/null && cfg_user_tor="echo 'Tor for ${USER} is already configured'" || cfg_user_tor="usermod -a -G debian-tor ${USER}";
