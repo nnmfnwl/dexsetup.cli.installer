@@ -60,10 +60,20 @@ function tool_arg_value() { #1 arg.name #2 "if match" #3 "then set to" #4"secret
          ((j++))
          var_v="${argvv[j]}"
          echo ""
-         if [[ "secret" == "${4}" ]]; then
-            echo ">>> argument '${1}' - ${5} value found '*******'"
+         
+         if [[ "${2}" == "${var_v}" ]]; then
+            var_v="${3}"
+            if [[ "secret" == "${4}" ]]; then
+               echo ">>> argument '${1}' - ${5} value found but set to default '*******'"
+            else
+               echo ">>> argument '${1}' - ${5} value found but set to default '${var_v}'"
+            fi
          else
-            echo ">>> argument '${1}' - ${5} value found '${var_v}'"
+            if [[ "secret" == "${4}" ]]; then
+               echo ">>> argument '${1}' - ${5} value found '*******'"
+            else
+               echo ">>> argument '${1}' - ${5} value found '${var_v}'"
+            fi
          fi
          
          return 0
@@ -72,12 +82,15 @@ function tool_arg_value() { #1 arg.name #2 "if match" #3 "then set to" #4"secret
    
    if [[ "${2}" == "${var_v}" ]]; then
       var_v="${3}"
-   fi
-   
-   if [[ "secret" == "${4}" ]]; then
-      echo ">>> argument '${1}' - ${5} value not found and set to default '*******'"
+      if [[ "secret" == "${4}" ]]; then
+         echo ">>> argument '${1}' - ${5} value not found and set to default '*******'"
+      else
+         echo ">>> argument '${1}' - ${5} value not found and set to default '${var_v}'"
+      fi
    else
-      echo ">>> argument '${1}' - ${5} value not found and set to default '${var_v}'"
+      if [[ "secret" == "${4}" ]]; then
+         echo ">>> argument '${1}' - ${5} value not found and is empty '${var_v}'"
+      fi
    fi
    
    return 1
@@ -332,7 +345,46 @@ if [[ "${var_q}" == "y" ]]; then
    tool_setup_wallet_profile "PART-dex" ./src/cfg.cc.particl.sh
 fi
 
-#1 ticker1   #2 ticker2   #3 block script   #4 ticker 1 script   #5 ticker 2 script   #6 dexbot script  #7 dexbot strategy template  #8 strategy name #9 addr1   #10 addr2
+#setup custom dexbot profile
+tool_arg_value "strategy-name" "" "" "" "custom strategy name"
+strategy_name=${var_v}
+if [[ ${?} == 0 ]]; then
+   tool_arg_value "strategy-cfg" "" "" "" "custom strategy configuration file"
+   strategy_cfg=${var_v}
+   if [[ ${?} == 0 ]]; then
+      tool_arg_value "strategy-cfg-a" "" "" "" "custom strategy configuration file A"
+      strategy_cfg_a=${var_v}
+      if [[ ${?} == 0 ]]; then
+         tool_arg_value "strategy-cfg-b" "" "" "" "custom strategy configuration file B"
+         strategy_cfg_b=${var_v}
+         if [[ ${?} == 0 ]]; then
+            tool_arg_value "strategy-addr-a" "" "" "" "custom strategy address A"
+            strategy_addr_a=${var_v}
+            if [[ ${?} == 0 ]]; then
+               tool_arg_value "strategy-addr-b" "" "" "" "custom strategy address B"
+               strategy_addr_b=${var_v}
+               if [[ ${?} == 0 ]]; then
+                  ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ${strategy_cfg_a} ${strategy_cfg_b} ./src/cfg.dexbot.alfa.sh ${strategy_cfg} ${strategy_name} ${strategy_addr_a} ${strategy_addr_b} 
+                  if [[ ${?} != 0 ]]; then
+                     tool_interactivity "$strategy-update-y" "strategy-update-n" "DEXBOT trading strategy ${strategy_name} failed or is already installed, would you like to try to update it?"
+                     if [[ "${var_q}" == "y" ]]; then
+                        ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ${strategy_cfg_a} ${strategy_cfg_b} ./src/cfg.dexbot.alfa.sh ${strategy_cfg} ${strategy_name} ${strategy_addr_a} ${strategy_addr_b} update_strategy update_source
+                        if [[ ${?} != 0 ]]; then
+                           tool_interactivity "$strategy-skip-failed-y" "strategy-skip-failed-n" "DEXBOT trading strategy ${strategy_name} make failed, would you like to skip and continue?"
+                           if [[ "${var_q}" != "y" ]]; then
+                              echo "ERROR >>> setup DEXBOT trading strategy {strategy_name} failed " && exit 1
+                           fi
+                        fi
+                     fi
+                  fi
+               fi
+            fi
+         fi
+      fi
+   fi
+fi
+
+#1 ticker1   #2 ticker2   #3 block script   #4 ticker 1 script   #5 ticker 2 script   #6 dexbot script  #7 dexbot strategy template  #8 strategy name #9 addr_a   #10 addr_b
 function tool_setup_dexbot_profile() {  
    tool_interactivity "${1}-${2}-setup-y" "${1}-${2}-setup-n" "Would you like to setup DEXBOT ${1}/${2} trading strategy ${8} with DEX trading wallet profiles?"
    if [[ "${var_q}" == "y" ]]; then
@@ -341,16 +393,16 @@ function tool_setup_dexbot_profile() {
       strategy_cfg=${var_v}
       tool_arg_value "${1}-${2}-strategy-name" "" "${8}" "" "strategy name"
       strategy_name=${var_v}
-      tool_arg_value "${1}-${2}-strategy-addr1" "" "${9}" "" "address1"
-      strategy_addr1=${var_v}
-      tool_arg_value "${1}-${2}-strategy-addr2" "" "${10}" "" "address2"
-      strategy_addr2=${var_v}
+      tool_arg_value "${1}-${2}-strategy-addr-a" "" "${9}" "" "address1"
+      strategy_addr_a=${var_v}
+      tool_arg_value "${1}-${2}-strategy-addr-b" "" "${10}" "" "address2"
+      strategy_addr_b=${var_v}
       
-      ./setup.cc.dexbot.profile.sh ${3} ${4} ${5} ${6} ${strategy_cfg} ${strategy_name} ${strategy_addr1} ${strategy_addr2} 
+      ./setup.cc.dexbot.profile.sh ${3} ${4} ${5} ${6} ${strategy_cfg} ${strategy_name} ${strategy_addr_a} ${strategy_addr_b} 
       if [[ ${?} != 0 ]]; then
          tool_interactivity "${1}-${2}-update-y" "${1}-${2}-update-n" "DEXBOT ${1}/${2} trading strategy ${strategy_name} failed or is already installed, would you like to try to update it?"
          if [[ "${var_q}" == "y" ]]; then
-            ./setup.cc.dexbot.profile.sh ${3} ${4} ${5} ${6} ${strategy_cfg} ${strategy_name} ${strategy_addr1} ${strategy_addr2} update_strategy update_source
+            ./setup.cc.dexbot.profile.sh ${3} ${4} ${5} ${6} ${strategy_cfg} ${strategy_name} ${strategy_addr_a} ${strategy_addr_b} update_strategy update_source
             if [[ ${?} != 0 ]]; then
                tool_interactivity "${1}-${2}-skip-failed-y" "${1}-${2}-skip-failed-n" "DEXBOT ${1}/${2} trading strategy ${strategy_name} make failed, would you like to skip and continue?"
                if [[ "${var_q}" != "y" ]]; then
