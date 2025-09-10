@@ -347,23 +347,23 @@ fi
 
 #setup custom dexbot profile
 tool_arg_value "strategy-name" "" "" "" "custom strategy name"
-strategy_name=${var_v}
 if [[ ${?} == 0 ]]; then
+   strategy_name=${var_v}
    tool_arg_value "strategy-cfg" "" "" "" "custom strategy configuration file"
-   strategy_cfg=${var_v}
    if [[ ${?} == 0 ]]; then
+      strategy_cfg=${var_v}
       tool_arg_value "strategy-cfg-a" "" "" "" "custom strategy configuration file A"
-      strategy_cfg_a=${var_v}
       if [[ ${?} == 0 ]]; then
+         strategy_cfg_a=${var_v}
          tool_arg_value "strategy-cfg-b" "" "" "" "custom strategy configuration file B"
-         strategy_cfg_b=${var_v}
          if [[ ${?} == 0 ]]; then
+            strategy_cfg_b=${var_v}
             tool_arg_value "strategy-addr-a" "" "" "" "custom strategy address A"
-            strategy_addr_a=${var_v}
             if [[ ${?} == 0 ]]; then
+               strategy_addr_a=${var_v}
                tool_arg_value "strategy-addr-b" "" "" "" "custom strategy address B"
-               strategy_addr_b=${var_v}
                if [[ ${?} == 0 ]]; then
+                  strategy_addr_b=${var_v}
                   ./setup.cc.dexbot.profile.sh ./src/cfg.cc.blocknet.sh ${strategy_cfg_a} ${strategy_cfg_b} ./src/cfg.dexbot.alfa.sh ${strategy_cfg} ${strategy_name} ${strategy_addr_a} ${strategy_addr_b} 
                   if [[ ${?} != 0 ]]; then
                      tool_interactivity "$strategy-update-y" "strategy-update-n" "DEXBOT trading strategy ${strategy_name} failed or is already installed, would you like to try to update it?"
