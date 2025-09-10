@@ -55,11 +55,11 @@ function tool_interactivity() { #toyes #tono #info
 # find argument value
 function tool_arg_value() { #1 arg.name #2 "if match" #3 "then set to" #4"secret"  #5 info  #arg is loaded to var_v
    var_v=""
+   echo ""
    for (( j=0; j<argcc; j++ )); do
       if [[ "${argvv[j]}" == "${1}" ]]; then
          ((j++))
          var_v="${argvv[j]}"
-         echo ""
          
          if [[ "${2}" == "${var_v}" ]]; then
             var_v="${3}"
@@ -89,6 +89,8 @@ function tool_arg_value() { #1 arg.name #2 "if match" #3 "then set to" #4"secret
       fi
    else
       if [[ "secret" == "${4}" ]]; then
+         echo ">>> argument '${1}' - ${5} value not found and is empty '*******'"
+      else
          echo ">>> argument '${1}' - ${5} value not found and is empty '${var_v}'"
       fi
    fi
