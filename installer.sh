@@ -151,7 +151,7 @@ fi
 
 tool_interactivity "pkg-build-y" "pkg-build-n" "Would you like to set to install mandatory to have command line interface build packages?"
 if [[ "${var_q}" == "y" ]]; then
-   pkg_cli_build="curl wget git make cmake clang clang-tools clang-format libclang1 libboost-all-dev basez libprotobuf-dev protobuf-compiler libssl-dev openssl gcc g++ python3-pip python3-dateutil cargo pkg-config libseccomp-dev libcap-dev libsecp256k1-dev firejail firejail-profiles seccomp proxychains4 tor libsodium-dev libgmp-dev screen"
+   pkg_cli_build="curl wget git make cmake clang clang-tools clang-format libclang1 libboost-all-dev basez libprotobuf-dev protobuf-compiler libssl-dev openssl gcc g++ python3-pip python3-dateutil cargo pkg-config libseccomp-dev libcap-dev libsecp256k1-dev firejail firejail-profiles seccomp proxychains4 tor libsodium-dev libgmp-dev screen libfmt-dev linux-cpupower"
 else
    pkg_cli_build=""
 fi
@@ -295,7 +295,7 @@ function tool_setup_wallet() {  #crypto_name  #crypto_ticker  #cfg_script_path  
    fi
 }
 
-tool_setup_wallet "Blocknet" "BLOCK" "./src/cfg.cc.blocknet.sh" "build"
+tool_setup_wallet "Blocknet" "BLOCK" "./src/cfg.cc.blocknet.sh" "download"
 tool_setup_wallet "Litecoin" "LTC" "./src/cfg.cc.litecoin.sh" "build"
 tool_setup_wallet "Bitcoin" "BTC" "./src/cfg.cc.bitcoin.sh" "build"
 tool_setup_wallet "Dogecoin" "DOGE" "./src/cfg.cc.dogecoin.sh" "build"
