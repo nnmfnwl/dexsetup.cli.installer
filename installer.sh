@@ -295,12 +295,12 @@ function tool_setup_wallet() {  #crypto_name  #crypto_ticker  #cfg_script_path  
    fi
 }
 
-tool_setup_wallet "Blocknet" "BLOCK" "./src/cfg.cc.blocknet.sh" "download"
+tool_setup_wallet "Blocknet" "BLOCK" "./src/cfg.cc.blocknet.sh" "build"
 tool_setup_wallet "Litecoin" "LTC" "./src/cfg.cc.litecoin.sh" "build"
 tool_setup_wallet "Bitcoin" "BTC" "./src/cfg.cc.bitcoin.sh" "build"
 tool_setup_wallet "Dogecoin" "DOGE" "./src/cfg.cc.dogecoin.sh" "build"
 tool_setup_wallet "Dash" "DASH" "./src/cfg.cc.dash.sh" "build"
-tool_setup_wallet "PIVX" "PIVX" "./src/cfg.cc.pivx.sh" "download"
+tool_setup_wallet "PIVX" "PIVX" "./src/cfg.cc.pivx.sh" "build"
 tool_setup_wallet "Verge" "XVG" "./src/cfg.cc.verge.sh" "build"
 tool_setup_wallet "Lbry Credits LevelDB" "LBC" "./src/cfg.cc.lbrycrd.leveldb.sh" "build"
 tool_setup_wallet "Lbry Credits SQLITE" "LBC" "./src/cfg.cc.lbrycrd.sqlite.sh" "build"
