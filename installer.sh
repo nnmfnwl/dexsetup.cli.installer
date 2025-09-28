@@ -151,7 +151,7 @@ fi
 
 tool_interactivity "pkg-build-y" "pkg-build-n" "Would you like to set to install mandatory to have command line interface build packages?"
 if [[ "${var_q}" == "y" ]]; then
-   pkg_cli_build="curl wget git make cmake clang clang-tools clang-format libclang1 libboost-all-dev basez libprotobuf-dev protobuf-compiler libssl-dev openssl gcc g++ python3-pip python3-dateutil cargo pkg-config libseccomp-dev libcap-dev libsecp256k1-dev firejail firejail-profiles seccomp proxychains4 tor libsodium-dev libgmp-dev screen libfmt-dev linux-cpupower"
+   pkg_cli_build="curl wget git make cmake clang clang-tools clang-format libclang1 libboost-all-dev basez libprotobuf-dev protobuf-compiler libssl-dev openssl gcc g++ python3-pip python3-dateutil cargo pkg-config libseccomp-dev libcap-dev libsecp256k1-dev firejail firejail-profiles seccomp proxychains4 tor libsodium-dev libgmp-dev screen libfmt-dev linux-cpupower libdb-dev libdb5.3++-dev"
 else
    pkg_cli_build=""
 fi
