@@ -205,16 +205,42 @@ fi
 [[ "${cfg_user_tor}" == "" ]] && cfg_user_tor="echo 'no Tor service for ${USER} is going to be configured'"
 [[ "${cfg_user_vnc}" == "" ]] && cfg_user_vnc="echo 'no TigerVNC for ${USER} is going to be configured'"
 
-echo ""
-eval_cmdd="${su_cmd} \"${pkg_update}; apt -y install apt ${pkg_privacy} ${pkg_cli_build} ${pkg_cli_tools} ${pkg_gui_build} ${pkg_gui_tools}; ${cfg_user_tor}; ${cfg_user_vnc}; exit\""
-echo "${eval_cmdd}"
-tool_interactivity "proceed-y" "proceed-n" "Proceed with above system setup/update?"
-if [[ "${var_q}" == "y" ]]; then
-   eval "$eval_cmdd"
-   (test $? != 0) && echo "ERROR >>> System setup password/update/install/tor/vnc failed. Please check above." && exit 1
-else
-   echo "INFO >> Operating system setup/update been skip."
-fi
+while : ; do
+   # make system update and setup command
+   eval_cmdd="${su_cmd} \"${pkg_update}; apt -y install apt ${pkg_privacy} ${pkg_cli_build} ${pkg_cli_tools} ${pkg_gui_build} ${pkg_gui_tools}; ${cfg_user_tor}; ${cfg_user_vnc}; exit\""
+   # log message system update and setup command
+   echo ""
+   echo "${eval_cmdd}"
+   # ask to process command
+   tool_interactivity "proceed-y" "proceed-n" "Proceed with above system setup/update?"
+   if [[ "${var_q}" == "y" ]]; then
+      # process command
+      eval "$eval_cmdd"
+      if [[ "$?" == "0" ]]; then
+         # break loop if system update and setup command success
+         break
+      else
+         # warning if system update and setup command fails
+         echo "WARNING >>> System setup password/update/install/tor/vnc failed. Please check above."
+         # ask if to try to repeat system update and setup command
+         tool_interactivity "proceed-repeat-y" "proceed-repeat-n" "Try to repeat system setup/update?"
+         if [[ "${var_q}" == "y" ]]; then
+            echo "INFO >> Trying to repeat system update & setup"
+            # if above command already process vnc configuration, then do not try it again
+            grep "^:[0-9]=${USER}$" /etc/tigervnc/vncserver.users && cfg_user_vnc="echo 'TigerVNC for ${USER} is already configured'"
+            # if above command already process to add user to tor groups, then do not try ti again
+            groups | grep debian-tor > /dev/null && cfg_user_tor="echo 'tor for ${USER} already configured'"
+         else
+            # if system update and setup commands fails and user refuse to repat, it exit installer process with error 1
+            echo "ERROR >> System configuration step failed"
+            exit 1
+         fi
+      fi
+   else
+      echo "WARNING >> Operating system setup/update been skip."
+      break
+   fi
+done
 
 if [[ "${tigervnc_yes}" == "y" ]]; then
    tool_interactivity "vnc-setpassword-y" "vnc-setpassword-n" "Would you like to setup VNC user login password?"
