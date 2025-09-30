@@ -44,10 +44,16 @@ function tool_interactivity() { #toyes #tono #info
    
    echo ""
    echo ">>> ${3}"
-   read -p ">>> (could skip by arg '${1} / ${2} / DEFAULT-Y / DEFAULT-N') [y to yes]: " -n1 var_q ; echo ""
-   if [[ "${var_q}" == "y" ]]; then
-      return 0
-   fi
+   while : ; do
+      read -p ">>> (could skip by arg '${1} / ${2} / DEFAULT-Y / DEFAULT-N') [n-no/y-yes]: " -n1 var_q ; echo ""
+      if [[ "${var_q}" == "y" ]]; then
+         return 0
+      elif [[ "${var_q}" == "n" ]]; then
+         return 1
+      else
+         echo "Please use <y> to 'Yes' or <n> to 'No'"
+      fi
+   done
    
    return 1
 }
