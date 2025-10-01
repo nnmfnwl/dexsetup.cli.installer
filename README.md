@@ -50,7 +50,7 @@ mkdir -p ~/dexsetup && cd ~/dexsetup && rm -f installer.sh && proxychains4 wget 
 ```
 
 #### 1.3. Custom automatization with installer 
-  * Deployment and other custom automatization examples with installer could be found in here [Additional resources](https://github.com/nnmfnwl/dexsetup.cli.installer/tree/main#7-additional-resources---automatic-deployment-scripts-examples)
+  * Deployment and other custom automatization examples with installer could be found in here [Additional resources](https://github.com/nnmfnwl/dexsetup.cli.installer#7-additional-resources---automatic-deployment-scripts-examples)
 
 ### 2. Remote desktop management with VNC
   * Open secured SSH tunnel between client and server(replace `10.10.10.10X` with real IP address)
@@ -200,7 +200,7 @@ cd ~/dexsetup/dexbot/git.src/ && ls -la | grep strategy | grep .py
   * [nnmfnwl7 on bastyon](https://bastyon.com/nnmfnwl7) - Bastyon, fully decentralized proof-of-stake blockchain based social network,chat,video,stream,blog,tip,monetization,pay-to-view platform
   * [dexsetup public chat on Bastyon](https://bastyon.com/welcome?publicroom=!cJLoAwwxvGxLoTtjwv:matrix.pocketnet.app) - DEXSETUP **open public chat on bastyon**
   * [nnmfnwl on X](https://x.com/nnmfnwl) - Twitter/X
-  * `051dcabc45ab21bcb5b8c3b29416f2cdac1e8b9836f545fd4e470e0f31a9ed825a` - Session privacy messenger ID - [getsession.org](https://getsession.org)
+  * `051dcabc45ab21bcb5b8c3b29416f2cdac1e8b9836f545fd4e470e0f31a9ed825a` - Session privacy messenger - [getsession.org](https://getsession.org)
 
 ### 9. Remember
   * Your keys your content.
