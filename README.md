@@ -156,27 +156,27 @@ cd ~/dexsetup/dexbot/git.src/ && ls -la | grep strategy | grep .py
 ```
 ./run.firejail.proxy.sh
 ```
-  * **Start DEXBOT strategy1 BLOCK/LTC** trading direction by `BLOCK LTC strategy1` component:
+  * **Start** `DEXBOT BLOCK LTC trading strategy1` component:
 ```
 ./run.firejail.BLOCK.LTC.strategy1.sh 
 ```
-  * **Start DEXBOT strategy1 LTC/BLOCK** trading direction by `LTC BLOCK strategy1` component:
+  * **Start** `DEXBOT LTC BLOCK trading strategy1` component:
 ```
 ./run.firejail.LTC.BLOCK.strategy1.sh
 ```
-  * **Stop and Clean running BLOCK/LTC** trading direction by `Control + Z` in `BLOCK LTC strategy1` component and:
+  * **Stop and Clean** `DEXBOT BLOCK LTC trading strategy1` component by `Control + Z` and:
 ```
 ./run.firejail.BLOCK.LTC.strategy1.sh  --canceladdress
 ```
-  * **Stop and Clean running LTC/BLOCK** trading direction by `Control + Z` in `LTC BLOCK strategy1` component and:
+  * **Stop and Clean** `DEXBOT LTC BLOCK trading strategy1` component by `Control + Z` and:
 ```
-./run.firejail.BLOCK.LTC.strategy1.sh  --canceladdress
+./run.firejail.LTC.BLOCK.strategy1.sh  --canceladdress
 ```
-  * **Start DEXBOT strategy1 BLOCK/LTC trading direction after manually adding or removing funds from specified address** by `BLOCK LTC strategy1` component:
+  * **Start** `DEXBOT BLOCK LTC trading strategy1` component `after manually adding or removing funds` from specified address by:
 ```
 ./run.firejail.BLOCK.LTC.strategy1.sh  --reset
 ```
-  * **Start DEXBOT strategy1 LTC/BLOCK trading direction after manually adding or removing funds from specified address** by `LTC BLOCK strategy1` component:
+  * **Start** `DEXBOT LTC BLOCK trading strategy1` component `after manually adding or removing funds` from specified address by:
 ```
 ./run.firejail.LTC.BLOCK.strategy1.sh  --reset
 ```
