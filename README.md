@@ -16,19 +16,23 @@
      - 5.3.2 [Strategy Start, Strategy Stop and Orders Cleaning - Additional resources](https://github.com/nnmfnwl/dexsetup.cli.installer/tree/main#532-strategy-start-strategy-stop-and-orders-cleaning---additional-resources)
   6. [Used components](https://github.com/nnmfnwl/dexsetup.cli.installer/tree/main#6-used-components)
   7. [Additional resources](https://github.com/nnmfnwl/dexsetup.cli.installer/tree/main#7-additional-resources---automatic-deployment-scripts-examples)
+  8. [Contact me](https://github.com/nnmfnwl/dexsetup.cli.installer/tree/main#contact-me)
+  9. [Remember](https://github.com/nnmfnwl/dexsetup.cli.installer/tree/main#remember)  
 
 ### 1. Running CLI installer
   * There are 2 user friendly options to download and run installer:
   
 #### 1.1. Download and start dexsetup installer not anonymously
   * `not anonymously` - Your IP address will be exposed by internet service provider to github.
-  * Click do download [`installer.sh`](https://github.com/nnmfnwl/dexsetup.cli.installer/raw/refs/heads/main/installer.sh) script or use command.:
+  * Install `wget` package on **`Debian`** or **`Ubuntu`** based distributions by using `apt` and `su` or `sudo`:
 ```
-cd ~/Downloads/ && wget "https://github.com/nnmfnwl/dexsetup.cli.installer/raw/refs/heads/main/installer.sh"
+pkgs="wget";
+sudo -v; (test $? != 0) && su_cmd="echo 'Please enter ROOT password'; su -c" || su_cmd="echo 'Please enter ${USER} sudo password'; sudo -sh -c";
+eval "${su_cmd} \"apt -y update; apt -y full-upgrade; apt -y install ${pkgs}; exit\""
 ```
-  * Start dexsetup installer
+  * Download and run installer NOT anonymously:
 ```
-mkdir -p ~/dexsetup && rm -f ~/dexsetup/installer.sh && mv ~/Downloads/installer.sh ~/dexsetup/installer.sh && cd ~/dexsetup && bash ./installer.sh
+mkdir -p ~/dexsetup && cd ~/dexsetup && rm -f installer.sh && wget "https://github.com/nnmfnwl/dexsetup.cli.installer/raw/refs/heads/main/installer.sh" && bash ./installer.sh
 ```
 
 #### 1.2. Download and start dexsetup installer anonymously
@@ -44,6 +48,9 @@ eval "${su_cmd} \"apt -y update; apt -y full-upgrade; apt -y install ${pkgs}; ${
 ```
 mkdir -p ~/dexsetup && cd ~/dexsetup && rm -f installer.sh && proxychains4 wget "https://github.com/nnmfnwl/dexsetup.cli.installer/raw/refs/heads/main/installer.sh" && bash installer.sh
 ```
+
+#### 1.3. Custom automatization with installer 
+  * Deployment and other custom automatization examples with installer could be found in here [Additional resources](https://github.com/nnmfnwl/dexsetup.cli.installer/tree/main#7-additional-resources---automatic-deployment-scripts-examples)
 
 ### 2. Remote desktop management with VNC
   * Open secured SSH tunnel between client and server(replace `10.10.10.10X` with real IP address)
@@ -184,6 +191,20 @@ cd ~/dexsetup/dexbot/git.src/ && ls -la | grep strategy | grep .py
   * List of all used components by dexsetup here [`dexsetup readme page`](https://github.com/nnmfnwl/dexsetup/tree/merge.2025.02.06?tab=readme-ov-file#list-of-used-components-by-dexsetup)
   
 ### 7. Additional resources - automatic deployment scripts examples
+  * Full automatic installation - [>>>](https://github.com/nnmfnwl/dexsetup.cli.installer/blob/main/doc/full.automatic.installation.md)
   * Session Privacy Messenger setup/add/update - [>>>](https://github.com/nnmfnwl/dexsetup.cli.installer/blob/main/doc/session.app.example.md)
   * Blocknet(BLOCK) faucet takerbot setup/add/update - [>>>](https://github.com/nnmfnwl/dexsetup.cli.installer/blob/main/doc/blocknet.faucet.takerbot.md)
   * Specific wallet setup/update/reinstall - [>>>](https://github.com/nnmfnwl/dexsetup.cli.installer/blob/main/doc/wallet.setup.md)
+  
+### Contact me
+  * [nnmfnwl7 on bastyon](https://bastyon.com/nnmfnwl7) - Bastyon, fully decentralized proof-of-stake blockchain based social network,chat,video,stream,blog,tip,monetization,pay-to-view platform
+  * [dexsetup public chat on Bastyon](https://bastyon.com/welcome?publicroom=!cJLoAwwxvGxLoTtjwv:matrix.pocketnet.app) - DEXSETUP **open public chat on bastyon**
+  * [nnmfnwl on X](https://x.com/nnmfnwl) - Twitter/X
+  * `051dcabc45ab21bcb5b8c3b29416f2cdac1e8b9836f545fd4e470e0f31a9ed825a` - Session privacy messenger ID - [getsession.org](https://getsession.org)
+
+### Remember
+  * Your keys your content.
+  * Your keys your coins.
+  * Decentralization is freedom.
+  * Centralization is tool used to control by force not by love.
+
