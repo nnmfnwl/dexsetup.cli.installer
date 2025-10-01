@@ -131,7 +131,7 @@ screen -x
   * After successful **strategy** installation, re-installation or update, it **must be finalized manually by text editor to be able to be used**, because it must be always specified trading address per bot strategy.
   * To finalize by installer generated `BLOCK/LTC` default trading `strategy1`, it must edit two files:
 ```
-editor=geany && ${editor} ~/dexsetup/dexbot/git.src/strategy_BLOCK_LTC_strategy1.py && ${editor} ~/dexsetup/dexbot/git.src/strategy_LTC_BLOCK_strategy1.py
+editor=geany && ${editor} ~/dexsetup/dexbot/git.src/strategy_BLOCK_LTC_strategy1.py & ${editor} ~/dexsetup/dexbot/git.src/strategy_LTC_BLOCK_strategy1.py
 ```
   * To finalize and make strategy usable, `blocknet01` and `litecoin01` string must be replaced with valid wallet addresses.
 ```
