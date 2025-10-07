@@ -15,7 +15,7 @@
      - 5.3.1 [Strategy Start, Strategy Stop and Orders Cleaning](https://github.com/nnmfnwl/dexsetup.cli.installer#531-strategy-start-strategy-stop-and-orders-cleaning)
      - 5.3.2 [Strategy Start, Strategy Stop and Orders Cleaning - Additional resources](https://github.com/nnmfnwl/dexsetup.cli.installer#532-strategy-start-strategy-stop-and-orders-cleaning---additional-resources)
   6. [Used components](https://github.com/nnmfnwl/dexsetup.cli.installer#6-used-components)
-  7. [Additional resources](https://github.com/nnmfnwl/dexsetup.cli.installer#7-additional-resources---automatic-deployment-scripts-examples)
+  7. [Additional resources](https://github.com/nnmfnwl/dexsetup.cli.installer#7-additional-resources)
   8. [Contact me](https://github.com/nnmfnwl/dexsetup.cli.installer#8-contact-me)
   9. [Remember](https://github.com/nnmfnwl/dexsetup.cli.installer#9-remember) 
 
@@ -50,7 +50,7 @@ mkdir -p ~/dexsetup && cd ~/dexsetup && rm -f installer.sh && proxychains4 wget 
 ```
 
 #### 1.3. Custom automatization with installer 
-  * Deployment and other custom automatization examples with installer could be found in here [Additional resources](https://github.com/nnmfnwl/dexsetup.cli.installer#7-additional-resources---automatic-deployment-scripts-examples)
+  * Deployment and other custom automatization examples with installer could be found in here [Additional resources](https://github.com/nnmfnwl/dexsetup.cli.installer#7-additional-resources)
 
 ### 2. Remote desktop management with VNC
   * Open secured SSH tunnel between client and server(replace `10.10.10.10X` with real IP address)
@@ -190,11 +190,15 @@ cd ~/dexsetup/dexbot/git.src/ && ls -la | grep strategy | grep .py
 ### 6. Used components
   * List of all used components by dexsetup here [`dexsetup readme page`](https://github.com/nnmfnwl/dexsetup/tree/merge.2025.02.06?tab=readme-ov-file#list-of-used-components-by-dexsetup)
   
-### 7. Additional resources - automatic deployment scripts examples
+### 7. Additional resources
+##### Automatization scripts examples
   * Full automatic installation - [>>>](https://github.com/nnmfnwl/dexsetup.cli.installer/blob/main/doc/full.automatic.installation.md)
   * Session Privacy Messenger setup/add/update - [>>>](https://github.com/nnmfnwl/dexsetup.cli.installer/blob/main/doc/session.app.example.md)
   * Blocknet(BLOCK) faucet takerbot setup/add/update - [>>>](https://github.com/nnmfnwl/dexsetup.cli.installer/blob/main/doc/blocknet.faucet.takerbot.md)
   * Specific wallet setup/update/reinstall - [>>>](https://github.com/nnmfnwl/dexsetup.cli.installer/blob/main/doc/wallet.setup.md)
+##### Video tutorials
+  * 12 minutes full installation tutorial on Bastyon - [>>>](https://bastyon.com/index?video=1&v=174b6c6b9ee64f0f91ebff80a12a9d3df4905876896f37ba3aab4cba790708aa)
+  * 10 minutes cut(because X 10 minutes video limit) installation tutorial on X - [>>>](https://x.com/nnmfnwl/status/1975517690937880999)
   
 ### 8. Contact me
   * [nnmfnwl7 on bastyon](https://bastyon.com/nnmfnwl7) - Bastyon, fully decentralized proof-of-stake blockchain based social network,chat,video,stream,blog,tip,monetization,pay-to-view platform
@@ -207,4 +211,3 @@ cd ~/dexsetup/dexbot/git.src/ && ls -la | grep strategy | grep .py
   * Your keys your coins.
   * Decentralization is freedom.
   * Centralization is tool used to control by force not by love.
-
