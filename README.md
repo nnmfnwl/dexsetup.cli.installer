@@ -197,8 +197,8 @@ cd ~/dexsetup/dexbot/git.src/ && ls -la | grep strategy | grep .py
   * Blocknet(BLOCK) faucet takerbot setup/add/update - [>>>](https://github.com/nnmfnwl/dexsetup.cli.installer/blob/main/doc/blocknet.faucet.takerbot.md)
   * Specific wallet setup/update/reinstall - [>>>](https://github.com/nnmfnwl/dexsetup.cli.installer/blob/main/doc/wallet.setup.md)
 ##### Video tutorials
-  * 12 minutes full installation tutorial on Bastyon - [>>>](https://bastyon.com/index?video=1&v=174b6c6b9ee64f0f91ebff80a12a9d3df4905876896f37ba3aab4cba790708aa)
-  * 10 minutes cut(because X 10 minutes video limit) installation tutorial on X - [>>>](https://x.com/nnmfnwl/status/1975517690937880999)
+  * 12 minutes full installation tutorial on Bastyon - [Bastyon.com](https://bastyon.com/index?video=1&v=174b6c6b9ee64f0f91ebff80a12a9d3df4905876896f37ba3aab4cba790708aa)
+  * 10 minutes full installation tutorial on X - [X.com](https://x.com/nnmfnwl/status/1975517690937880999) (video is cut because 10 minutes limit on X)
   
 ### 8. Contact me
   * [nnmfnwl7 on bastyon](https://bastyon.com/nnmfnwl7) - Bastyon, fully decentralized proof-of-stake blockchain based social network,chat,video,stream,blog,tip,monetization,pay-to-view platform
