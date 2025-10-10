@@ -17,7 +17,8 @@
   6. [Used components](https://github.com/nnmfnwl/dexsetup.cli.installer#6-used-components)
   7. [Additional resources](https://github.com/nnmfnwl/dexsetup.cli.installer#7-additional-resources)
   8. [Contact me](https://github.com/nnmfnwl/dexsetup.cli.installer#8-contact-me)
-  9. [Remember](https://github.com/nnmfnwl/dexsetup.cli.installer#9-remember) 
+  9. [Donations](https://github.com/nnmfnwl/dexsetup.cli.installer#9-donations)
+  10. [Remember](https://github.com/nnmfnwl/dexsetup.cli.installer#10-remember)
 
 ### 1. Running CLI installer
   * There are 2 user friendly options to download and run installer:
@@ -206,7 +207,23 @@ cd ~/dexsetup/dexbot/git.src/ && ls -la | grep strategy | grep .py
   * [nnmfnwl on X](https://x.com/nnmfnwl) - Twitter/X
   * `051dcabc45ab21bcb5b8c3b29416f2cdac1e8b9836f545fd4e470e0f31a9ed825a` - Session privacy messenger - [getsession.org](https://getsession.org)
 
-### 9. Remember
+### 9. Donations
+  * Donations for [DEXBOT](https://github.com/nnmfnwl/dexbot/tree/merge.2025.03.26), [DEXSETUP](https://github.com/nnmfnwl/dexsetup/tree/merge.2025.02.06), [DEXSETUP.INSTALLER](https://github.com/nnmfnwl/dexsetup.cli.installer) and [DEXSETUP.VIDEOS](https://github.com/nnmfnwl/dexsetup.videos) continuous development, testing and liquidity providing:
+  * For ability of this project to continue it helps even a penny support. Please use below addresses or contact section to request other address.
+  * BTC LN: ****
+  * BTC: ****
+  * DASH: XpoeUHMoQaKJ6CZ6kYk7QoKK3QsYN1NTQC
+  * LTC: LYRaGuZFGSkZHrEYHTgFyPiFtipcMPDeTM
+  * DOGE: DRmtYF5vqV5iSeG2eeSh2MLCcojVASViH6
+  * XVG: DFhrGF3xYb2NWfGnRPRyjK2GwcrVYfDEfk
+  * PIVX: D6aXrsX4cscvW2zu8qJzW2TFSXoZZPYVv5
+  * BLOCK: Bb4gLEvmgsWWqy159GkdvfJMbkQH1mRmnD
+  * PKOIN: ****
+  * LBC: ****
+  * XMR: ****
+  * ETH: ****
+
+### 10. Remember
   * Your keys your content.
   * Your keys your coins.
   * Decentralization is freedom.
