@@ -50,7 +50,7 @@ mkdir -p ~/dexsetup && cd ~/dexsetup && rm -f installer.sh && proxychains4 wget 
 ```
 
 #### 1.3. Custom automatization with installer 
-  * Deployment and other custom automatization examples with installer could be found in here [Additional resources](https://github.com/nnmfnwl/dexsetup.cli.installer#7-additional-resources)
+  * Examples of automatization and custom installer usage by arguments could be found in here [Additional resources](https://github.com/nnmfnwl/dexsetup.cli.installer#7-additional-resources)
 
 ### 2. Remote desktop management with VNC
   * Open secured SSH tunnel between client and server(replace `10.10.10.10X` with real IP address)
