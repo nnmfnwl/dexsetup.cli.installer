@@ -206,6 +206,7 @@ cd ~/dexsetup/dexbot/git.src/ && ls -la | grep strategy | grep .py
   * [dexsetup public chat on Bastyon](https://bastyon.com/welcome?publicroom=!cJLoAwwxvGxLoTtjwv:matrix.pocketnet.app) - DEXSETUP **open public chat on bastyon**
   * [nnmfnwl on X](https://x.com/nnmfnwl) - Twitter/X
   * `051dcabc45ab21bcb5b8c3b29416f2cdac1e8b9836f545fd4e470e0f31a9ed825a` - Session privacy messenger - [getsession.org](https://getsession.org)
+  * [nnmfnwl7 on CMC](https://coinmarketcap.com/community/profile/nnmfnwl7/) - CoinMarketCap profile
 
 ### 9. Donations
   * Donations for [DEXBOT](https://github.com/nnmfnwl/dexbot/tree/merge.2025.03.26), [DEXSETUP](https://github.com/nnmfnwl/dexsetup/tree/merge.2025.02.06), [DEXSETUP.INSTALLER](https://github.com/nnmfnwl/dexsetup.cli.installer) and [DEXSETUP.VIDEOS](https://github.com/nnmfnwl/dexsetup.videos) continuous development, testing and liquidity providing:
