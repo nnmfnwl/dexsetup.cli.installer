@@ -28,7 +28,7 @@
   * Install `wget` package on **`Debian`** or **`Ubuntu`** based distributions by using `apt` and `su` or `sudo`:
 ```
 pkgs="wget";
-sudo -v; (test $? != 0) && su_cmd="echo 'Please enter ROOT password'; su -c" || su_cmd="echo 'Please enter ${USER} sudo password'; sudo -sh -c";
+sudo -v; (test $? != 0) && su_cmd="echo 'Please enter ROOT password'; su -c" || su_cmd="echo 'Please enter ${USER} sudo password'; sudo sh -c";
 eval "${su_cmd} \"apt -y update; apt -y full-upgrade; apt -y install ${pkgs}; exit\""
 ```
   * Download and run installer NOT anonymously:
@@ -42,7 +42,7 @@ mkdir -p ~/dexsetup && cd ~/dexsetup && rm -f installer.sh && wget "https://gith
 ```
 pkgs="proxychains4 tor torsocks wget";
 groups | grep debian-tor > /dev/null && cfg_user_tor="echo 'Tor for ${USER} is already configured'" || cfg_user_tor="usermod -a -G debian-tor ${USER}";
-sudo -v; (test $? != 0) && su_cmd="echo 'Please enter ROOT password'; su -c" || su_cmd="echo 'Please enter ${USER} sudo password'; sudo -sh -c";
+sudo -v; (test $? != 0) && su_cmd="echo 'Please enter ROOT password'; su -c" || su_cmd="echo 'Please enter ${USER} sudo password'; sudo sh -c";
 eval "${su_cmd} \"apt -y update; apt -y full-upgrade; apt -y install ${pkgs}; ${cfg_user_tor}; exit\""
 ```
   * Download and run installer anonymously:
