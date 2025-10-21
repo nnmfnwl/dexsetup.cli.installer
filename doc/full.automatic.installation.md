@@ -35,7 +35,7 @@ pkgs="proxychains4 tor torsocks wget";
 groups | grep debian-tor > /dev/null && cfg_user_tor="echo 'Tor for ${USER} is already configured'" || cfg_user_tor="usermod -a -G debian-tor ${USER}";
 
 # detect if to use sudo or su
-sudo -v; (test $? != 0) && su_cmd="echo 'Please enter ROOT password'; su -c" || su_cmd="echo 'Please enter ${USER} sudo password'; sudo -sh -c";
+sudo -v; (test $? != 0) && su_cmd="echo 'Please enter ROOT password'; su -c" || su_cmd="echo 'Please enter ${USER} sudo password'; sudo sh -c";
 
 # do necessary system update and install all needed packages
 eval "${su_cmd} \"apt -y update; apt -y full-upgrade; apt -y install ${pkgs}; ${cfg_user_tor}; exit\""
