@@ -116,7 +116,7 @@ if [[ ${?} != 0 ]]; then
 fi
 
 echo "INFO >>> Detecting Linux distribution 'sudo'/'su' compatibility"
-sudo -v; (test $? != 0) && su_cmd="echo 'Please enter ROOT password'; su -c" || su_cmd="echo 'Please enter ${USER} sudo password'; sudo -sh -c";
+sudo -v; (test $? != 0) && su_cmd="echo 'Please enter ROOT password'; su -c" || su_cmd="echo 'Please enter ${USER} sudo password'; sudo sh -c";
 
 echo ""
 echo "DEXSETUP INSTALLER - Blocknet's Decentralized Exchange Backend System Installer for Debian/Ubuntu based Linux distributions, namely dexsetup framework"
