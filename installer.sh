@@ -274,7 +274,7 @@ if [[ ${?} != 0 ]]; then
    if [[ "${var_q}" == "y" ]]; then
       echo "INFO >>> DEXSETUP re-installation/update in progress"
       git stash \
-      && git checkout merge.2025.02.06 \
+      && git checkout dev.2025.10.23 \
       && proxychains4 git pull \
       && chmod 755 setup* \
       && chmod 755 ./src/setup*.sh
@@ -283,7 +283,7 @@ if [[ ${?} != 0 ]]; then
       echo "ERROR >>> DEXSETUP is already installed and update been skip"
    fi
 else
-   git checkout merge.2025.02.06 \
+   git checkout dev.2025.10.23 \
    && chmod 755 setup* \
    && chmod 755 ./src/setup*.sh
    (test $? != 0) && echo "ERROR >>> switch to experimental DEXSETUP version failed" && exit 1
