@@ -33,7 +33,7 @@ eval "${su_cmd} \"apt -y update; apt -y full-upgrade; apt -y install ${pkgs}; ex
 ```
   * Download and run installer NOT anonymously:
 ```
-mkdir -p ~/dexsetup && cd ~/dexsetup && rm -f installer.sh && wget "https://github.com/nnmfnwl/dexsetup.cli.installer/raw/refs/heads/main/installer.sh" && bash ./installer.sh
+mkdir -p ~/dexsetup && cd ~/dexsetup && rm -f installer.sh && wget "https://github.com/nnmfnwl/dexsetup.cli.installer/raw/refs/heads/dev.2025.10.23/installer.sh" && bash ./installer.sh
 ```
 
 #### 1.2. Download and start dexsetup installer anonymously
@@ -47,7 +47,7 @@ eval "${su_cmd} \"apt -y update; apt -y full-upgrade; apt -y install ${pkgs}; ${
 ```
   * Download and run installer anonymously:
 ```
-mkdir -p ~/dexsetup && cd ~/dexsetup && rm -f installer.sh && proxychains4 wget "https://github.com/nnmfnwl/dexsetup.cli.installer/raw/refs/heads/main/installer.sh" && bash installer.sh
+mkdir -p ~/dexsetup && cd ~/dexsetup && rm -f installer.sh && proxychains4 wget "https://github.com/nnmfnwl/dexsetup.cli.installer/raw/refs/heads/dev.2025.10.23/installer.sh" && bash installer.sh
 ```
 
 #### 1.3. Custom automatization with installer 
