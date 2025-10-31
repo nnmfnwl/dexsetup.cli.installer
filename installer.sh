@@ -334,8 +334,10 @@ tool_setup_wallet "Dogecoin" "DOGE" "./src/cfg.cc.dogecoin.sh" "build"
 tool_setup_wallet "Dash" "DASH" "./src/cfg.cc.dash.sh" "build"
 tool_setup_wallet "PIVX" "PIVX" "./src/cfg.cc.pivx.sh" "build"
 tool_setup_wallet "Verge" "XVG" "./src/cfg.cc.verge.sh" "build"
-tool_setup_wallet "Lbry Credits LevelDB" "LBC" "./src/cfg.cc.lbrycrd.leveldb.sh" "build"
-tool_setup_wallet "Lbry Credits SQLITE" "LBC" "./src/cfg.cc.lbrycrd.sqlite.sh" "build"
+tool_setup_wallet "Bitcoincash unlimited" "BCH" "./src/cfg.cc.bch.unlimited.sh" "build"
+tool_setup_wallet "Bitcoincash node" "BCH" "./src/cfg.cc.bch.node.sh" "download"
+#~ tool_setup_wallet "Lbry Credits LevelDB" "LBC" "./src/cfg.cc.lbrycrd.leveldb.sh" "build"
+#~ tool_setup_wallet "Lbry Credits SQLITE" "LBC" "./src/cfg.cc.lbrycrd.sqlite.sh" "build"
 tool_setup_wallet "Pocketcoin(Bastyon.com)" "PKOIN" "./src/cfg.cc.pocketcoin.sh" "build"
 tool_setup_wallet "Particl" "PART" "./src/cfg.cc.particl.sh" "build"
 
@@ -373,8 +375,10 @@ if [[ "${var_q}" == "y" ]]; then
    tool_setup_wallet_profile "DOGE-dex" ./src/cfg.cc.dogecoin.sh
    tool_setup_wallet_profile "PIVX-dex" ./src/cfg.cc.pivx.sh
    tool_setup_wallet_profile "DASH-dex" ./src/cfg.cc.dash.sh
-   tool_setup_wallet_profile "LBC-dex" ./src/cfg.cc.lbrycrd.leveldb.sh
-   tool_setup_wallet_profile "LBC-dex" ./src/cfg.cc.lbrycrd.sqlite.sh
+   tool_setup_wallet_profile "BCH-unlimited-dex" ./src/cfg.cc.bch.unlimited.sh
+   tool_setup_wallet_profile "BCH-node-dex" ./src/cfg.cc.bch.node.sh
+   #~ tool_setup_wallet_profile "LBC-dex" ./src/cfg.cc.lbrycrd.leveldb.sh
+   #~ tool_setup_wallet_profile "LBC-dex" ./src/cfg.cc.lbrycrd.sqlite.sh
    tool_setup_wallet_profile "PKOIN-dex" ./src/cfg.cc.pocketcoin.sh
    tool_setup_wallet_profile "PART-dex" ./src/cfg.cc.particl.sh
 fi
@@ -463,7 +467,9 @@ if [[ "${var_q}" == "y" ]]; then
    
    tool_setup_dexbot_profile "DASH" "LTC"  ./src/cfg.cc.blocknet.sh ./src/cfg.cc.dash.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.dash.ltc.sh strategy1 dash01 litecoin06
    
-   tool_setup_dexbot_profile "LBC" "LTC"  ./src/cfg.cc.blocknet.sh ./src/cfg.cc.lbrycrd.leveldb.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.lbc.ltc.sh strategy1 lbrycrd01 litecoin07
+   tool_setup_dexbot_profile "BCH" "LTC"  ./src/cfg.cc.blocknet.sh ./src/cfg.cc.bch.unlimited.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.bch.ltc.sh strategy1 bitcoincash01 litecoin07
+   
+   #~ tool_setup_dexbot_profile "LBC" "LTC"  ./src/cfg.cc.blocknet.sh ./src/cfg.cc.lbrycrd.leveldb.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.lbc.ltc.sh strategy1 lbrycrd01 litecoin07
    
    tool_setup_dexbot_profile "PKOIN" "LTC"  ./src/cfg.cc.blocknet.sh ./src/cfg.cc.pocketcoin.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.pkoin.ltc.sh strategy1 pocketcoin01 litecoin08
    
