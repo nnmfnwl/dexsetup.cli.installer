@@ -207,6 +207,7 @@ cd ~/dexsetup/dexbot/git.src/ && ls -la | grep strategy | grep .py
   * [nnmfnwl on X](https://x.com/nnmfnwl) - Twitter/X
   * `051dcabc45ab21bcb5b8c3b29416f2cdac1e8b9836f545fd4e470e0f31a9ed825a` - Session privacy messenger - [getsession.org](https://getsession.org)
   * [nnmfnwl7 on CMC](https://coinmarketcap.com/community/profile/nnmfnwl7/) - CoinMarketCap profile
+  * sha512 sum of email for verification - `f287ec46e5f0875832abb68ff54db2a4d0fe93b35ccc0cbe692f2ee6f545603d41db4e4d230fa8d2c8ffa2f39531d1da5421bfeab542c1098a6c7e26a6fec64c` - get as `echo "***@***.***" | sha512sum`
 
 ### 9. Donations
   * Donations for [DEXBOT](https://github.com/nnmfnwl/dexbot/tree/merge.2025.03.26), [DEXSETUP](https://github.com/nnmfnwl/dexsetup/tree/merge.2025.02.06), [DEXSETUP.INSTALLER](https://github.com/nnmfnwl/dexsetup.cli.installer) and [DEXSETUP.VIDEOS](https://github.com/nnmfnwl/dexsetup.videos) continuous development, testing and liquidity providing:
