@@ -8,6 +8,10 @@ id | grep root && echo "ERROR >>> IT IS NOT ALLOWED TO RUN THIS SCRIPT AS ROOT !
 argcc=$#
 argvv=("$@")
 
+# define
+#~ dexsetup_git_branch="merge.2025.02.06"
+dexsetup_git_branch="dev.2025.10.23"
+
 # interactivity function definition. find yes or no arguments or ask interactively
 function tool_interactivity() { #toyes #tono #info
    for (( j=0; j<argcc; j++ )); do
@@ -274,7 +278,7 @@ if [[ ${?} != 0 ]]; then
    if [[ "${var_q}" == "y" ]]; then
       echo "INFO >>> DEXSETUP re-installation/update in progress"
       git stash \
-      && git checkout dev.2025.10.23 \
+      && git checkout ${dexsetup_git_branch} \
       && proxychains4 git pull \
       && chmod 755 setup* \
       && chmod 755 ./src/setup*.sh
@@ -283,7 +287,7 @@ if [[ ${?} != 0 ]]; then
       echo "ERROR >>> DEXSETUP is already installed and update been skip"
    fi
 else
-   git checkout dev.2025.10.23 \
+   git checkout ${dexsetup_git_branch} \
    && chmod 755 setup* \
    && chmod 755 ./src/setup*.sh
    (test $? != 0) && echo "ERROR >>> switch to experimental DEXSETUP version failed" && exit 1
@@ -455,24 +459,51 @@ function tool_setup_dexbot_profile() {
 tool_interactivity "dexbot-strategies-y" "dexbot-strategies-n" "Would you like to setup DEXBOT and trading strategies with DEX trading wallet profiles?"
 if [[ "${var_q}" == "y" ]]; then
    strategies_enabled="1"
-   tool_setup_dexbot_profile "BLOCK" "LTC" ./src/cfg.cc.blocknet.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.block.ltc.sh strategy1 blocknet01 litecoin01
    
+   #BLOCK
+   tool_setup_dexbot_profile "BLOCK" "BCH" ./src/cfg.cc.blocknet.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.bch.unlimited.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.block.bch.sh strategy1 unique_block_addr unique_bch_addr
+   
+   tool_setup_dexbot_profile "BLOCK" "BTC" ./src/cfg.cc.blocknet.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.bitcoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.block.btc.sh strategy1 unique_block_addr unique_btc_addr
+   
+   tool_setup_dexbot_profile "BLOCK" "DASH" ./src/cfg.cc.blocknet.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.dash.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.block.dash.sh strategy1 unique_block_addr unique_dash_addr
+   
+   tool_setup_dexbot_profile "BLOCK" "DOGE" ./src/cfg.cc.blocknet.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.dogecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.block.doge.sh strategy1 unique_block_addr unique_doge_addr
+   
+   tool_setup_dexbot_profile "BLOCK" "LTC" ./src/cfg.cc.blocknet.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.block.ltc.sh strategy1 unique_block_addr unique_ltc_addr
+   
+   tool_setup_dexbot_profile "BLOCK" "PART" ./src/cfg.cc.blocknet.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.particl.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.block.part.sh strategy1 unique_block_addr unique_part_addr
+   
+   tool_setup_dexbot_profile "BLOCK" "PIVX" ./src/cfg.cc.blocknet.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.pivx.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.block.pivx.sh strategy1 unique_block_addr unique_pivx_addr
+   
+   tool_setup_dexbot_profile "BLOCK" "PKOIN" ./src/cfg.cc.blocknet.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.pocketcoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.block.pkoin.sh strategy1 unique_block_addr unique_pkoin_addr
+   
+   tool_setup_dexbot_profile "BLOCK" "XVG" ./src/cfg.cc.blocknet.sh ./src/cfg.cc.blocknet.sh ./src/cfg.cc.verge.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.block.xvg.sh strategy1 unique_block_addr unique_xvg_addr
+   
+   #BTC
    tool_setup_dexbot_profile "BTC" "LTC" ./src/cfg.cc.blocknet.sh ./src/cfg.cc.bitcoin.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.btc.ltc.sh strategy1 bitcoin01 litecoin02
    
+   #XVG
    tool_setup_dexbot_profile "XVG" "LTC" ./src/cfg.cc.blocknet.sh ./src/cfg.cc.verge.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.xvg.ltc.sh strategy1 verge01 litecoin03
    
+   #DOGE
    tool_setup_dexbot_profile "DOGE" "LTC" ./src/cfg.cc.blocknet.sh ./src/cfg.cc.dogecoin.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.doge.ltc.sh strategy1 dogecoin01 litecoin04
    
+   #PIVX
    tool_setup_dexbot_profile "PIVX" "LTC" ./src/cfg.cc.blocknet.sh ./src/cfg.cc.pivx.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.pivx.ltc.sh strategy1 pivx01 litecoin05
    
+   #DASH
    tool_setup_dexbot_profile "DASH" "LTC"  ./src/cfg.cc.blocknet.sh ./src/cfg.cc.dash.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.dash.ltc.sh strategy1 dash01 litecoin06
    
+   #BCH
    tool_setup_dexbot_profile "BCH" "LTC"  ./src/cfg.cc.blocknet.sh ./src/cfg.cc.bch.unlimited.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.bch.ltc.sh strategy1 bitcoincash01 litecoin07
    
+   #LBC
    #~ tool_setup_dexbot_profile "LBC" "LTC"  ./src/cfg.cc.blocknet.sh ./src/cfg.cc.lbrycrd.leveldb.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.lbc.ltc.sh strategy1 lbrycrd01 litecoin07
    
+   #PKOIN
    tool_setup_dexbot_profile "PKOIN" "LTC"  ./src/cfg.cc.blocknet.sh ./src/cfg.cc.pocketcoin.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.pkoin.ltc.sh strategy1 pocketcoin01 litecoin08
    
+   #PART
    tool_setup_dexbot_profile "PART" "LTC" ./src/cfg.cc.blocknet.sh ./src/cfg.cc.particl.sh ./src/cfg.cc.litecoin.sh ./src/cfg.dexbot.alfa.sh ./src/cfg.strategy.part.ltc.sh strategy1 particl01 litecoin09
 fi
 
