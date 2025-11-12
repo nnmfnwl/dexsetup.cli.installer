@@ -34,7 +34,7 @@ eval "${su_cmd} \"apt -y update; apt -y full-upgrade; apt -y install ${pkgs}; ${
 ```
 mkdir -p ~/dexsetup && cd ~/dexsetup && rm -f installer.sh && proxychains4 wget "https://github.com/nnmfnwl/dexsetup.cli.installer/raw/refs/heads/main/installer.sh" && sha512sum installer.sh | grep 43ace62d6e178154d6357b1e0d77c11ca722af1592c2528941ccaaa087ae156016886eaf0a1b3be4eb635bf29fc736ecab68e63229df24ad88c78730e7e4664f && (echo "installer fingerprint verification success") || (sha512sum installer.sh; echo "installer fingerprint verification failed"; rm -f installer.sh)
 ```
-  * Run installer in full interactive mode:
+  * **run installer in full interactive mode**:
 ```
 cd ~/dexsetup && bash installer.sh
 ```
