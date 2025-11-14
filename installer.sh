@@ -175,7 +175,7 @@ fi
 
 tool_interactivity "pkg-gui-build-y" "pkg-gui-build-n" "Would you like to set to install optional graphical user interface build packages?"
 if [[ "${var_q}" == "y" ]]; then
-   pkg_gui_build="qt5-qmake-bin qt5-qmake qttools5-dev-tools qttools5-dev qtbase5-dev-tools qtbase5-dev libqt5charts5-dev python3-gst-1.0 libqrencode-dev"
+   pkg_gui_build="qt5-qmake-bin qt5-qmake qttools5-dev-tools qttools5-dev qtbase5-dev-tools qtbase5-dev libqt5charts5-dev python3-gst-1.0 libqrencode-dev libqt5svg5-dev"
 else
    pkg_gui_build=""
 fi
