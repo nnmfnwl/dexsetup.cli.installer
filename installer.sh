@@ -109,6 +109,10 @@ function tool_arg_value() { #1 arg.name #2 "if match" #3 "then set to" #4"secret
 }
 
 echo "INFO >>> Detecting Linux distribution operating system compatibility"
+dist_val="unknown"
+cat /etc/*release | grep -i debian | grep -i debian > /dev/null && dist_val="debian"
+cat /etc/*release | grep -i ubuntu | grep -i ubuntu > /dev/null && dist_val="ubuntu"
+    
 cat /etc/*release | grep -i -e debian -e ubuntu > /dev/null;
 if [[ ${?} != 0 ]]; then
    cat /etc/*release
@@ -338,7 +342,11 @@ tool_setup_wallet "Litecoin" "LTC" "./src/cfg.cc.litecoin.sh" "build"
 tool_setup_wallet "Bitcoin" "BTC" "./src/cfg.cc.bitcoin.sh" "build"
 tool_setup_wallet "Dogecoin" "DOGE" "./src/cfg.cc.dogecoin.sh" "build"
 tool_setup_wallet "Dash" "DASH" "./src/cfg.cc.dash.sh" "build"
-tool_setup_wallet "PIVX" "PIVX" "./src/cfg.cc.pivx.sh" "build"
+if [[ "${dist_val}" == "ubuntu" ]]; then
+   tool_setup_wallet "PIVX" "PIVX" "./src/cfg.cc.pivx.sh" "download"
+else
+   tool_setup_wallet "PIVX" "PIVX" "./src/cfg.cc.pivx.sh" "build"
+fi
 tool_setup_wallet "Verge" "XVG" "./src/cfg.cc.verge.sh" "build"
 tool_setup_wallet "Bitcoincash unlimited" "BCH" "./src/cfg.cc.bch.unlimited.sh" "build"
 tool_setup_wallet "Bitcoincash node" "BCH" "./src/cfg.cc.bch.node.sh" "download"
