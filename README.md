@@ -26,13 +26,13 @@
 ```
 pkgs="proxychains4 tor torsocks wget";
 groups | grep debian-tor > /dev/null && cfg_user_tor="echo 'Tor for ${USER} is already configured'" || cfg_user_tor="usermod -a -G debian-tor ${USER}";
-sudo -v; (test $? != 0) && su_cmd="echo 'Please enter ROOT password'; su -c" || su_cmd="echo 'Please enter ${USER} sudo password'; sudo sh -c";
+sudo -v; (test $? != 0) && su_cmd="echo 'Please enter ROOT password'; su - -c" || su_cmd="echo 'Please enter ${USER} sudo password'; sudo sh -c";
 eval "${su_cmd} \"apt -y update; apt -y full-upgrade; apt -y install ${pkgs}; ${cfg_user_tor}; exit\""
 ```
   * **download or update installer**
   * installer is downloaded anonymously and verified if digital fingerprint match
 ```
-mkdir -p ~/dexsetup && cd ~/dexsetup && rm -f installer.sh && proxychains4 wget "https://github.com/nnmfnwl/dexsetup.cli.installer/raw/refs/heads/main/installer.sh" && sha512sum installer.sh | grep 43ace62d6e178154d6357b1e0d77c11ca722af1592c2528941ccaaa087ae156016886eaf0a1b3be4eb635bf29fc736ecab68e63229df24ad88c78730e7e4664f && (echo "installer fingerprint verification success") || (sha512sum installer.sh; echo "installer fingerprint verification failed"; rm -f installer.sh)
+mkdir -p ~/dexsetup && cd ~/dexsetup && rm -f installer.sh && proxychains4 wget "https://github.com/nnmfnwl/dexsetup.cli.installer/raw/refs/heads/dev.2025.10.23/installer.sh" && sha512sum installer.sh | grep a185c0ab62435ade713f04f2f07da16878cf2b447ab90906280920b14bf3bb228f3aa92c09fe96c98de8e30a0d7b597837c2e8d06d6868c7144298a771edb0b0 && (echo "installer fingerprint verification success") || (sha512sum installer.sh; echo "installer fingerprint verification failed"; rm -f installer.sh)
 ```
   * **run installer in full interactive mode**:
 ```
