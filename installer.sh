@@ -321,11 +321,27 @@ echo "Building wallets from official repositories..."
 function tool_setup_wallet() {  #crypto_name  #crypto_ticker  #cfg_script_path  #download_build_action
    tool_interactivity "${2}-install-y" "${2}-install-n" "Would you like to install or update ${1}(${2}) wallet?"
    if [[ "${var_q}" == "y" ]]; then
-      ./setup.cc.wallet.sh $3 install $4
+      
+      # choose between building from source and download
+      tool_arg_value "${2}-build-download" "" "${4}" "" "choose between build/download"
+      if [[ "$?" == "0" ]]; then
+         if [[ "${var_v}" == "build" ]]; then
+            build_download=${var_v}
+         elif [[ "${var_v}" == "download" ]]; then
+            build_download=${var_v}
+         else
+            echo "ERROR >>> invalid ${2}-build-download argument, allowed values are build/download"
+            exit 1
+         fi
+      else
+         build_download=${4}
+      fi
+      
+      ./setup.cc.wallet.sh ${3} install ${build_download}
       if [[ ${?} != 0 ]]; then
          tool_interactivity "${2}-update-y" "${2}-update-n" "${1} wallet installation failed or is already installed, would you like to try to update ${1} wallet?"
          if [[ "${var_q}" == "y" ]]; then
-            ./setup.cc.wallet.sh $3 update $4
+            ./setup.cc.wallet.sh ${3} update ${build_download}
             if [[ ${?} != 0 ]]; then
                tool_interactivity "skip-failed-install-y" "skip-failed-install-n" "${1} wallet update failed, would you like to skip this wallet and continue?"
                if [[ "${var_q}" != "y" ]]; then
@@ -342,11 +358,7 @@ tool_setup_wallet "Litecoin" "LTC" "./src/cfg.cc.litecoin.sh" "build"
 tool_setup_wallet "Bitcoin" "BTC" "./src/cfg.cc.bitcoin.sh" "build"
 tool_setup_wallet "Dogecoin" "DOGE" "./src/cfg.cc.dogecoin.sh" "build"
 tool_setup_wallet "Dash" "DASH" "./src/cfg.cc.dash.sh" "build"
-if [[ "${dist_val}" == "ubuntu" ]]; then
-   tool_setup_wallet "PIVX" "PIVX" "./src/cfg.cc.pivx.sh" "download"
-else
-   tool_setup_wallet "PIVX" "PIVX" "./src/cfg.cc.pivx.sh" "build"
-fi
+tool_setup_wallet "PIVX" "PIVX" "./src/cfg.cc.pivx.sh" "build"
 tool_setup_wallet "Verge" "XVG" "./src/cfg.cc.verge.sh" "build"
 tool_setup_wallet "Bitcoincash unlimited" "BCH" "./src/cfg.cc.bch.unlimited.sh" "build"
 tool_setup_wallet "Bitcoincash node" "BCH" "./src/cfg.cc.bch.node.sh" "download"
