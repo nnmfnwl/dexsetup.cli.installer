@@ -1,5 +1,5 @@
 ### About
-  * **dexsetup.cli.installer** is simple interactive command line installer for [dexsetup](https://github.com/nnmfnwl/dexsetup?tab=readme-ov-file#step-by-step-setup-tutorial)
+  * **dexinstaller** is simple interactive command line installer for [dexsetup](https://github.com/nnmfnwl/dexsetup?tab=readme-ov-file#step-by-step-setup-tutorial)
   * One stop point installer/tutorial, which guides everything needed to know to setup/configure/run/manage backend of most decentralized exchange DEX by [Blocknet](https://blocknet.org/built-on-blocknet.html)
 
 ### Summary
@@ -32,7 +32,7 @@ eval "${su_cmd} \"apt -y update; apt -y full-upgrade; apt -y install ${pkgs}; ${
   * **download or update installer**
   * installer is downloaded anonymously and verified if digital fingerprint match
 ```
-mkdir -p ~/dexsetup && cd ~/dexsetup && rm -f installer.sh && proxychains4 wget "https://github.com/nnmfnwl/dexsetup.cli.installer/raw/refs/heads/dev.2025.10.23/installer.sh" && sha512sum installer.sh | grep a185c0ab62435ade713f04f2f07da16878cf2b447ab90906280920b14bf3bb228f3aa92c09fe96c98de8e30a0d7b597837c2e8d06d6868c7144298a771edb0b0 && (echo "installer fingerprint verification success") || (sha512sum installer.sh; echo "installer fingerprint verification failed"; rm -f installer.sh)
+mkdir -p ~/dexsetup && cd ~/dexsetup && rm -f installer.sh && proxychains4 wget "https://github.com/nnmfnwl/dexinstaller/raw/refs/heads/dev.2025.10.23/installer.sh" && sha512sum installer.sh | grep a185c0ab62435ade713f04f2f07da16878cf2b447ab90906280920b14bf3bb228f3aa92c09fe96c98de8e30a0d7b597837c2e8d06d6868c7144298a771edb0b0 && (echo "installer fingerprint verification success") || (sha512sum installer.sh; echo "installer fingerprint verification failed"; rm -f installer.sh)
 ```
   * **run installer in full interactive mode**:
 ```
@@ -120,7 +120,7 @@ screen -x
   * After successful **strategy** installation, re-installation or update, it **must be finalized manually by text editor to be able to be used**, because it must be always specified trading address per bot strategy.
   * To finalize by installer generated `BLOCK/LTC` default trading `strategy1`, it must edit two files:
 ```
-editor=geany && ${editor} ~/dexsetup/dexbot/git.src/strategy_BLOCK_LTC_strategy1.py & ${editor} ~/dexsetup/dexbot/git.src/strategy_LTC_BLOCK_strategy1.py
+editor=geany; ${editor} ~/dexsetup/dexbot/git.src/strategy_BLOCK_LTC_strategy1.py & ${editor} ~/dexsetup/dexbot/git.src/strategy_LTC_BLOCK_strategy1.py
 ```
   * To finalize and make strategy usable, `blocknet01` and `litecoin01` string must be replaced with valid wallet addresses.
 ```
@@ -181,10 +181,10 @@ cd ~/dexsetup/dexbot/git.src/ && ls -la | grep strategy | grep .py
   
 ### 7. Additional resources
 ##### Automatization scripts examples
-  * Full automatic installation - [>>>](https://github.com/nnmfnwl/dexsetup.cli.installer/blob/main/doc/full.automatic.installation.md)
-  * Session Privacy Messenger setup/add/update - [>>>](https://github.com/nnmfnwl/dexsetup.cli.installer/blob/main/doc/session.app.example.md)
-  * Blocknet(BLOCK) faucet takerbot setup/add/update - [>>>](https://github.com/nnmfnwl/dexsetup.cli.installer/blob/main/doc/blocknet.faucet.takerbot.md)
-  * Specific wallet setup/update/reinstall - [>>>](https://github.com/nnmfnwl/dexsetup.cli.installer/blob/main/doc/wallet.setup.md)
+  * Full automatic installation - [>>>](doc/full.automatic.installation.md)
+  * Session Privacy Messenger setup/add/update - [>>>](doc/session.app.example.md)
+  * Blocknet(BLOCK) faucet takerbot setup/add/update - [>>>](doc/blocknet.faucet.takerbot.md)
+  * Specific wallet setup/update/reinstall - [>>>](doc/wallet.setup.md)
 ##### Video tutorials
   * 12 minutes full installation tutorial on Bastyon - [Bastyon.com](https://bastyon.com/index?video=1&v=174b6c6b9ee64f0f91ebff80a12a9d3df4905876896f37ba3aab4cba790708aa)
   * 10 minutes full installation tutorial on X - [X.com](https://x.com/nnmfnwl/status/1975517690937880999) (video is cut because 10 minutes limit on X)
@@ -198,7 +198,7 @@ cd ~/dexsetup/dexbot/git.src/ && ls -la | grep strategy | grep .py
   * sha512 sum of email for verification - `f287ec46e5f0875832abb68ff54db2a4d0fe93b35ccc0cbe692f2ee6f545603d41db4e4d230fa8d2c8ffa2f39531d1da5421bfeab542c1098a6c7e26a6fec64c` - get as `echo "***@p**l.com" | sha512sum`
 
 ### 9. Donations
-  * Donations for [DEXBOT](https://github.com/nnmfnwl/dexbot/tree/merge.2025.03.26), [DEXSETUP](https://github.com/nnmfnwl/dexsetup/tree/merge.2025.02.06), [DEXSETUP.INSTALLER](https://github.com/nnmfnwl/dexsetup.cli.installer) and [DEXSETUP.VIDEOS](https://github.com/nnmfnwl/dexsetup.videos) continuous development, testing and liquidity providing:
+  * Donations for [DEXBOT](https://github.com/nnmfnwl/dexbot/tree/merge.2025.03.26), [DEXSETUP](https://github.com/nnmfnwl/dexsetup/tree/merge.2025.02.06), [DEXINSTALLER](https://github.com/nnmfnwl/dexinstaller) and [DEXSETUP.VIDEOS](https://github.com/nnmfnwl/dexsetup.videos) continuous development, testing and liquidity providing:
   * For ability of this project to continue it helps even a penny support. Please use below addresses or contact section to request other address.
   * BTC LN: ****
   * BTC: ****
